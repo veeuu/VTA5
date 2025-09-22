@@ -125,7 +125,7 @@ const VTA5LandingPage = () => {
       display: 'flex',
       alignItems: 'center',
       gap: '2rem',
-      '@media (max-width: 7680px)': {
+      '@media (maxWidth: 7680px)': {
         display: 'none'
       }
     },
@@ -257,7 +257,7 @@ const VTA5LandingPage = () => {
       gap: '1rem',
       maxWidth: '400px',
       margin: '0 auto',
-      '@media (min-width: 768px)': {
+      '@media (minWidth: 768px)': {
         flexDirection: 'row'
       }
     },
@@ -350,7 +350,7 @@ const VTA5LandingPage = () => {
       gridTemplateColumns: '1fr',
       gap: '3rem',
       alignItems: 'center',
-      '@media (min-width: 1024px)': {
+      '@media (minWidth: 1024px)': {
         gridTemplateColumns: '1fr 1fr'
       }
     },
@@ -478,7 +478,7 @@ const VTA5LandingPage = () => {
       flexDirection: 'column',
       gap: '1rem',
       justifyContent: 'center',
-      '@media (min-width: 640px)': {
+      '@media (minWidth: 640px)': {
         flexDirection: 'row'
       }
     },
@@ -549,7 +549,7 @@ const VTA5LandingPage = () => {
       color: '#9ca3af',
       fontSize: '0.875rem',
       gap: '1rem',
-      '@media (min-width: 640px)': {
+      '@media (minWidth: 640px)': {
         flexDirection: 'row'
       }
     }
@@ -590,7 +590,7 @@ const VTA5LandingPage = () => {
             color: white;
           }
           
-          @media (max-width: 768px) {
+          @media (maxWidth: 768px) {
             .nav-links {
               display: none;
             }
@@ -612,19 +612,19 @@ const VTA5LandingPage = () => {
             }
           }
           
-          @media (min-width: 768px) {
+          @media (minWidth: 768px) {
             .email-form {
               flex-direction: row;
             }
           }
           
-          @media (min-width: 1024px) {
+          @media (minWidth: 1024px) {
             .preview-grid {
               grid-template-columns: 1fr 1fr;
             }
           }
           
-          @media (min-width: 640px) {
+          @media (minWidth: 640px) {
             .cta-buttons {
               flex-direction: row;
             }
