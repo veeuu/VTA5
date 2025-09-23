@@ -1,860 +1,462 @@
 import React, { useState, useEffect } from 'react';
-import { Shield, TrendingUp, Trophy, Users, DollarSign, Bot } from 'lucide-react';
+import { Shield, TrendingUp, Trophy, Users, DollarSign, Bot, CheckCircle } from 'lucide-react';
 
 const VTA5LandingPage = () => {
-  const [timeLeft, setTimeLeft] = useState({
-    days: 29,
-    hours: 23,
-    minutes: 59,
-    seconds: 29
-  });
+    const [registeredUsers, setRegisteredUsers] = useState(15340); // Initial number of users
+    const [email, setEmail] = useState('');
 
-  const [email, setEmail] = useState('');
+    // Effect for the dynamic registered user count
+    useEffect(() => {
+        const userCountInterval = setInterval(() => {
+            setRegisteredUsers(prev => prev + Math.floor(Math.random() * 3) + 2); // Increase by 2-4 users
+        }, 10000); // Every 10 seconds
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(prev => {
-        if (prev.seconds > 0) {
-          return { ...prev, seconds: prev.seconds - 1 };
-        } else if (prev.minutes > 0) {
-          return { ...prev, minutes: prev.minutes - 1, seconds: 59 };
-        } else if (prev.hours > 0) {
-          return { ...prev, hours: prev.hours - 1, minutes: 59, seconds: 59 };
-        } else if (prev.days > 0) {
-          return { ...prev, days: prev.days - 1, hours: 23, minutes: 59, seconds: 59 };
+        return () => clearInterval(userCountInterval);
+    }, []);
+
+    const handleNotifyMe = () => {
+        console.log('Email registered:', email);
+        alert(`Thank you for your interest! We'll notify you at ${email}.`);
+        setEmail('');
+    };
+
+    const features = [
+        {
+            icon: <Trophy size={32} />,
+            title: "Elite Tournaments",
+            description: "Premium competitions with higher stakes and exclusive access."
+        },
+        {
+            icon: <Shield size={32} />,
+            title: "Advanced Security",
+            description: "Military-grade encryption and robust protection for your assets."
+        },
+        {
+            icon: <TrendingUp size={32} />,
+            title: "Pro Analytics",
+            description: "Deep market insights and sophisticated trading analytics tools."
+        },
+        {
+            icon: <Users size={32} />,
+            title: "VIP Community",
+            description: "Exclusive access to professional traders and networking opportunities."
+        },
+        {
+            icon: <DollarSign size={32} />,
+            title: "Higher Rewards",
+            description: "Achieve up to 500% returns in our premium, high-reward tournaments."
+        },
+        {
+            icon: <Bot size={32} />,
+            title: "AI Assistant",
+            description: "Smart trading suggestions, personalized market analysis, and alerts."
         }
-        return prev;
-      });
-    }, 1000);
+    ];
 
-    return () => clearInterval(timer);
-  }, []);
+    const tradingFeatures = [
+        "Real-time market data from 50+ exchanges",
+        "AI-powered trading suggestions and strategies",
+        "Advanced charting tools with custom indicators",
+        "One-click order execution with minimal latency",
+        "Comprehensive risk management tools and alerts"
+    ];
 
-  const handleNotifyMe = () => {
-    console.log('Email registered:', email);
-    setEmail('');
-  };
+    const metrics = [
+        { value: "500%", label: "Max Tournament Returns" },
+        { value: "<1ms", label: "Order Execution Speed" },
+        { value: "24/7", label: "Global Market Access" },
+        { value: "99.99%", label: "Platform Uptime" }
+    ];
 
-  const features = [
-    {
-      icon: <Trophy size={32} />,
-      title: "Elite Tournaments",
-      description: "Premium competitions with higher stakes"
-    },
-    {
-      icon: <Shield size={32} />,
-      title: "Advanced Security",
-      description: "Military-grade encryption and protection"
-    },
-    {
-      icon: <TrendingUp size={32} />,
-      title: "Pro Analytics",
-      description: "Deep market insights and trading analytics"
-    },
-    {
-      icon: <Users size={32} />,
-      title: "VIP Community",
-      description: "Exclusive access to professional traders"
-    },
-    {
-      icon: <DollarSign size={32} />,
-      title: "Higher Rewards",
-      description: "Up to 500% returns in premium tournaments"
-    },
-    {
-      icon: <Bot size={32} />,
-      title: "AI Assistant",
-      description: "Smart trading suggestions and market analysis"
-    }
-  ];
+    return (
+        <div className="vta5-container">
+            {/* Global Styles */}
+            <style jsx global>{`
+                :root {
+                    --color-primary-start: #ec4899; /* Pink */
+                    --color-primary-end: #8b5cf6; /* Purple */
+                    --color-secondary: #a855f7; /* Lighter Purple */
+                    --color-gradient-text-start: #f472b6;
+                    --color-gradient-text-mid: #a855f7;
+                    --color-gradient-text-end: #3b82f6;
+                    --color-dark-bg-start: #581c87;
+                    --color-dark-bg-mid: #374151;
+                    --color-dark-bg-end: #000000;
+                    --color-card-bg: rgba(31, 41, 55, 0.5);
+                    --color-card-border: #374151;
+                    --color-text-light: #d1d5db;
+                    --color-text-faded: #9ca3af;
+                }
 
-  const tradingFeatures = [
-    "Real-time market data from 50+ exchanges",
-    "AI-powered trading suggestions",
-    "Advanced charting tools and indicators",
-    "One-click order execution",
-    "Risk management tools"
-  ];
+                html, body {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }
 
-  const metrics = [
-    { value: "500%", label: "Max Tournament Returns" },
-    { value: "<1ms", label: "Order Execution Speed" },
-    { value: "24/7", label: "Global Market Access" },
-    { value: "99.99%", label: "Platform Uptime" }
-  ];
+                *, *::before, *::after {
+                    box-sizing: inherit;
+                }
 
-  const styles = {
-    container: {
-      minHeight: '100vh',
-      background: 'linear-gradient(135deg, #581c87 0%, #374151 50%, #000000 100%)',
-      color: 'white',
-      overflow: 'hidden',
-      fontFamily: 'system-ui, -apple-system, sans-serif'
-    },
-    header: {
-      position: 'relative',
-      zIndex: 10,
-      padding: '1rem 1.5rem'
-    },
-    nav: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      maxWidth: '1280px',
-      margin: '0 auto'
-    },
-    logo: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '0.5rem'
-    },
-    logoIcon: {
-      width: '40px',
-      height: '40px',
-      background: 'linear-gradient(to right, #ec4899, #8b5cf6)',
-      borderRadius: '8px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    },
-    logoText: {
-      fontSize: '1.25rem',
-      fontWeight: 'bold'
-    },
-    navLinks: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '2rem',
-      '@media (maxWidth: 7680px)': {
-        display: 'none'
-      }
-    },
-    navLink: {
-      color: 'white',
-      textDecoration: 'none',
-      transition: 'color 0.3s',
-      cursor: 'pointer'
-    },
-    navButtons: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '1rem'
-    },
-    signInBtn: {
-      background: 'none',
-      border: 'none',
-      color: 'white',
-      cursor: 'pointer',
-      transition: 'color 0.3s'
-    },
-    getStartedBtn: {
-      background: 'linear-gradient(to right, #ec4899, #8b5cf6)',
-      color: 'white',
-      border: 'none',
-      padding: '0.5rem 1.5rem',
-      borderRadius: '8px',
-      cursor: 'pointer',
-      transition: 'transform 0.2s',
-      fontWeight: '500'
-    },
-    hero: {
-      position: 'relative',
-      padding: '5rem 1.5rem',
-      textAlign: 'center'
-    },
-    comingSoonBadge: {
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: '0.5rem',
-      background: 'rgba(139, 92, 246, 0.3)',
-      backdropFilter: 'blur(10px)',
-      border: '1px solid rgba(139, 92, 246, 0.3)',
-      padding: '0.5rem 1rem',
-      borderRadius: '9999px',
-      marginBottom: '2rem',
-      fontSize: '0.875rem'
-    },
-    pulseDot: {
-      width: '8px',
-      height: '8px',
-      background: '#a855f7',
-      borderRadius: '50%',
-      animation: 'pulse 2s infinite'
-    },
-    heroTitle: {
-      fontSize: 'clamp(4rem, 10vw, 8rem)',
-      fontWeight: 'bold',
-      marginBottom: '1.5rem',
-      background: 'linear-gradient(to right, #f472b6, #a855f7, #3b82f6)',
-      backgroundClip: 'text',
-      WebkitBackgroundClip: 'text',
-      color: 'transparent'
-    },
-    heroSubtitle: {
-      fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
-      fontWeight: 'bold',
-      marginBottom: '1.5rem'
-    },
-    heroDescription: {
-      fontSize: '1.125rem',
-      color: '#d1d5db',
-      maxWidth: '800px',
-      margin: '0 auto 3rem auto',
-      lineHeight: '1.7'
-    },
-    countdownContainer: {
-      background: 'rgba(31, 41, 55, 0.5)',
-      backdropFilter: 'blur(10px)',
-      border: '1px solid #374151',
-      borderRadius: '1rem',
-      padding: '2rem',
-      maxWidth: '500px',
-      margin: '0 auto 3rem auto'
-    },
-    countdownTitle: {
-      fontSize: '1.5rem',
-      fontWeight: 'bold',
-      marginBottom: '1.5rem'
-    },
-    countdownGrid: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(4, 1fr)',
-      gap: '1rem'
-    },
-    countdownItem: {
-      background: 'linear-gradient(to right, #ec4899, #8b5cf6)',
-      borderRadius: '12px',
-      padding: '1rem',
-      textAlign: 'center'
-    },
-    countdownValue: {
-      fontSize: '1.875rem',
-      fontWeight: 'bold'
-    },
-    countdownLabel: {
-      fontSize: '0.875rem',
-      opacity: 0.8
-    },
-    earlyAccess: {
-      position: 'relative',
-      padding: '4rem 1.5rem',
-      background: 'linear-gradient(to right, rgba(139, 92, 246, 0.2), rgba(59, 130, 246, 0.2))',
-      backdropFilter: 'blur(10px)',
-      textAlign: 'center'
-    },
-    earlyAccessTitle: {
-      fontSize: '1.875rem',
-      fontWeight: 'bold',
-      marginBottom: '1rem'
-    },
-    earlyAccessDescription: {
-      color: '#d1d5db',
-      marginBottom: '2rem'
-    },
-    emailForm: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '1rem',
-      maxWidth: '400px',
-      margin: '0 auto',
-      '@media (minWidth: 768px)': {
-        flexDirection: 'row'
-      }
-    },
-    emailInput: {
-      flex: 1,
-      padding: '0.75rem 1rem',
-      background: 'rgba(31, 41, 55, 0.5)',
-      backdropFilter: 'blur(10px)',
-      border: '1px solid #4b5563',
-      borderRadius: '8px',
-      color: 'white',
-      outline: 'none',
-      transition: 'border-color 0.3s'
-    },
-    notifyBtn: {
-      padding: '0.75rem 2rem',
-      background: 'linear-gradient(to right, #ec4899, #8b5cf6)',
-      color: 'white',
-      border: 'none',
-      borderRadius: '8px',
-      cursor: 'pointer',
-      fontWeight: '600',
-      transition: 'transform 0.2s'
-    },
-    features: {
-      padding: '5rem 1.5rem'
-    },
-    featuresContainer: {
-      maxWidth: '1152px',
-      margin: '0 auto'
-    },
-    featuresHeader: {
-      textAlign: 'center',
-      marginBottom: '4rem'
-    },
-    featuresTitle: {
-      fontSize: '2.25rem',
-      fontWeight: 'bold',
-      marginBottom: '1rem'
-    },
-    featuresDescription: {
-      color: '#d1d5db',
-      fontSize: '1.125rem'
-    },
-    featuresGrid: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-      gap: '2rem'
-    },
-    featureCard: {
-      background: 'rgba(31, 41, 55, 0.5)',
-      backdropFilter: 'blur(10px)',
-      border: '1px solid #374151',
-      borderRadius: '12px',
-      padding: '1.5rem',
-      transition: 'all 0.3s',
-      cursor: 'pointer'
-    },
-    featureIcon: {
-      width: '64px',
-      height: '64px',
-      background: 'linear-gradient(to right, #ec4899, #8b5cf6)',
-      borderRadius: '12px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      marginBottom: '1rem'
-    },
-    featureTitle: {
-      fontSize: '1.25rem',
-      fontWeight: 'bold',
-      marginBottom: '0.5rem'
-    },
-    featureDescription: {
-      color: '#d1d5db'
-    },
-    preview: {
-      padding: '5rem 1.5rem'
-    },
-    previewContainer: {
-      maxWidth: '1152px',
-      margin: '0 auto'
-    },
-    previewHeader: {
-      textAlign: 'center',
-      marginBottom: '4rem'
-    },
-    previewGrid: {
-      display: 'grid',
-      gridTemplateColumns: '1fr',
-      gap: '3rem',
-      alignItems: 'center',
-      '@media (minWidth: 1024px)': {
-        gridTemplateColumns: '1fr 1fr'
-      }
-    },
-    previewTitle: {
-      fontSize: '1.5rem',
-      fontWeight: 'bold',
-      marginBottom: '1.5rem'
-    },
-    previewFeatures: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '1rem'
-    },
-    previewFeature: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '0.75rem'
-    },
-    greenDot: {
-      width: '8px',
-      height: '8px',
-      background: '#4ade80',
-      borderRadius: '50%'
-    },
-    mockInterface: {
-      position: 'relative'
-    },
-    mockContainer: {
-      background: 'linear-gradient(to right, #1f2937, #111827)',
-      borderRadius: '12px',
-      padding: '1.5rem',
-      border: '1px solid #374151'
-    },
-    mockGrid: {
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
-      gap: '1rem',
-      marginBottom: '1rem'
-    },
-    mockChart1: {
-      height: '80px',
-      background: 'linear-gradient(to right, #4ade80, #3b82f6)',
-      borderRadius: '8px',
-      opacity: 0.8
-    },
-    mockChart2: {
-      height: '80px',
-      background: 'linear-gradient(to right, #ef4444, #ec4899)',
-      borderRadius: '8px',
-      opacity: 0.8
-    },
-    mockMainChart: {
-      height: '128px',
-      background: 'linear-gradient(to right, #8b5cf6, #3b82f6)',
-      borderRadius: '8px',
-      opacity: 0.6,
-      marginBottom: '1rem'
-    },
-    mockControls: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(3, 1fr)',
-      gap: '0.5rem'
-    },
-    mockControl: {
-      height: '32px',
-      background: '#4b5563',
-      borderRadius: '4px',
-      opacity: 0.6
-    },
-    mockGlow: {
-      position: 'absolute',
-      inset: '-16px',
-      background: 'linear-gradient(to right, #ec4899, #8b5cf6)',
-      borderRadius: '12px',
-      opacity: 0.2,
-      filter: 'blur(20px)',
-      zIndex: -1
-    },
-    metrics: {
-      padding: '5rem 1.5rem'
-    },
-    metricsGrid: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-      gap: '2rem',
-      maxWidth: '1152px',
-      margin: '0 auto'
-    },
-    metricCard: {
-      background: 'rgba(31, 41, 55, 0.5)',
-      backdropFilter: 'blur(10px)',
-      border: '1px solid #374151',
-      borderRadius: '12px',
-      padding: '1.5rem',
-      textAlign: 'center'
-    },
-    metricValue: {
-      fontSize: '1.875rem',
-      fontWeight: 'bold',
-      background: 'linear-gradient(to right, #f472b6, #a855f7)',
-      backgroundClip: 'text',
-      WebkitBackgroundClip: 'text',
-      color: 'transparent',
-      marginBottom: '0.5rem'
-    },
-    metricLabel: {
-      color: '#d1d5db'
-    },
-    cta: {
-      padding: '5rem 1.5rem',
-      textAlign: 'center'
-    },
-    ctaTitle: {
-      fontSize: '2.25rem',
-      fontWeight: 'bold',
-      marginBottom: '1.5rem'
-    },
-    ctaDescription: {
-      fontSize: '1.125rem',
-      color: '#d1d5db',
-      marginBottom: '2rem'
-    },
-    ctaButtons: {
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '1rem',
-      justifyContent: 'center',
-      '@media (minWidth: 640px)': {
-        flexDirection: 'row'
-      }
-    },
-    ctaPrimary: {
-      padding: '1rem 2rem',
-      background: 'linear-gradient(to right, #ec4899, #8b5cf6)',
-      color: 'white',
-      border: 'none',
-      borderRadius: '8px',
-      cursor: 'pointer',
-      fontWeight: '600',
-      fontSize: '1.125rem',
-      transition: 'transform 0.2s'
-    },
-    ctaSecondary: {
-      padding: '1rem 2rem',
-      border: '1px solid #8b5cf6',
-      color: '#a855f7',
-      background: 'transparent',
-      borderRadius: '8px',
-      cursor: 'pointer',
-      fontWeight: '600',
-      fontSize: '1.125rem',
-      transition: 'all 0.3s'
-    },
-    footer: {
-      padding: '3rem 1.5rem',
-      borderTop: '1px solid #1f2937'
-    },
-    footerContainer: {
-      maxWidth: '1152px',
-      margin: '0 auto'
-    },
-    footerContent: {
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      textAlign: 'center',
-      gap: '1rem'
-    },
-    footerLogo: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '0.5rem'
-    },
-    footerDescription: {
-      color: '#9ca3af'
-    },
-    footerLinks: {
-      display: 'flex',
-      gap: '1.5rem',
-      marginTop: '1.5rem'
-    },
-    footerLink: {
-      color: '#9ca3af',
-      textDecoration: 'none',
-      transition: 'color 0.3s',
-      cursor: 'pointer'
-    },
-    footerBottom: {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      width: '100%',
-      paddingTop: '2rem',
-      borderTop: '1px solid #1f2937',
-      color: '#9ca3af',
-      fontSize: '0.875rem',
-      gap: '1rem',
-      '@media (minWidth: 640px)': {
-        flexDirection: 'row'
-      }
-    }
-  };
+                body {
+                    font-family: 'Inter', sans-serif; /* Using a more modern font */
+                    background: linear-gradient(135deg, var(--color-dark-bg-start) 0%, var(--color-dark-bg-mid) 50%, var(--color-dark-bg-end) 100%);
+                    color: white;
+                    min-height: 100vh;
+                    overflow-x: hidden;
+                }
 
-  return (
-    <div style={styles.container}>
-      <style>
-        {`
-          @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-          }
-          
-          .email-input:focus {
-            border-color: #8b5cf6;
-          }
-          
-          .btn-hover:hover {
-            transform: scale(1.05);
-          }
-          
-          .nav-link:hover {
-            color: #a855f7;
-          }
-          
-          .feature-card:hover {
-            background: rgba(31, 41, 55, 0.7);
-            transform: scale(1.05);
-          }
-          
-          .cta-secondary:hover {
-            background: #8b5cf6;
-            color: white;
-          }
-          
-          .footer-link:hover {
-            color: white;
-          }
-          
-          @media (maxWidth: 768px) {
-            .nav-links {
-              display: none;
-            }
-            
-            .email-form {
-              flex-direction: column;
-            }
-            
-            .preview-grid {
-              grid-template-columns: 1fr;
-            }
-            
-            .cta-buttons {
-              flex-direction: column;
-            }
-            
-            .footer-bottom {
-              flex-direction: column;
-            }
-          }
-          
-          @media (minWidth: 768px) {
-            .email-form {
-              flex-direction: row;
-            }
-          }
-          
-          @media (minWidth: 1024px) {
-            .preview-grid {
-              grid-template-columns: 1fr 1fr;
-            }
-          }
-          
-          @media (minWidth: 640px) {
-            .cta-buttons {
-              flex-direction: row;
-            }
-            
-            .footer-bottom {
-              flex-direction: row;
-            }
-          }
-        `}
-      </style>
-      
-      {/* Header */}
-      <header style={styles.header}>
-        <nav style={styles.nav}>
-          <div style={styles.logo}>
-            <div style={styles.logoIcon}>
-              <Shield size={24} color="white" />
-            </div>
-            <span style={styles.logoText}>TradeTournament</span>
-          </div>
-          
-          <div className="nav-links" style={styles.navLinks}>
-            <a href="#" className="nav-link" style={styles.navLink}>Home</a>
-            <a href="#" className="nav-link" style={styles.navLink}>VTA5 Launch</a>
-            <a href="#" className="nav-link" style={styles.navLink}>About</a>
-          </div>
-          
-          <div style={styles.navButtons}>
-            <button className="nav-link" style={styles.signInBtn}>Sign In</button>
-            <button className="btn-hover" style={styles.getStartedBtn}>
-              Get Started
-            </button>
-          </div>
-        </nav>
-      </header>
+                .vta5-container {
+                    width: 100%; /* Ensure full width */
+                    overflow: hidden;
+                }
 
-      {/* Hero Section */}
-      <section style={styles.hero}>
-        <div style={styles.comingSoonBadge}>
-          <span style={styles.pulseDot}></span>
-          <span>Coming Soon</span>
-        </div>
-        
-        <h1 style={styles.heroTitle}>VTA5</h1>
-        
-        <h2 style={styles.heroSubtitle}>
-          The Future of Trading Tournaments
-        </h2>
-        
-        <p style={styles.heroDescription}>
-          Experience the next generation of competitive trading with advanced AI analytics,
-          premium tournaments, and unprecedented rewards. VTA5 takes trading competitions
-          to a whole new level.
-        </p>
+                /* Keyframe Animations */
+                @keyframes pulse {
+                    0%, 100% { opacity: 1; }
+                    50% { opacity: 0.5; }
+                }
 
-        {/* Countdown */}
-        <div style={styles.countdownContainer}>
-          <h3 style={styles.countdownTitle}>Launch Countdown</h3>
-          <div style={styles.countdownGrid}>
-            {[
-              { value: timeLeft.days, label: 'Days' },
-              { value: timeLeft.hours, label: 'Hours' },
-              { value: timeLeft.minutes, label: 'Minutes' },
-              { value: timeLeft.seconds, label: 'Seconds' }
-            ].map((item, index) => (
-              <div key={index} style={styles.countdownItem}>
-                <div style={styles.countdownValue}>{item.value.toString().padStart(2, '0')}</div>
-                <div style={styles.countdownLabel}>{item.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: translateY(20px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
 
-      {/* Early Access Section */}
-      <section style={styles.earlyAccess}>
-        <div style={{ maxWidth: '1024px', margin: '0 auto' }}>
-          <h3 style={styles.earlyAccessTitle}>Get Early Access</h3>
-          <p style={styles.earlyAccessDescription}>Be the first to know when VTA5 launches and get exclusive beta access</p>
-          
-          <div className="email-form" style={styles.emailForm}>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email address"
-              className="email-input"
-              style={styles.emailInput}
-            />
-            <button
-              onClick={handleNotifyMe}
-              className="btn-hover"
-              style={styles.notifyBtn}
-            >
-              Notify Me
-            </button>
-          </div>
-        </div>
-      </section>
+                /* Reusable Classes */
+                .gradient-text {
+                    background: linear-gradient(to right, var(--color-gradient-text-start), var(--color-gradient-text-mid), var(--color-gradient-text-end));
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    color: transparent;
+                }
 
-      {/* Features Section */}
-      <section style={styles.features}>
-        <div style={styles.featuresContainer}>
-          <div style={styles.featuresHeader}>
-            <h3 style={styles.featuresTitle}>What's New in VTA5?</h3>
-            <p style={styles.featuresDescription}>Revolutionary features that will transform your trading tournament experience</p>
-          </div>
-          
-          <div style={styles.featuresGrid}>
-            {features.map((feature, index) => (
-              <div key={index} className="feature-card" style={styles.featureCard}>
-                <div style={styles.featureIcon}>
-                  {feature.icon}
+                .btn-primary {
+                    background: linear-gradient(to right, var(--color-primary-start), var(--color-primary-end));
+                    color: white;
+                    border: none;
+                    padding: 0.75rem 2rem;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    font-weight: 600;
+                    transition: transform 0.2s ease, box-shadow 0.2s ease;
+                }
+
+                .btn-primary:hover {
+                    transform: translateY(-2px) scale(1.02);
+                    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+                }
+
+                .btn-secondary {
+                    border: 1px solid var(--color-primary-end);
+                    color: var(--color-secondary);
+                    background: transparent;
+                    padding: 0.75rem 2rem;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    font-weight: 600;
+                    transition: all 0.3s ease;
+                }
+
+                .btn-secondary:hover {
+                    background: var(--color-primary-end);
+                    color: white;
+                    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+                }
+
+                .input-field {
+                    flex: 1;
+                    padding: 0.75rem 1rem;
+                    background: rgba(31, 41, 55, 0.5);
+                    backdrop-filter: blur(10px);
+                    border: 1px solid #4b5563;
+                    border-radius: 8px;
+                    color: white;
+                    outline: none;
+                    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+                }
+
+                .input-field::placeholder {
+                    color: var(--color-text-faded);
+                }
+
+                .input-field:focus {
+                    border-color: var(--color-primary-end);
+                    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3);
+                }
+
+                .card-glass {
+                    background: var(--color-card-bg);
+                    backdrop-filter: blur(10px);
+                    border: 1px solid var(--color-card-border);
+                    border-radius: 12px;
+                    transition: all 0.3s ease;
+                }
+
+                .card-glass:hover {
+                    transform: translateY(-5px) scale(1.02);
+                    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+                }
+
+                /* Utility Classes */
+                .max-w-screen-xl { max-width: 1280px; margin: 0 auto; }
+                .text-center { text-align: center; }
+                .flex { display: flex; }
+                .items-center { align-items: center; }
+                .justify-between { justify-content: space-between; }
+                .gap-4 { gap: 1rem; }
+                .gap-8 { gap: 2rem; }
+                .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+                .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+                .py-24 { padding-top: 6rem; padding-bottom: 6rem; }
+
+                /* Responsive Design */
+                @media (max-width: 768px) {
+                    .nav-links { display: none; }
+                    .hero-title { font-size: 3rem !important; line-height: 1.1; }
+                    .hero-subtitle { font-size: 1.8rem !important; }
+                    .email-form { flex-direction: column; }
+                    .preview-grid { grid-template-columns: 1fr; }
+                    .cta-buttons { flex-direction: column; }
+                    .footer-content { flex-direction: column; text-align: center; }
+                    .footer-links { margin-top: 1rem; }
+                    .footer-bottom { flex-direction: column; gap: 0.5rem; }
+                }
+
+                @media (min-width: 768px) {
+                    .email-form { flex-direction: row; }
+                    .features-grid { grid-template-columns: repeat(2, 1fr); }
+                    .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+                }
+
+                @media (min-width: 1024px) {
+                    .features-grid { grid-template-columns: repeat(3, 1fr); }
+                    .preview-grid { grid-template-columns: 1fr 1fr; }
+                    .metrics-grid { grid-template-columns: repeat(4, 1fr); }
+                }
+            `}</style>
+
+            {/* Header */}
+            <header className="py-4 px-6 relative z-10">
+                <nav className="flex items-center justify-between max-w-screen-xl mx-auto">
+                    <div className="flex items-center gap-2">
+                        <div className="w-10 h-10 bg-gradient-to-r from-[var(--color-primary-start)] to-[var(--color-primary-end)] rounded-lg flex items-center justify-center">
+                            <Shield size={24} color="white" />
+                        </div>
+                        <span className="text-xl font-bold">TradeTournament</span>
+                    </div>
+
+                    <div className="nav-links flex items-center gap-8">
+                        <a href="#" className="text-white hover:text-[var(--color-secondary)] transition-colors duration-300">Home</a>
+                        <a href="#" className="text-white hover:text-[var(--color-secondary)] transition-colors duration-300">VTA5 Launch</a>
+                        <a href="#" className="text-white hover:text-[var(--color-secondary)] transition-colors duration-300">About</a>
+                    </div>
+
+                    <div className="flex items-center gap-4">
+                        <button className="text-white hover:text-[var(--color-secondary)] transition-colors duration-300 bg-transparent border-none cursor-pointer">Sign In</button>
+                        <button className="btn-primary px-6 py-2">
+                            Get Started
+                        </button>
+                    </div>
+                </nav>
+            </header>
+
+            {/* Hero Section */}
+            <section className="text-center py-24 px-6 relative overflow-hidden">
+                <div className="max-w-screen-xl mx-auto animate-fadeIn">
+                    <div className="inline-flex items-center gap-2 bg-[rgba(139,92,246,0.2)] backdrop-blur-md border border-[rgba(139,92,246,0.3)] px-4 py-2 rounded-full mb-8 text-sm">
+                        <span className="w-2 h-2 bg-[var(--color-secondary)] rounded-full animate-pulse"></span>
+                        <span>The Future is Here</span>
+                    </div>
+
+                    <h1 className="hero-title text-6xl md:text-7xl lg:text-8xl font-extrabold mb-6 gradient-text" style={{ lineHeight: '1.1' }}>VTA5</h1>
+
+                    <h2 className="hero-subtitle text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+                        The Next Generation of Trading Tournaments
+                    </h2>
+
+                    <p className="text-lg text-[var(--color-text-light)] max-w-3xl mx-auto mb-12 leading-relaxed">
+                        Experience the next generation of competitive trading with advanced AI analytics,
+                        premium tournaments, and unprecedented rewards. VTA5 takes trading competitions
+                        to a whole new level.
+                    </p>
+
+                    {/* Registered Users */}
+                    <div className="card-glass p-8 max-w-md mx-auto mb-12 animate-fadeIn" style={{ animationDelay: '0.3s' }}>
+                        <h3 className="text-2xl font-bold mb-6 text-white">Join Thousands of Traders!</h3>
+                        <div className="text-center">
+                            <div className="text-6xl font-extrabold gradient-text mb-2">
+                                {registeredUsers.toLocaleString()}
+                            </div>
+                            <div className="text-xl opacity-80">Registered Traders</div>
+                        </div>
+                        <p className="text-sm text-[var(--color-text-faded)] mt-4">Counting up in real-time. Don't miss out!</p>
+                    </div>
                 </div>
-                <h4 style={styles.featureTitle}>{feature.title}</h4>
-                <p style={styles.featureDescription}>{feature.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            </section>
 
-      {/* Platform Preview */}
-      <section style={styles.preview}>
-        <div style={styles.previewContainer}>
-          <div style={styles.previewHeader}>
-            <h3 style={styles.featuresTitle}>Platform Preview</h3>
-            <p style={styles.featuresDescription}>Get a sneak peek at the VTA5 interface</p>
-          </div>
-          
-          <div className="preview-grid" style={styles.previewGrid}>
-            <div>
-              <h4 style={styles.previewTitle}>Advanced Trading Interface</h4>
-              <div style={styles.previewFeatures}>
-                {tradingFeatures.map((feature, index) => (
-                  <div key={index} style={styles.previewFeature}>
-                    <div style={styles.greenDot}></div>
-                    <span style={{ color: '#d1d5db' }}>{feature}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <div style={styles.mockInterface}>
-              <div style={styles.mockContainer}>
-                <div style={styles.mockGrid}>
-                  <div style={styles.mockChart1}></div>
-                  <div style={styles.mockChart2}></div>
+            {/* Early Access Section */}
+            <section className="py-24 px-6 text-center bg-gradient-to-r from-[rgba(139,92,246,0.1)] to-[rgba(59,130,246,0.1)] backdrop-blur-md relative z-10">
+                <div className="max-w-screen-xl mx-auto animate-fadeIn" style={{ animationDelay: '0.4s' }}>
+                    <h3 className="text-3xl font-bold mb-4">Get Early Access & Exclusive Updates</h3>
+                    <p className="text-lg text-[var(--color-text-light)] max-w-2xl mx-auto mb-10">
+                        Be the first to know when VTA5 launches and get exclusive beta access.
+                    </p>
+
+                    <div className="email-form flex gap-4 max-w-lg mx-auto">
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Enter your email address"
+                            className="input-field"
+                        />
+                        <button
+                            onClick={handleNotifyMe}
+                            className="btn-primary"
+                        >
+                            Notify Me
+                        </button>
+                    </div>
                 </div>
-                <div style={styles.mockMainChart}></div>
-                <div style={styles.mockControls}>
-                  <div style={styles.mockControl}></div>
-                  <div style={styles.mockControl}></div>
-                  <div style={styles.mockControl}></div>
+            </section>
+
+            {/* Features Section */}
+            <section className="py-24 px-6">
+                <div className="max-w-screen-xl mx-auto animate-fadeIn" style={{ animationDelay: '0.5s' }}>
+                    <div className="text-center mb-16">
+                        <h3 className="text-4xl font-bold mb-4">What's New in VTA5?</h3>
+                        <p className="text-xl text-[var(--color-text-light)] max-w-3xl mx-auto">
+                            Revolutionary features that will transform your trading tournament experience.
+                        </p>
+                    </div>
+
+                    <div className="features-grid grid gap-8">
+                        {features.map((feature, index) => (
+                            <div key={index} className="card-glass p-6 text-center hover:shadow-lg hover:border-[var(--color-primary-end)]" style={{ animationDelay: `${0.5 + index * 0.1}s` }}>
+                                <div className="w-16 h-16 mx-auto bg-gradient-to-r from-[var(--color-primary-start)] to-[var(--color-primary-end)] rounded-xl flex items-center justify-center mb-6">
+                                    {feature.icon}
+                                </div>
+                                <h4 className="text-xl font-bold mb-2">{feature.title}</h4>
+                                <p className="text-[var(--color-text-light)]">{feature.description}</p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
-              </div>
-              <div style={styles.mockGlow}></div>
-            </div>
-          </div>
-        </div>
-      </section>
+            </section>
 
-      {/* Performance Metrics */}
-      <section style={styles.metrics}>
-        <div style={styles.previewContainer}>
-          <div style={styles.previewHeader}>
-            <h3 style={styles.featuresTitle}>Expected Performance Metrics</h3>
-          </div>
-          
-          <div style={styles.metricsGrid}>
-            {metrics.map((metric, index) => (
-              <div key={index} style={styles.metricCard}>
-                <div style={styles.metricValue}>
-                  {metric.value}
+            {/* Platform Preview */}
+            <section className="py-24 px-6">
+                <div className="max-w-screen-xl mx-auto animate-fadeIn" style={{ animationDelay: '0.6s' }}>
+                    <div className="text-center mb-16">
+                        <h3 className="text-4xl font-bold mb-4">Platform Preview</h3>
+                        <p className="text-xl text-[var(--color-text-light)] max-w-3xl mx-auto">Get a sneak peek at the intuitive and powerful VTA5 interface.</p>
+                    </div>
+
+                    <div className="preview-grid grid gap-12 items-center">
+                        <div>
+                            <h4 className="text-3xl font-bold mb-6">Advanced Trading Interface</h4>
+                            <div className="flex flex-col gap-4">
+                                {tradingFeatures.map((feature, index) => (
+                                    <div key={index} className="flex items-center gap-3">
+                                        <CheckCircle size={20} color="#4ade80" />
+                                        <span className="text-lg text-[var(--color-text-light)]">{feature}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="relative p-4">
+                            {/* Mock Interface Container */}
+                            <div className="card-glass p-6 border-[var(--color-card-border)] relative z-10 shadow-xl">
+                                <div className="grid grid-cols-2 gap-4 mb-4">
+                                    <div className="h-20 bg-gradient-to-r from-[#4ade80] to-[#3b82f6] rounded-lg opacity-80"></div>
+                                    <div className="h-20 bg-gradient-to-r from-[#ef4444] to-[#ec4899] rounded-lg opacity-80"></div>
+                                </div>
+                                <div className="h-32 bg-gradient-to-r from-[#8b5cf6] to-[#3b82f6] rounded-lg opacity-60 mb-4"></div>
+                                <div className="grid grid-cols-3 gap-2">
+                                    <div className="h-8 bg-[#4b5563] rounded-md opacity-60"></div>
+                                    <div className="h-8 bg-[#4b5563] rounded-md opacity-60"></div>
+                                    <div className="h-8 bg-[#4b5563] rounded-md opacity-60"></div>
+                                </div>
+                            </div>
+                            {/* Subtle Glow Effect */}
+                            <div className="absolute inset-[-16px] bg-gradient-to-r from-[var(--color-primary-start)] to-[var(--color-primary-end)] rounded-xl opacity-20 blur-xl z-0"></div>
+                        </div>
+                    </div>
                 </div>
-                <div style={styles.metricLabel}>{metric.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            </section>
 
-      {/* CTA Section */}
-      <section style={styles.cta}>
-        <div style={{ maxWidth: '1024px', margin: '0 auto' }}>
-          <h3 style={styles.ctaTitle}>Ready for the Future of Trading?</h3>
-          <p style={styles.ctaDescription}>
-            VTA5 will revolutionize competitive trading. Join the waitlist and be among the first to experience the future.
-          </p>
-          
-          <div className="cta-buttons" style={styles.ctaButtons}>
-            <button className="btn-hover" style={styles.ctaPrimary}>
-              Join Waitlist
-            </button>
-            <button className="cta-secondary" style={styles.ctaSecondary}>
-              Learn More
-            </button>
-          </div>
-        </div>
-      </section>
+            {/* Performance Metrics */}
+            <section className="py-24 px-6">
+                <div className="max-w-screen-xl mx-auto animate-fadeIn" style={{ animationDelay: '0.7s' }}>
+                    <div className="text-center mb-16">
+                        <h3 className="text-4xl font-bold mb-4">Unmatched Performance & Reliability</h3>
+                        <p className="text-xl text-[var(--color-text-light)] max-w-3xl mx-auto">
+                            Our platform is engineered for speed, security, and global accessibility.
+                        </p>
+                    </div>
 
-      {/* Footer */}
-      <footer style={styles.footer}>
-        <div style={styles.footerContainer}>
-          <div style={styles.footerContent}>
-            <div style={styles.footerLogo}>
-              <div style={styles.logoIcon}>
-                <Shield size={24} color="white" />
-              </div>
-              <span style={styles.logoText}>TradeTournament VTA5</span>
-            </div>
-            
-            <p style={styles.footerDescription}>The next generation trading tournament platform. Coming soon.</p>
-            
-            <div style={styles.footerLinks}>
-              <a href="#" className="footer-link" style={styles.footerLink}>Twitter</a>
-              <a href="#" className="footer-link" style={styles.footerLink}>LinkedIn</a>
-              <a href="#" className="footer-link" style={styles.footerLink}>Discord</a>
-              <a href="#" className="footer-link" style={styles.footerLink}>Telegram</a>
-            </div>
-            
-            <div className="footer-bottom" style={styles.footerBottom}>
-              <p>© 2024 TradeTournament VTA5. All rights reserved.</p>
-              <p>Made with Readdy</p>
-            </div>
-          </div>
+                    <div className="metrics-grid grid gap-8">
+                        {metrics.map((metric, index) => (
+                            <div key={index} className="card-glass p-6 text-center hover:shadow-lg" style={{ animationDelay: `${0.7 + index * 0.1}s` }}>
+                                <div className="text-5xl font-extrabold gradient-text mb-2">
+                                    {metric.value}
+                                </div>
+                                <div className="text-lg text-[var(--color-text-light)]">{metric.label}</div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* CTA Section */}
+            <section className="py-24 px-6 text-center">
+                <div className="max-w-screen-xl mx-auto animate-fadeIn" style={{ animationDelay: '0.8s' }}>
+                    <h3 className="text-4xl font-bold mb-6">Ready for the Future of Trading?</h3>
+                    <p className="text-xl text-[var(--color-text-light)] max-w-3xl mx-auto mb-12">
+                        VTA5 will revolutionize competitive trading. Join the waitlist and be among the first to experience the future.
+                    </p>
+
+                    <div className="cta-buttons flex justify-center gap-6">
+                        <button className="btn-primary text-lg px-8 py-3">
+                            Join Waitlist
+                        </button>
+                        <button className="btn-secondary text-lg px-8 py-3">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            {/* Footer */}
+            <footer className="py-12 px-6 border-t border-[#1f2937]">
+                <div className="max-w-screen-xl mx-auto">
+                    <div className="flex flex-col items-center justify-center gap-6 mb-8">
+                        <div className="flex items-center gap-2">
+                            <div className="w-10 h-10 bg-gradient-to-r from-[var(--color-primary-start)] to-[var(--color-primary-end)] rounded-lg flex items-center justify-center">
+                                <Shield size={24} color="white" />
+                            </div>
+                            <span className="text-xl font-bold">TradeTournament VTA5</span>
+                        </div>
+
+                        <p className="text-[var(--color-text-faded)] max-w-md">The next generation trading tournament platform. Coming soon to redefine competitive trading.</p>
+
+                        <div className="flex gap-6 mt-4">
+                            <a href="#" className="text-[var(--color-text-faded)] hover:text-white transition-colors duration-300">Twitter</a>
+                            <a href="#" className="text-[var(--color-text-faded)] hover:text-white transition-colors duration-300">LinkedIn</a>
+                            <a href="#" className="text-[var(--color-text-faded)] hover:text-white transition-colors duration-300">Discord</a>
+                            <a href="#" className="text-[var(--color-text-faded)] hover:text-white transition-colors duration-300">Telegram</a>
+                        </div>
+                    </div>
+
+                    <div className="flex flex-col md:flex-row justify-between items-center w-full pt-8 border-t border-[#1f2937] text-[var(--color-text-faded)] text-sm gap-4">
+                        <p>© 2024 TradeTournament VTA5. All rights reserved.</p>
+                        <p>Designed with <span className="gradient-text">Passion</span></p>
+                    </div>
+                </div>
+            </footer>
         </div>
-      </footer>
-    </div>
-  );
+    );
 };
 
 export default VTA5LandingPage;
