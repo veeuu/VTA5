@@ -1,25 +1,102 @@
 import React, { useState, useEffect } from 'react';
-import { Shield, TrendingUp, Trophy, Users, DollarSign, Bot, CheckCircle } from 'lucide-react';
+import { Shield, TrendingUp, Trophy, Users, DollarSign, Bot, CheckCircle, X, Mail, User, Phone, Building } from 'lucide-react';
 import platformPreviewImage from '../assets/platformPreview.jpg';
 
 const VTA5LandingPage = () => {
-    const [registeredUsers, setRegisteredUsers] = useState(154892); // Initial number matching the image
+    // const [registeredUsers, setRegisteredUsers] = useState(); // Initial number matching the image
     const [email, setEmail] = useState('');
 
-    // Effect for the dynamic registered user count
-    useEffect(() => {
-        const userCountInterval = setInterval(() => {
-            setRegisteredUsers(prev => prev + Math.floor(Math.random() * 3) + 1); // Increase by 1-3 users
-        }, 5000); // Every 5 seconds
+    const [showWaitlistModal, setShowWaitlistModal] = useState(false);
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        company: '',
+        tradingExperience: '',
+        interests: []
+    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitSuccess, setSubmitSuccess] = useState(false);
 
-        return () => clearInterval(userCountInterval);
-    }, []);
+    // Effect for the dynamic registered user count
+    // useEffect(() => {
+    //     const userCountInterval = setInterval(() => {
+    //         setRegisteredUsers(prev => prev + Math.floor(Math.random() * 3) + 1); // Increase by 1-3 users
+    //     }, 5000); // Every 5 seconds
+
+    //     return () => clearInterval(userCountInterval);
+    // }, []);
 
     const handleNotifyMe = () => {
         console.log('Email registered:', email);
         alert(`Thank you for your interest! We'll notify you at ${email}.`);
         setEmail('');
     };
+
+    const handleWaitlistSubmit = async (e) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+    
+        // Simulate API call
+        setTimeout(() => {
+            console.log('Waitlist form submitted:', formData);
+            
+            // Simulate sending email (in real app, this would be done on the backend)
+            const emailContent = {
+                to: 'jigar@ectsasyventures.com',
+                subject: 'New VTA5 Waitlist Registration',
+                body: `
+                    New waitlist registration:
+                    
+                    Name: ${formData.firstName} ${formData.lastName}
+                    Email: ${formData.email}
+                    Phone: ${formData.phone}
+                    Company: ${formData.company}
+                    Trading Experience: ${formData.tradingExperience}
+                    Interests: ${formData.interests.join(', ')}
+                    
+                    Registration Time: ${new Date().toLocaleString()}
+                `
+            };
+            
+            console.log('Email would be sent to jigar@ectsasyventures.com:', emailContent);
+            
+            setIsSubmitting(false);
+            setSubmitSuccess(true);
+            
+            // Reset form after 3 seconds
+            setTimeout(() => {
+                setShowWaitlistModal(false);
+                setSubmitSuccess(false);
+                setFormData({
+                    firstName: '',
+                    lastName: '',
+                    email: '',
+                    phone: '',
+                    company: '',
+                    tradingExperience: '',
+                    interests: []
+                });
+            }, 3000);
+        }, 2000);
+    };
+    const handleInputChange = (field, value) => {
+        setFormData(prev => ({
+            ...prev,
+            [field]: value
+        }));
+    };
+    
+    const handleInterestToggle = (interest) => {
+        setFormData(prev => ({
+            ...prev,
+            interests: prev.interests.includes(interest)
+                ? prev.interests.filter(i => i !== interest)
+                : [...prev.interests, interest]
+        }));
+    };
+    
 
     const features = [
         {
@@ -284,6 +361,178 @@ const VTA5LandingPage = () => {
                 .preview-grid { grid-template-columns: 1fr 1fr; }
                 .metrics-grid { grid-template-columns: repeat(4, 1fr); }
             }
+                /* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    animation: modalFadeIn 0.3s ease-out forwards;
+}
+
+.modal-content {
+    background: var(--color-dark-bg-start);
+    border: 1px solid var(--color-card-border);
+    border-radius: 20px;
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: scale(0.8);
+    animation: modalScaleIn 0.3s ease-out 0.1s forwards;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--color-text-light);
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 8px;
+    color: var(--color-text-light);
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 1rem;
+}
+
+.form-input::placeholder {
+    color: var(--color-text-faded);
+}
+
+.form-input:focus {
+    border-color: var(--color-primary-end);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3);
+}
+
+.form-select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 8px;
+    color: var(--color-text-light);
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 1rem;
+}
+
+.form-select:focus {
+    border-color: var(--color-primary-end);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3);
+}
+
+.interest-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.interest-checkbox {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.875rem;
+}
+
+.interest-checkbox.selected {
+    background: var(--color-primary-end);
+    border-color: var(--color-primary-end);
+    color: white;
+}
+
+.interest-checkbox:hover {
+    background: rgba(139, 92, 246, 0.2);
+    border-color: var(--color-primary-end);
+}
+
+.close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--color-text-faded);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.close-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-text-light);
+}
+
+.btn-primary:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-primary:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+@keyframes modalFadeIn {
+    to { opacity: 1; }
+}
+
+@keyframes modalScaleIn {
+    to { transform: scale(1); }
+}
+
+.success-message {
+    text-align: center;
+    padding: 2rem;
+}
+
+.success-icon {
+    width: 4rem;
+    height: 4rem;
+    background: linear-gradient(to right, #10b981, #22c55e);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    animation: successPulse 0.6s ease-out;
+}
+
+@keyframes successPulse {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
         `;
         document.head.appendChild(style);
         
@@ -443,15 +692,181 @@ const VTA5LandingPage = () => {
                     </p>
 
                     <div className="cta-buttons flex justify-center gap-6">
-                        <button className="btn-primary text-lg px-8 py-3">
-                            Join Waitlist
-                        </button>
+                    <button 
+                        className="btn-primary text-lg px-8 py-3"
+                        onClick={() => setShowWaitlistModal(true)}
+                    >
+                        Join Waitlist
+                    </button>
                         {/* <button className="btn-secondary text-lg px-8 py-3">
                             Learn More
                         </button> */}
                     </div>
                 </div>
             </section>
+
+            {/* Waitlist Modal */}
+{showWaitlistModal && (
+    <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && setShowWaitlistModal(false)}>
+        <div className="modal-content" style={{ position: 'relative' }}>
+            <button 
+                className="close-button"
+                onClick={() => setShowWaitlistModal(false)}
+            >
+                <X size={20} />
+            </button>
+
+            {submitSuccess ? (
+                <div className="success-message">
+                    <div className="success-icon">
+                        <CheckCircle size={32} color="white" />
+                    </div>
+                    <h3 className="text-2xl font-bold mb-4 text-[var(--color-text-light)]">Success!</h3>
+                    <p className="text-[var(--color-text-faded)] mb-2">
+                        Thank you for joining the VTA5 waitlist!
+                    </p>
+                    <p className="text-sm text-[var(--color-text-faded)]">
+                        Your details have been sent to jigar@ectsasyventures.com
+                    </p>
+                </div>
+            ) : (
+                <>
+                    <div className="text-center mb-6">
+                        <div className="flex items-center justify-center gap-3 mb-4">
+                            <div className="w-12 h-12 bg-gradient-to-r from-[var(--color-primary-start)] to-[var(--color-primary-end)] rounded-full flex items-center justify-center">
+                                <Mail size={24} color="white" />
+                            </div>
+                            <h2 className="text-2xl font-bold gradient-text">Join VTA5 Waitlist</h2>
+                        </div>
+                        <p className="text-[var(--color-text-faded)]">
+                            Be among the first to experience the future of competitive trading
+                        </p>
+                    </div>
+
+                    <form onSubmit={handleWaitlistSubmit}>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="form-group">
+                                <label className="form-label">
+                                    <User size={16} className="inline mr-2" />
+                                    First Name *
+                                </label>
+                                <input
+                                    type="text"
+                                    className="form-input"
+                                    placeholder="John"
+                                    required
+                                    value={formData.firstName}
+                                    onChange={(e) => handleInputChange('firstName', e.target.value)}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label className="form-label">Last Name *</label>
+                                <input
+                                    type="text"
+                                    className="form-input"
+                                    placeholder="Doe"
+                                    required
+                                    value={formData.lastName}
+                                    onChange={(e) => handleInputChange('lastName', e.target.value)}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="form-group">
+                            <label className="form-label">
+                                <Mail size={16} className="inline mr-2" />
+                                Email Address *
+                            </label>
+                            <input
+                                type="email"
+                                className="form-input"
+                                placeholder="john@example.com"
+                                required
+                                value={formData.email}
+                                onChange={(e) => handleInputChange('email', e.target.value)}
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label className="form-label">
+                                <Phone size={16} className="inline mr-2" />
+                                Phone Number
+                            </label>
+                            <input
+                                type="tel"
+                                className="form-input"
+                                placeholder="+1 (555) 123-4567"
+                                value={formData.phone}
+                                onChange={(e) => handleInputChange('phone', e.target.value)}
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label className="form-label">
+                                <Building size={16} className="inline mr-2" />
+                                Company/Organization
+                            </label>
+                            <input
+                                type="text"
+                                className="form-input"
+                                placeholder="Your Company Name"
+                                value={formData.company}
+                                onChange={(e) => handleInputChange('company', e.target.value)}
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label className="form-label">Trading Experience</label>
+                            <select
+                                className="form-select"
+                                value={formData.tradingExperience}
+                                onChange={(e) => handleInputChange('tradingExperience', e.target.value)}
+                            >
+                                <option value="">Select your experience level</option>
+                                <option value="beginner">Beginner (0-1 years)</option>
+                                <option value="intermediate">Intermediate (1-3 years)</option>
+                                <option value="advanced">Advanced (3-5 years)</option>
+                                <option value="expert">Expert (5+ years)</option>
+                            </select>
+                        </div>
+
+                        <div className="form-group">
+                            <label className="form-label">Areas of Interest</label>
+                            <div className="interest-grid">
+                                {['Tournaments', 'AI Analytics', 'Real-time Trading', 'Community Features', 'Educational Content', 'Mobile App'].map((interest) => (
+                                    <div
+                                        key={interest}
+                                        className={`interest-checkbox ${formData.interests.includes(interest) ? 'selected' : ''}`}
+                                        onClick={() => handleInterestToggle(interest)}
+                                    >
+                                        {interest}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="flex gap-4 mt-8">
+                            <button
+                                type="button"
+                                className="btn-secondary flex-1"
+                                onClick={() => setShowWaitlistModal(false)}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                type="submit"
+                                className="btn-primary flex-1"
+                                disabled={isSubmitting || !formData.firstName || !formData.lastName || !formData.email}
+                            >
+                                {isSubmitting ? 'Submitting...' : 'Join Waitlist'}
+                            </button>
+                        </div>
+                    </form>
+                </>
+            )}
+        </div>
+    </div>
+)}
 
             {/* Footer */}
             <footer className="w-full py-12 px-6 border-t border-[var(--color-border-subtle)]">
