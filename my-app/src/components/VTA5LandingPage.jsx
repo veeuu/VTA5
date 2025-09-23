@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Shield, TrendingUp, Trophy, Users, DollarSign, Bot, CheckCircle } from 'lucide-react';
+import platformPreviewImage from '../assets/platformPreview.jpg';
 
-const VT45LandingPage = () => {
+const VTA5LandingPage = () => {
     const [registeredUsers, setRegisteredUsers] = useState(154892); // Initial number matching the image
     const [email, setEmail] = useState('');
 
@@ -38,18 +39,18 @@ const VT45LandingPage = () => {
         },
         {
             icon: <Users size={32} />,
-            title: "VIP Community",
-            description: "Exclusive access to professional traders and networking opportunities."
+            title: "Real Rewards",
+            description: "Win real money prizes, sponsorship opportunities, and exclusive rewards based on your tournament performance."
         },
         {
             icon: <DollarSign size={32} />,
-            title: "Higher Rewards",
-            description: "Achieve up to 500% returns in our premium, high-reward tournaments."
+            title: "Global Community",
+            description: "Connect with traders worldwide, share strategies, and learn from the best in our active community."
         },
         {
             icon: <Bot size={32} />,
-            title: "AI Assistant",
-            description: "Smart trading suggestions, personalized market analysis, and alerts."
+            title: "Real-Time Trading",
+            description: "Trade with live market data from major exchanges. Experience real market conditions without any financial risk."
         }
     ];
 
@@ -63,7 +64,7 @@ const VT45LandingPage = () => {
 
     const metrics = [
         { value: "500%", label: "Max Tournament Returns" },
-        { value: "<1ms", label: "Order Execution Speed" },
+        // { value: "<1ms", label: "Order Execution Speed" },
         { value: "24/7", label: "Global Market Access" },
         { value: "99.99%", label: "Platform Uptime" }
     ];
@@ -111,7 +112,7 @@ const VT45LandingPage = () => {
                 -moz-osx-font-smoothing: grayscale;
             }
 
-            .vt45-container {
+            .VTA5-container {
                 width: 100%;
                 max-width: 100%;
                 margin: 0 auto;
@@ -292,62 +293,62 @@ const VT45LandingPage = () => {
     }, []);
 
     return (
-        <div className="vt45-container">
+        <div className="VTA5-container">
             {/* Header */}
-            <header className="w-full py-4 px-6 relative z-10 border-b border-[var(--color-border-subtle)]">
-                <nav className="flex items-center justify-between max-w-screen-xl mx-auto">
+            {/* <header className="w-full py-4 px-6 relative z-10 border-b border-[var(--color-border-subtle)]">
                     <div className="flex items-center gap-3">
                         <div className="w-10 h-10 bg-gradient-to-r from-[var(--color-primary-start)] to-[var(--color-primary-end)] rounded-full flex items-center justify-center shadow-lg">
                             <Shield size={22} color="white" strokeWidth={2.5} />
                         </div>
-                        <span className="text-2xl font-extrabold gradient-text header-logo-text">TradeTournament</span>
+                        <span className="text-2xl font-extrabold gradient-text header-logo-text">VTA5</span>
                     </div>
+                {/* <nav className="flex items-center justify-between max-w-screen-xl mx-auto"> */}
 
-                    <div className="nav-links flex items-center gap-8">
+                    {/* <div className="nav-links flex items-center gap-8">
                         <a href="#" className="text-[var(--color-text-light)] hover:text-[var(--color-primary-end)] transition-colors duration-300 font-medium">Home</a>
-                        <a href="#" className="text-[var(--color-text-light)] hover:text-[var(--color-primary-end)] transition-colors duration-300 font-medium">VT45 Launch</a>
+                        <a href="#" className="text-[var(--color-text-light)] hover:text-[var(--color-primary-end)] transition-colors duration-300 font-medium">VTA5 Launch</a>
                         <a href="#" className="text-[var(--color-text-light)] hover:text-[var(--color-primary-end)] transition-colors duration-300 font-medium">About</a>
-                    </div>
+                    </div> */}
 
-                    <div className="flex items-center gap-4">
+                    {/* <div className="flex items-center gap-4">
                         <button className="text-[var(--color-text-faded)] hover:text-[var(--color-primary-end)] transition-colors duration-300 bg-transparent border-none cursor-pointer font-medium header-signin-btn">Sign In</button>
                         <button className="btn-primary px-6 py-2">
                             Get Started
                         </button>
-                    </div>
-                </nav>
-            </header>
+                    </div> */}
+                {/* </nav> */}
+            {/* </header>  */}
 
             {/* Hero Section */}
             <section className="w-full text-center py-24 px-6 relative overflow-hidden">
                 <div className="max-w-screen-xl mx-auto animate-fadeIn">
-                    <div className="inline-flex items-center gap-2 bg-[rgba(139,92,246,0.15)] backdrop-blur-md border border-[rgba(139,92,246,0.3)] px-5 py-2 rounded-full mb-8 text-sm text-[var(--color-text-faded)] font-medium">
-                        <span className="w-2.5 h-2.5 bg-[var(--color-secondary)] rounded-full animate-pulse shadow-md shadow-[var(--color-secondary)]"></span>
-                        <span>The Future is Here</span>
+                    <div className="inline-flex items-center gap-2 bg-[rgba(139,92,246,0.15)] backdrop-blur-md border border-[rgba(139,92,246,0.3)] p-10 rounded-full mb-8 text-sm text-[var(--color-text-faded)] font-medium">
+                        <span className="w-2.5 h-2.5 p-10 min-w-[150px] rounded-full animate-pulse shadow-md shadow-[var(--color-secondary)]">🚀 Coming Soon</span>
+                        {/* <span>  </span> */}
                     </div>
 
-                    <h1 className="hero-title text-6xl md:text-7xl lg:text-8xl font-extrabold mb-6 gradient-text" style={{ lineHeight: '1.1' }}>VT45</h1>
+                    <h1 className="hero-title text-6xl md:text-7xl lg:text-8xl font-extrabold mb-6 gradient-text" style={{ lineHeight: '1.1' }}>VTA5</h1>
 
-                    <h2 className="hero-subtitle text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-[var(--color-text-light)]">
-                        The Next Generation of Trading Tournaments
+                    <h2 className="hero-subtitle text-6xl md:text-4xl lg:text-5xl font-bold mb-6 text-[var(--color-text-light)]">
+                    Master Trading with Real-Time Competitions
                     </h2>
 
                     <p className="text-lg text-[var(--color-text-faded)] max-w-3xl mx-auto mb-12 leading-relaxed">
                         Experience the next generation of competitive trading with advanced AI analytics,
-                        premium tournaments, and unprecedented rewards. VT45 takes trading competitions
+                        premium tournaments, and unprecedented rewards. VTA5 takes trading competitions
                         to a whole new level.
                     </p>
 
                     {/* Registered Users */}
-                    <div className="card-glass p-8 max-w-md mx-auto mb-12 animate-fadeIn" style={{ animationDelay: '0.3s' }}>
+                    {/* <div className="card-glass p-8 max-w-md mx-auto mb-12 animate-fadeIn" style={{ animationDelay: '0.3s' }}>
                         <div className="text-center">
                             <div className="text-6xl font-extrabold gradient-text mb-2 animate-glow">
                                 {registeredUsers.toLocaleString()}
                             </div>
-                            <div className="text-xl text-[var(--color-text-faded)] opacity-90">Registered Traders</div>
-                        </div>
+                            {/* <div className="text-xl text-[var(--color-text-faded)] opacity-90">Registered Traders</div> */}
+                        {/* </div>
                         <p className="text-sm text-[var(--color-text-faded)] mt-4">Counting up in real-time. Don't miss out!</p>
-                    </div>
+                    </div> */} 
                 </div>
             </section>
 
@@ -355,7 +356,7 @@ const VT45LandingPage = () => {
             <section className="w-full py-24 px-6">
                 <div className="max-w-screen-xl mx-auto animate-fadeIn" style={{ animationDelay: '0.5s' }}>
                     <div className="text-center mb-16">
-                        <h3 className="text-4xl font-bold mb-4 text-[var(--color-text-light)]">What's New in V35?</h3>
+                        <h3 className="text-4xl font-bold mb-4 text-[var(--color-text-light)]">Why Choose Our Platform?</h3>
                         <p className="text-xl text-[var(--color-text-faded)] max-w-3xl mx-auto">
                             Revolutionary features that will transform your trading tournament experience.
                         </p>
@@ -375,6 +376,41 @@ const VT45LandingPage = () => {
                 </div>
             </section>
 
+            {/* Platform Preview Section */}
+            <section className="w-full py-24 px-6">
+                <div className="max-w-screen-xl mx-auto grid preview-grid items-center gap-16">
+                    {/* Left Side: Text Content */}
+                    <div className="animate-fadeIn" style={{ animationDelay: '0.6s' }}>
+                        <h3 className="text-4xl font-bold mb-4 text-[var(--color-text-light)]">Platform Preview</h3>
+                        <p className="text-lg text-[var(--color-text-faded)] mb-8">
+                            Get a sneak peek at the VTA5 interface
+                        </p>
+
+                        <div>
+                            <h4 className="text-2xl font-bold mb-4 text-[var(--color-text-light)]">Advanced Trading Interface</h4>
+                            <ul className="space-y-4 text-[var(--color-text-faded)] text-base">
+                                {tradingFeatures.map((feature, index) => (
+                                    <li key={index} className="flex items-start gap-2">
+                                        <CheckCircle size={20} color="#22c55e" className="mt-1" />
+                                        {feature}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                            
+                    {/* Right Side: Image */}
+                    <div className="animate-fadeIn" style={{ animationDelay: '0.7s' }}>
+                        <img 
+                            src={platformPreviewImage} 
+                            alt="Trading Interface Preview" 
+                            className="w-full rounded-2xl shadow-xl border border-[var(--color-card-border)]" 
+                        />
+                    </div>
+                </div>
+            </section>
+
+
             {/* Performance Metrics */}
             <section className="w-full py-24 px-6">
                 <div className="max-w-screen-xl mx-auto animate-fadeIn" style={{ animationDelay: '0.7s' }}>
@@ -385,13 +421,13 @@ const VT45LandingPage = () => {
                         </p>
                     </div>
 
-                    <div className="metrics-grid grid gap-8 w-full">
+                    <div className="metrics-grid flex flex-wrap justify-center gap-8">
                         {metrics.map((metric, index) => (
-                            <div key={index} className="card-glass p-6 text-center hover:shadow-lg" style={{ animationDelay: `${0.7 + index * 0.1}s` }}>
-                                <div className="text-5xl font-extrabold gradient-text mb-2">
+                            <div key={index} className="card-glass p-10 text-center hover:shadow-lg min-w-[280px]" style={{ animationDelay: `${0.7 + index * 0.1}s` }}>
+                                <div className="text-5xl font-extrabold gradient-text mb-4">
                                     {metric.value}
                                 </div>
-                                <div className="text-lg text-[var(--color-text-faded)]">{metric.label}</div>
+                                <div className="text-lg text-[var(--color-text-faded)] px-2">{metric.label}</div>
                             </div>
                         ))}
                     </div>
@@ -403,16 +439,16 @@ const VT45LandingPage = () => {
                 <div className="max-w-screen-xl mx-auto animate-fadeIn" style={{ animationDelay: '0.8s' }}>
                     <h3 className="text-4xl font-bold mb-6 text-[var(--color-text-light)]">Ready for the Future of Trading?</h3>
                     <p className="text-xl text-[var(--color-text-faded)] max-w-3xl mx-auto mb-12">
-                        VT45 will revolutionize competitive trading. Join the waitlist and be among the first to experience the future.
+                        VTA5 will revolutionize competitive trading. Join the waitlist and be among the first to experience the future.
                     </p>
 
                     <div className="cta-buttons flex justify-center gap-6">
                         <button className="btn-primary text-lg px-8 py-3">
                             Join Waitlist
                         </button>
-                        <button className="btn-secondary text-lg px-8 py-3">
+                        {/* <button className="btn-secondary text-lg px-8 py-3">
                             Learn More
-                        </button>
+                        </button> */}
                     </div>
                 </div>
             </section>
@@ -422,25 +458,24 @@ const VT45LandingPage = () => {
                 <div className="max-w-screen-xl mx-auto">
                     <div className="flex flex-col items-center justify-center gap-6 mb-8">
                         <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 bg-gradient-to-r from-[var(--color-primary-start)] to-[var(--color-primary-end)] rounded-full flex items-center justify-center shadow-lg">
+                            {/* <div className="w-10 h-10 bg-gradient-to-r from-[var(--color-primary-start)] to-[var(--color-primary-end)] rounded-full flex items-center justify-center shadow-lg">
                                 <Shield size={22} color="white" strokeWidth={2.5} />
-                            </div>
-                            <span className="text-2xl font-extrabold gradient-text">TradeTournament VT45</span>
+                            </div> */}
+                            <span className="text-2xl font-extrabold gradient-text">Virtual Trading Arena (VTA5)</span>
                         </div>
 
                         <p className="text-[var(--color-text-faded)] max-w-md text-center">The next generation trading tournament platform. Coming soon to redefine competitive trading.</p>
 
-                        <div className="flex gap-6 mt-4">
+                        {/* <div className="flex gap-6 mt-4">
                             <a href="#" className="text-[var(--color-text-faded)] hover:text-[var(--color-primary-end)] transition-colors duration-300 font-medium">Twitter</a>
                             <a href="#" className="text-[var(--color-text-faded)] hover:text-[var(--color-primary-end)] transition-colors duration-300 font-medium">LinkedIn</a>
                             <a href="#" className="text-[var(--color-text-faded)] hover:text-[var(--color-primary-end)] transition-colors duration-300 font-medium">Discord</a>
                             <a href="#" className="text-[var(--color-text-faded)] hover:text-[var(--color-primary-end)] transition-colors duration-300 font-medium">Telegram</a>
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className="flex flex-col md:flex-row justify-between items-center w-full pt-8 border-t border-[var(--color-border-subtle)] text-[var(--color-text-faded)] text-sm gap-4">
-                        <p>© 2024 TradeTournament VT45. All rights reserved.</p>
-                        <p>Designed with <span className="gradient-text">Passion</span></p>
+                        <p>© 2025 VTA5. All rights reserved.</p>
                     </div>
                 </div>
             </footer>
@@ -448,4 +483,4 @@ const VT45LandingPage = () => {
     );
 };
 
-export default VT45LandingPage;
+export default VTA5LandingPage;
