@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Shield, TrendingUp, Trophy, Users, DollarSign, Bot, CheckCircle, X, Mail, User, Phone, Building } from 'lucide-react';
 import platformPreviewImage from '../assets/platformPreview.jpg';
+import HyperSpeed from './HyperSpeed';
 
 const VTA5LandingPage = () => {
-    // const [registeredUsers, setRegisteredUsers] = useState(); // Initial number matching the image
     const [email, setEmail] = useState('');
-
     const [showWaitlistModal, setShowWaitlistModal] = useState(false);
     const [formData, setFormData] = useState({
         firstName: '',
@@ -18,15 +17,6 @@ const VTA5LandingPage = () => {
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitSuccess, setSubmitSuccess] = useState(false);
-
-    // Effect for the dynamic registered user count
-    // useEffect(() => {
-    //     const userCountInterval = setInterval(() => {
-    //         setRegisteredUsers(prev => prev + Math.floor(Math.random() * 3) + 1); // Increase by 1-3 users
-    //     }, 5000); // Every 5 seconds
-
-    //     return () => clearInterval(userCountInterval);
-    // }, []);
 
     const handleNotifyMe = () => {
         console.log('Email registered:', email);
@@ -42,7 +32,7 @@ const VTA5LandingPage = () => {
         setTimeout(() => {
             console.log('Waitlist form submitted:', formData);
             
-            // Simulate sending email (in real app, this would be done on the backend)
+            // Simulate sending email
             const emailContent = {
                 to: 'jigar@ectsasyventures.com',
                 subject: 'New VTA5 Waitlist Registration',
@@ -81,6 +71,7 @@ const VTA5LandingPage = () => {
             }, 3000);
         }, 2000);
     };
+    
     const handleInputChange = (field, value) => {
         setFormData(prev => ({
             ...prev,
@@ -96,7 +87,6 @@ const VTA5LandingPage = () => {
                 : [...prev.interests, interest]
         }));
     };
-    
 
     const features = [
         {
@@ -141,7 +131,6 @@ const VTA5LandingPage = () => {
 
     const metrics = [
         { value: "500%", label: "Max Tournament Returns" },
-        // { value: "<1ms", label: "Order Execution Speed" },
         { value: "24/7", label: "Global Market Access" },
         { value: "99.99%", label: "Platform Uptime" }
     ];
@@ -173,6 +162,7 @@ const VTA5LandingPage = () => {
                 box-sizing: border-box;
                 width: 100%;
                 overflow-x: hidden;
+                background-color: rgba(0,0,0,0.15); /* Changed to transparent */
             }
 
             *, *::before, *::after {
@@ -180,8 +170,7 @@ const VTA5LandingPage = () => {
             }
 
             body {
-                font-family: 'Inter', sans-serif; /* Using a more modern font */
-                background: linear-gradient(135deg, var(--color-dark-bg-start) 0%, var(--color-dark-bg-mid) 50%, var(--color-dark-bg-end) 100%);
+                font-family: 'Inter', sans-serif;
                 color: white;
                 min-height: 100vh;
                 line-height: 1.6;
@@ -197,6 +186,24 @@ const VTA5LandingPage = () => {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                position: relative;
+                z-index: 1; /* Ensure content is above background */
+            }
+
+            /* Background Animation Container */
+            .background-container {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: -1; /* Place behind all content */
+                overflow: hidden;
+            }
+
+            .background-container canvas {
+                width: 100%;
+                height: 100%;
             }
 
             /* Keyframe Animations */
@@ -283,7 +290,7 @@ const VTA5LandingPage = () => {
             .input-field {
                 flex: 1;
                 padding: 0.9rem 1.2rem;
-                background: rgba(255, 255, 255, 0.08); /* Lighter translucent background */
+                background: rgba(255, 255, 255, 0.08);
                 backdrop-filter: blur(15px);
                 border: 1px solid var(--color-border-subtle);
                 border-radius: 10px;
@@ -344,8 +351,8 @@ const VTA5LandingPage = () => {
                 .footer-links { margin-top: 1rem; }
                 .footer-bottom { flex-direction: column; gap: 0.5rem; }
 
-                .header-logo-text { display: none; } /* Hide text on small screens */
-                .header-signin-btn { display: none; } /* Hide sign-in on small screens */
+                .header-logo-text { display: none; }
+                .header-signin-btn { display: none; }
             }
 
             @media (min-width: 768px) {
@@ -361,178 +368,179 @@ const VTA5LandingPage = () => {
                 .preview-grid { grid-template-columns: 1fr 1fr; }
                 .metrics-grid { grid-template-columns: repeat(4, 1fr); }
             }
-                /* Modal Styles */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(10px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    opacity: 0;
-    animation: modalFadeIn 0.3s ease-out forwards;
-}
 
-.modal-content {
-    background: var(--color-dark-bg-start);
-    border: 1px solid var(--color-card-border);
-    border-radius: 20px;
-    padding: 2rem;
-    max-width: 500px;
-    width: 90%;
-    max-height: 90vh;
-    overflow-y: auto;
-    transform: scale(0.8);
-    animation: modalScaleIn 0.3s ease-out 0.1s forwards;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-}
+            /* Modal Styles */
+            .modal-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(10px);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1000;
+                opacity: 0;
+                animation: modalFadeIn 0.3s ease-out forwards;
+            }
 
-.form-group {
-    margin-bottom: 1.5rem;
-}
+            .modal-content {
+                background: var(--color-dark-bg-start);
+                border: 1px solid var(--color-card-border);
+                border-radius: 20px;
+                padding: 2rem;
+                max-width: 500px;
+                width: 90%;
+                max-height: 90vh;
+                overflow-y: auto;
+                transform: scale(0.8);
+                animation: modalScaleIn 0.3s ease-out 0.1s forwards;
+                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            }
 
-.form-label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: var(--color-text-light);
-    font-weight: 600;
-    font-size: 0.875rem;
-}
+            .form-group {
+                margin-bottom: 1.5rem;
+            }
 
-.form-input {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(15px);
-    border: 1px solid var(--color-border-subtle);
-    border-radius: 8px;
-    color: var(--color-text-light);
-    outline: none;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    font-size: 1rem;
-}
+            .form-label {
+                display: block;
+                margin-bottom: 0.5rem;
+                color: var(--color-text-light);
+                font-weight: 600;
+                font-size: 0.875rem;
+            }
 
-.form-input::placeholder {
-    color: var(--color-text-faded);
-}
+            .form-input {
+                width: 100%;
+                padding: 0.75rem 1rem;
+                background: rgba(255, 255, 255, 0.08);
+                backdrop-filter: blur(15px);
+                border: 1px solid var(--color-border-subtle);
+                border-radius: 8px;
+                color: var(--color-text-light);
+                outline: none;
+                transition: border-color 0.3s ease, box-shadow 0.3s ease;
+                font-size: 1rem;
+            }
 
-.form-input:focus {
-    border-color: var(--color-primary-end);
-    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3);
-}
+            .form-input::placeholder {
+                color: var(--color-text-faded);
+            }
 
-.form-select {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(15px);
-    border: 1px solid var(--color-border-subtle);
-    border-radius: 8px;
-    color: var(--color-text-light);
-    outline: none;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    font-size: 1rem;
-}
+            .form-input:focus {
+                border-color: var(--color-primary-end);
+                box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3);
+            }
 
-.form-select:focus {
-    border-color: var(--color-primary-end);
-    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3);
-}
+            .form-select {
+                width: 100%;
+                padding: 0.75rem 1rem;
+                background: rgba(255, 255, 255, 0.08);
+                backdrop-filter: blur(15px);
+                border: 1px solid var(--color-border-subtle);
+                border-radius: 8px;
+                color: var(--color-text-light);
+                outline: none;
+                transition: border-color 0.3s ease, box-shadow 0.3s ease;
+                font-size: 1rem;
+            }
 
-.interest-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 0.75rem;
-    margin-top: 0.5rem;
-}
+            .form-select:focus {
+                border-color: var(--color-primary-end);
+                box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3);
+            }
 
-.interest-checkbox {
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 0.75rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--color-border-subtle);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 0.875rem;
-}
+            .interest-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 0.75rem;
+                margin-top: 0.5rem;
+            }
 
-.interest-checkbox.selected {
-    background: var(--color-primary-end);
-    border-color: var(--color-primary-end);
-    color: white;
-}
+            .interest-checkbox {
+                display: flex;
+                align-items: center;
+                padding: 0.5rem 0.75rem;
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid var(--color-border-subtle);
+                border-radius: 8px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-size: 0.875rem;
+            }
 
-.interest-checkbox:hover {
-    background: rgba(139, 92, 246, 0.2);
-    border-color: var(--color-primary-end);
-}
+            .interest-checkbox.selected {
+                background: var(--color-primary-end);
+                border-color: var(--color-primary-end);
+                color: white;
+            }
 
-.close-button {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: none;
-    border: none;
-    color: var(--color-text-faded);
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-}
+            .interest-checkbox:hover {
+                background: rgba(139, 92, 246, 0.2);
+                border-color: var(--color-primary-end);
+            }
 
-.close-button:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--color-text-light);
-}
+            .close-button {
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                background: none;
+                border: none;
+                color: var(--color-text-faded);
+                cursor: pointer;
+                padding: 0.5rem;
+                border-radius: 50%;
+                transition: all 0.3s ease;
+            }
 
-.btn-primary:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-    transform: none;
-}
+            .close-button:hover {
+                background: rgba(255, 255, 255, 0.1);
+                color: var(--color-text-light);
+            }
 
-.btn-primary:disabled:hover {
-    transform: none;
-    box-shadow: none;
-}
+            .btn-primary:disabled {
+                opacity: 0.7;
+                cursor: not-allowed;
+                transform: none;
+            }
 
-@keyframes modalFadeIn {
-    to { opacity: 1; }
-}
+            .btn-primary:disabled:hover {
+                transform: none;
+                box-shadow: none;
+            }
 
-@keyframes modalScaleIn {
-    to { transform: scale(1); }
-}
+            @keyframes modalFadeIn {
+                to { opacity: 1; }
+            }
 
-.success-message {
-    text-align: center;
-    padding: 2rem;
-}
+            @keyframes modalScaleIn {
+                to { transform: scale(1); }
+            }
 
-.success-icon {
-    width: 4rem;
-    height: 4rem;
-    background: linear-gradient(to right, #10b981, #22c55e);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1rem;
-    animation: successPulse 0.6s ease-out;
-}
+            .success-message {
+                text-align: center;
+                padding: 2rem;
+            }
 
-@keyframes successPulse {
-    0% { transform: scale(0); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-}
+            .success-icon {
+                width: 4rem;
+                height: 4rem;
+                background: linear-gradient(to right, #10b981, #22c55e);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto 1rem;
+                animation: successPulse 0.6s ease-out;
+            }
+
+            @keyframes successPulse {
+                0% { transform: scale(0); }
+                50% { transform: scale(1.1); }
+                100% { transform: scale(1); }
+            }
         `;
         document.head.appendChild(style);
         
@@ -543,37 +551,16 @@ const VTA5LandingPage = () => {
 
     return (
         <div className="VTA5-container">
-            {/* Header */}
-            {/* <header className="w-full py-4 px-6 relative z-10 border-b border-[var(--color-border-subtle)]">
-                    <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-gradient-to-r from-[var(--color-primary-start)] to-[var(--color-primary-end)] rounded-full flex items-center justify-center shadow-lg">
-                            <Shield size={22} color="white" strokeWidth={2.5} />
-                        </div>
-                        <span className="text-2xl font-extrabold gradient-text header-logo-text">VTA5</span>
-                    </div>
-                {/* <nav className="flex items-center justify-between max-w-screen-xl mx-auto"> */}
-
-                    {/* <div className="nav-links flex items-center gap-8">
-                        <a href="#" className="text-[var(--color-text-light)] hover:text-[var(--color-primary-end)] transition-colors duration-300 font-medium">Home</a>
-                        <a href="#" className="text-[var(--color-text-light)] hover:text-[var(--color-primary-end)] transition-colors duration-300 font-medium">VTA5 Launch</a>
-                        <a href="#" className="text-[var(--color-text-light)] hover:text-[var(--color-primary-end)] transition-colors duration-300 font-medium">About</a>
-                    </div> */}
-
-                    {/* <div className="flex items-center gap-4">
-                        <button className="text-[var(--color-text-faded)] hover:text-[var(--color-primary-end)] transition-colors duration-300 bg-transparent border-none cursor-pointer font-medium header-signin-btn">Sign In</button>
-                        <button className="btn-primary px-6 py-2">
-                            Get Started
-                        </button>
-                    </div> */}
-                {/* </nav> */}
-            {/* </header>  */}
+            {/* Background Animation Container */}
+            <div className="background-container">
+                <HyperSpeed />
+            </div>
 
             {/* Hero Section */}
             <section className="w-full text-center py-24 px-6 relative overflow-hidden">
                 <div className="max-w-screen-xl mx-auto animate-fadeIn">
                     <div className="inline-flex items-center gap-2 bg-[rgba(139,92,246,0.15)] backdrop-blur-md border border-[rgba(139,92,246,0.3)] p-10 rounded-full mb-8 text-sm text-[var(--color-text-faded)] font-medium">
                         <span className="w-2.5 h-2.5 p-10 min-w-[150px] rounded-full animate-pulse shadow-md shadow-[var(--color-secondary)]">🚀 Coming Soon</span>
-                        {/* <span>  </span> */}
                     </div>
 
                     <h1 className="hero-title text-6xl md:text-7xl lg:text-8xl font-extrabold mb-6 gradient-text" style={{ lineHeight: '1.1' }}>VTA5</h1>
@@ -587,17 +574,6 @@ const VTA5LandingPage = () => {
                         premium tournaments, and unprecedented rewards. VTA5 takes trading competitions
                         to a whole new level.
                     </p>
-
-                    {/* Registered Users */}
-                    {/* <div className="card-glass p-8 max-w-md mx-auto mb-12 animate-fadeIn" style={{ animationDelay: '0.3s' }}>
-                        <div className="text-center">
-                            <div className="text-6xl font-extrabold gradient-text mb-2 animate-glow">
-                                {registeredUsers.toLocaleString()}
-                            </div>
-                            {/* <div className="text-xl text-[var(--color-text-faded)] opacity-90">Registered Traders</div> */}
-                        {/* </div>
-                        <p className="text-sm text-[var(--color-text-faded)] mt-4">Counting up in real-time. Don't miss out!</p>
-                    </div> */} 
                 </div>
             </section>
 
@@ -659,7 +635,6 @@ const VTA5LandingPage = () => {
                 </div>
             </section>
 
-
             {/* Performance Metrics */}
             <section className="w-full py-24 px-6">
                 <div className="max-w-screen-xl mx-auto animate-fadeIn" style={{ animationDelay: '0.7s' }}>
@@ -698,198 +673,185 @@ const VTA5LandingPage = () => {
                     >
                         Join Waitlist
                     </button>
-                        {/* <button className="btn-secondary text-lg px-8 py-3">
-                            Learn More
-                        </button> */}
                     </div>
                 </div>
             </section>
 
             {/* Waitlist Modal */}
-{showWaitlistModal && (
-    <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && setShowWaitlistModal(false)}>
-        <div className="modal-content" style={{ position: 'relative' }}>
-            <button 
-                className="close-button"
-                onClick={() => setShowWaitlistModal(false)}
-            >
-                <X size={20} />
-            </button>
+            {showWaitlistModal && (
+                <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && setShowWaitlistModal(false)}>
+                    <div className="modal-content" style={{ position: 'relative' }}>
+                        <button 
+                            className="close-button"
+                            onClick={() => setShowWaitlistModal(false)}
+                        >
+                            <X size={20} />
+                        </button>
 
-            {submitSuccess ? (
-                <div className="success-message">
-                    <div className="success-icon">
-                        <CheckCircle size={32} color="white" />
-                    </div>
-                    <h3 className="text-2xl font-bold mb-4 text-[var(--color-text-light)]">Success!</h3>
-                    <p className="text-[var(--color-text-faded)] mb-2">
-                        Thank you for joining the VTA5 waitlist!
-                    </p>
-                    <p className="text-sm text-[var(--color-text-faded)]">
-                        Your details have been sent to jigar@ectsasyventures.com
-                    </p>
-                </div>
-            ) : (
-                <>
-                    <div className="text-center mb-6">
-                        <div className="flex items-center justify-center gap-3 mb-4">
-                            <div className="w-12 h-12 bg-gradient-to-r from-[var(--color-primary-start)] to-[var(--color-primary-end)] rounded-full flex items-center justify-center">
-                                <Mail size={24} color="white" />
+                        {submitSuccess ? (
+                            <div className="success-message">
+                                <div className="success-icon">
+                                    <CheckCircle size={32} color="white" />
+                                </div>
+                                <h3 className="text-2xl font-bold mb-4 text-[var(--color-text-light)]">Success!</h3>
+                                <p className="text-[var(--color-text-faded)] mb-2">
+                                    Thank you for joining the VTA5 waitlist!
+                                </p>
+                                <p className="text-sm text-[var(--color-text-faded)]">
+                                    Your details have been sent to jigar@ectsasyventures.com
+                                </p>
                             </div>
-                            <h2 className="text-2xl font-bold gradient-text">Join VTA5 Waitlist</h2>
-                        </div>
-                        <p className="text-[var(--color-text-faded)]">
-                            Be among the first to experience the future of competitive trading
-                        </p>
-                    </div>
-
-                    <form onSubmit={handleWaitlistSubmit}>
-                        <div className="grid grid-cols-2 gap-4">
-                            <div className="form-group">
-                                <label className="form-label">
-                                    <User size={16} className="inline mr-2" />
-                                    First Name *
-                                </label>
-                                <input
-                                    type="text"
-                                    className="form-input"
-                                    placeholder="John"
-                                    required
-                                    value={formData.firstName}
-                                    onChange={(e) => handleInputChange('firstName', e.target.value)}
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label className="form-label">Last Name *</label>
-                                <input
-                                    type="text"
-                                    className="form-input"
-                                    placeholder="Doe"
-                                    required
-                                    value={formData.lastName}
-                                    onChange={(e) => handleInputChange('lastName', e.target.value)}
-                                />
-                            </div>
-                        </div>
-
-                        <div className="form-group">
-                            <label className="form-label">
-                                <Mail size={16} className="inline mr-2" />
-                                Email Address *
-                            </label>
-                            <input
-                                type="email"
-                                className="form-input"
-                                placeholder="john@example.com"
-                                required
-                                value={formData.email}
-                                onChange={(e) => handleInputChange('email', e.target.value)}
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label className="form-label">
-                                <Phone size={16} className="inline mr-2" />
-                                Phone Number
-                            </label>
-                            <input
-                                type="tel"
-                                className="form-input"
-                                placeholder="+1 (555) 123-4567"
-                                value={formData.phone}
-                                onChange={(e) => handleInputChange('phone', e.target.value)}
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label className="form-label">
-                                <Building size={16} className="inline mr-2" />
-                                Company/Organization
-                            </label>
-                            <input
-                                type="text"
-                                className="form-input"
-                                placeholder="Your Company Name"
-                                value={formData.company}
-                                onChange={(e) => handleInputChange('company', e.target.value)}
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <label className="form-label">Trading Experience</label>
-                            <select
-                                className="form-select"
-                                value={formData.tradingExperience}
-                                onChange={(e) => handleInputChange('tradingExperience', e.target.value)}
-                            >
-                                <option value="">Select your experience level</option>
-                                <option value="beginner">Beginner (0-1 years)</option>
-                                <option value="intermediate">Intermediate (1-3 years)</option>
-                                <option value="advanced">Advanced (3-5 years)</option>
-                                <option value="expert">Expert (5+ years)</option>
-                            </select>
-                        </div>
-
-                        <div className="form-group">
-                            <label className="form-label">Areas of Interest</label>
-                            <div className="interest-grid">
-                                {['Tournaments', 'AI Analytics', 'Real-time Trading', 'Community Features', 'Educational Content', 'Mobile App'].map((interest) => (
-                                    <div
-                                        key={interest}
-                                        className={`interest-checkbox ${formData.interests.includes(interest) ? 'selected' : ''}`}
-                                        onClick={() => handleInterestToggle(interest)}
-                                    >
-                                        {interest}
+                        ) : (
+                            <>
+                                <div className="text-center mb-6">
+                                    <div className="flex items-center justify-center gap-3 mb-4">
+                                        <div className="w-12 h-12 bg-gradient-to-r from-[var(--color-primary-start)] to-[var(--color-primary-end)] rounded-full flex items-center justify-center">
+                                            <Mail size={24} color="white" />
+                                        </div>
+                                        <h2 className="text-2xl font-bold gradient-text">Join VTA5 Waitlist</h2>
                                     </div>
-                                ))}
-                            </div>
-                        </div>
+                                    <p className="text-[var(--color-text-faded)]">
+                                        Be among the first to experience the future of competitive trading
+                                    </p>
+                                </div>
 
-                        <div className="flex gap-4 mt-8">
-                            <button
-                                type="button"
-                                className="btn-secondary flex-1"
-                                onClick={() => setShowWaitlistModal(false)}
-                            >
-                                Cancel
-                            </button>
-                            <button
-                                type="submit"
-                                className="btn-primary flex-1"
-                                disabled={isSubmitting || !formData.firstName || !formData.lastName || !formData.email}
-                            >
-                                {isSubmitting ? 'Submitting...' : 'Join Waitlist'}
-                            </button>
-                        </div>
-                    </form>
-                </>
+                                <form onSubmit={handleWaitlistSubmit}>
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div className="form-group">
+                                            <label className="form-label">
+                                                <User size={16} className="inline mr-2" />
+                                                First Name *
+                                            </label>
+                                            <input
+                                                type="text"
+                                                className="form-input"
+                                                placeholder="John"
+                                                required
+                                                value={formData.firstName}
+                                                onChange={(e) => handleInputChange('firstName', e.target.value)}
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <label className="form-label">Last Name *</label>
+                                            <input
+                                                type="text"
+                                                className="form-input"
+                                                placeholder="Doe"
+                                                required
+                                                value={formData.lastName}
+                                                onChange={(e) => handleInputChange('lastName', e.target.value)}
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label className="form-label">
+                                            <Mail size={16} className="inline mr-2" />
+                                            Email Address *
+                                        </label>
+                                        <input
+                                            type="email"
+                                            className="form-input"
+                                            placeholder="john@example.com"
+                                            required
+                                            value={formData.email}
+                                            onChange={(e) => handleInputChange('email', e.target.value)}
+                                        />
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label className="form-label">
+                                            <Phone size={16} className="inline mr-2" />
+                                            Phone Number
+                                        </label>
+                                        <input
+                                            type="tel"
+                                            className="form-input"
+                                            placeholder="+1 (555) 123-4567"
+                                            value={formData.phone}
+                                            onChange={(e) => handleInputChange('phone', e.target.value)}
+                                        />
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label className="form-label">
+                                            <Building size={16} className="inline mr-2" />
+                                            Company/Organization
+                                        </label>
+                                        <input
+                                            type="text"
+                                            className="form-input"
+                                            placeholder="Your Company Name"
+                                            value={formData.company}
+                                            onChange={(e) => handleInputChange('company', e.target.value)}
+                                        />
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label className="form-label">Trading Experience</label>
+                                        <select
+                                            className="form-select"
+                                            value={formData.tradingExperience}
+                                            onChange={(e) => handleInputChange('tradingExperience', e.target.value)}
+                                        >
+                                            <option value="">Select your experience level</option>
+                                            <option value="beginner">Beginner (0-1 years)</option>
+                                            <option value="intermediate">Intermediate (1-3 years)</option>
+                                            <option value="advanced">Advanced (3-5 years)</option>
+                                            <option value="expert">Expert (5+ years)</option>
+                                        </select>
+                                    </div>
+
+                                    <div className="form-group">
+                                        <label className="form-label">Areas of Interest</label>
+                                        <div className="interest-grid">
+                                            {['Tournaments', 'AI Analytics', 'Real-time Trading', 'Community Features', 'Educational Content', 'Mobile App'].map((interest) => (
+                                                <div
+                                                    key={interest}
+                                                    className={`interest-checkbox ${formData.interests.includes(interest) ? 'selected' : ''}`}
+                                                    onClick={() => handleInterestToggle(interest)}
+                                                >
+                                                    {interest}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div className="flex gap-4 mt-8">
+                                        <button
+                                            type="button"
+                                            className="btn-secondary flex-1"
+                                            onClick={() => setShowWaitlistModal(false)}
+                                        >
+                                            Cancel
+                                        </button>
+                                        <button
+                                            type="submit"
+                                            className="btn-primary flex-1"
+                                            disabled={isSubmitting || !formData.firstName || !formData.lastName || !formData.email}
+                                        >
+                                            {isSubmitting ? 'Submitting...' : 'Join Waitlist'}
+                                        </button>
+                                    </div>
+                                </form>
+                            </>
+                        )}
+                    </div>
+                </div>
             )}
-        </div>
-    </div>
-)}
 
             {/* Footer */}
-            <footer className="w-full py-12 px-6 border-t border-[var(--color-border-subtle)]">
+            <footer className="w-full py-6 px-6 border-t border-[var(--color-border-subtle)]">
                 <div className="max-w-screen-xl mx-auto">
-                    <div className="flex flex-col items-center justify-center gap-6 mb-8">
+                    <div className="flex flex-col items-center justify-center gap-4 mb-2">
                         <div className="flex items-center gap-3">
-                            {/* <div className="w-10 h-10 bg-gradient-to-r from-[var(--color-primary-start)] to-[var(--color-primary-end)] rounded-full flex items-center justify-center shadow-lg">
-                                <Shield size={22} color="white" strokeWidth={2.5} />
-                            </div> */}
                             <span className="text-2xl font-extrabold gradient-text">Virtual Trading Arena (VTA5)</span>
                         </div>
 
                         <p className="text-[var(--color-text-faded)] max-w-md text-center">The next generation trading tournament platform. Coming soon to redefine competitive trading.</p>
-
-                        {/* <div className="flex gap-6 mt-4">
-                            <a href="#" className="text-[var(--color-text-faded)] hover:text-[var(--color-primary-end)] transition-colors duration-300 font-medium">Twitter</a>
-                            <a href="#" className="text-[var(--color-text-faded)] hover:text-[var(--color-primary-end)] transition-colors duration-300 font-medium">LinkedIn</a>
-                            <a href="#" className="text-[var(--color-text-faded)] hover:text-[var(--color-primary-end)] transition-colors duration-300 font-medium">Discord</a>
-                            <a href="#" className="text-[var(--color-text-faded)] hover:text-[var(--color-primary-end)] transition-colors duration-300 font-medium">Telegram</a>
-                        </div> */}
                     </div>
 
-                    <div className="flex flex-col md:flex-row justify-between items-center w-full pt-8 border-t border-[var(--color-border-subtle)] text-[var(--color-text-faded)] text-sm gap-4">
+                    <div className="flex flex-col md:flex-row justify-between items-center w-full pt-4 border-t border-[var(--color-border-subtle)] text-[var(--color-text-faded)] text-sm gap-4">
                         <p>© 2025 VTA5. All rights reserved.</p>
                     </div>
                 </div>

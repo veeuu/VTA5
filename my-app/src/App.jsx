@@ -1,9 +1,15 @@
 import React from "react";
-// Change the path from "/components/VTASLandingPage.jsx" to "./components/VTASLandingPage.jsx"
-import VTASLandingPage from "./components/VTA5LandingPage.jsx"; 
+// Import both components
+import VTASLandingPage from "./components/VTA5LandingPage.jsx";
+import HyperSpeed from "./components/HyperSpeed.jsx";
 
 function App() {
-  return <VTASLandingPage />;
+  return (
+    <>
+      <VTASLandingPage />
+      <HyperSpeed />
+    </>
+  );
 }
 
 export default App;
