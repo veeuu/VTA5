@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Shield, TrendingUp, Trophy, Users, DollarSign, Bot, CheckCircle, X, Mail, User, Phone, Building, Zap, Target, Globe, BarChart3, Calendar, Award, Star, Play } from 'lucide-react';
+import { Shield, TrendingUp, Trophy, Users, DollarSign, Bot, CheckCircle, X, Mail, User, Phone, Building, Zap, Target, Globe, BarChart3, Calendar, Award, Star, Play, Circle, Sun, Rocket } from 'lucide-react';
 import platformPreviewImage from '../assets/platformPreview.jpg';
 import HyperSpeed from './HyperSpeed';
 
@@ -77,15 +77,40 @@ const VTA5LandingPage = () => {
     }));
   };
 
-  const vtaFeatures = [    {      icon: <DollarSign size={32} />,      title: "Low Entry, High Rewards",      description: "Start at just $5, earn up to 200%. No deposits required - just your entry fee."    },    {      icon: <Play size={32} />,      title: "Free Practice Tournaments",      description: "Sharpen your skills with no risk in our free practice arenas."    },    {      icon: <BarChart3 size={32} />,      title: "Live Transparency",      description: "Real-time leaderboard updates, no hidden scores or manipulation."    },    {      icon: <Globe size={32} />,      title: "Global Competition",      description: "Face traders worldwide with same data and fair play guaranteed."    },    {      icon: <Calendar size={32} />,      title: "Daily Tournaments",      description: "Multiple contests every day for every skill and entry level."    },    {      icon: <Bot size={32} />,      title: "All-in-One Platform",      description: "Dashboard → Web Trader → Live Leaderboard in one seamless experience."    }  ];
+  const vtaFeatures = [
+    { icon: <DollarSign size={32} />, title: "Low Entry, High Rewards", description: "Start at just $5, earn up to 200%. No deposits required - just your entry fee." },
+    { icon: <Play size={32} />, title: "Free Practice Tournaments", description: "Sharpen your skills with no risk in our free practice arenas." },
+    { icon: <BarChart3 size={32} />, title: "Live Transparency", description: "Real-time leaderboard updates, no hidden scores or manipulation." },
+    { icon: <Globe size={32} />, title: "Global Competition", description: "Face traders worldwide with same data and fair play guaranteed." },
+    { icon: <Calendar size={32} />, title: "Daily Tournaments", description: "Multiple contests every day for every skill and entry level." },
+    { icon: <Bot size={32} />, title: "All-in-One Platform", description: "Dashboard → Web Trader → Live Leaderboard in one seamless experience." }
+  ];
 
-  const howItWorksSteps = [    {      step: "1",      title: "Pick Your Arena",      description: "Choose between free practice tournaments or paid contests starting from $5 – available daily."    },    {      step: "2",       title: "Trade in Real Time",      description: "Use live market data directly on our integrated web trader – every trade updates instantly."    },    {      step: "3",      title: "Climb & Conquer",       description: "Rank higher, multiply your entry fee up to 200%, and unlock rewards."    }  ];
+  const howItWorksSteps = [
+    { step: "1", title: "Pick Your Arena", description: "Choose between free practice tournaments or paid contests starting from $5 – available daily." },
+    { step: "2", title: "Trade in Real Time", description: "Use live market data directly on our integrated web trader – every trade updates instantly." },
+    { step: "3", title: "Climb & Conquer", description: "Rank higher, multiply your entry fee up to 200%, and unlock rewards." }
+  ];
 
-  const catchyTaglines = [    "No Deposits. Just Skill.",    "Turn $5 into Victory – Every Day.",    "Your Trades. Your Arena. Your Glory.",    "Daily Tournaments. Global Competition."  ];
+  const catchyTaglines = [
+    "No Deposits. Just Skill.",
+    "Turn $5 into Victory – Every Day.",
+    "Your Trades. Your Arena. Your Glory.",
+    "Daily Tournaments. Global Competition."
+  ];
 
-  const traderTypes = [    {      icon: "🟢",      title: "Beginners",      description: "Free tournaments to practice, learn, and build confidence."    },    {      icon: "🔵",       title: "Pros",      description: "Competitive paid arenas to prove your skills & win big."    },    {      icon: "🟣",      title: "Ambitious Players",       description: "Daily contests to track your journey from dashboard → leaderboard → champion."    }  ];
+  // Updated symbols
+  const traderTypes = [
+    { icon: <Sun size={40} style={{ color: 'yellow' }} />, title: "Beginners", description: "Free tournaments to practice, learn, and build confidence." },
+    { icon: <Rocket size={40} style={{ color: 'cyan' }} />, title: "Pros", description: "Competitive paid arenas to prove your skills & win big." },
+    { icon: <Trophy size={40} style={{ color: 'magenta' }} />, title: "Ambitious Players", description: "Daily contests to track your journey from dashboard → leaderboard → champion." }
+  ];
 
-  const earlyAccessBenefits = [    {      icon: <Zap size={24} />,      title: "Priority Entry",      description: "Get priority entry into the first daily tournaments."    },    {      icon: <DollarSign size={24} />,      title: "Bonus Credits",      description: "Unlock bonus credits at launch."    },    {      icon: <Award size={24} />,      title: "Founding Trader",      description: "Become a Founding Trader with lifetime recognition."    }  ];
+  const earlyAccessBenefits = [
+    { icon: <Zap size={24} />, title: "Priority Entry", description: "Get priority entry into the first daily tournaments." },
+    { icon: <DollarSign size={24} />, title: "Bonus Credits", description: "Unlock bonus credits at launch." },
+    { icon: <Award size={24} />, title: "Founding Trader", description: "Become a Founding Trader with lifetime recognition." }
+  ];
 
   // Inject global styles
   useEffect(() => {
@@ -124,7 +149,6 @@ const VTA5LandingPage = () => {
       body {
         font-family: 'Inter', sans-serif;
         color: white;
-        min-height: 100vh;
         line-height: 1.6;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -132,7 +156,7 @@ const VTA5LandingPage = () => {
 
       .VTA5-container {
         width: 100%;
-        max-width: 100%;
+        height: 100%;          /* Match background-container */
         margin: 0 auto;
         overflow-x: hidden;
         display: flex;
@@ -140,6 +164,7 @@ const VTA5LandingPage = () => {
         align-items: center;
         position: relative;
         z-index: 1;
+        min-height: 100vh;     /* Still ensures full viewport coverage */
       }
 
       .background-container {
@@ -147,7 +172,7 @@ const VTA5LandingPage = () => {
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
+        height: 100%;          /* Full viewport */
         z-index: -1;
         overflow: hidden;
       }
@@ -156,6 +181,7 @@ const VTA5LandingPage = () => {
         width: 100%;
         height: 100%;
       }
+
 
       @keyframes pulse {
         0%, 100% { opacity: 1; transform: scale(1); }
@@ -356,6 +382,26 @@ const VTA5LandingPage = () => {
       .close-button:hover { background: rgba(255, 255, 255, 0.1); color: var(--color-text-light); }
       .btn-primary:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
       .btn-primary:disabled:hover { transform: none; box-shadow: none; }
+      
+      .catchy-taglines-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        margin: 3rem 0;
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+        justify-items: center;
+      }
+      
+      .tagline-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        text-align: center;
+        width: 100%;
+      }
 
       @keyframes modalFadeIn { to { opacity: 1; } }
       @keyframes modalScaleIn { to { transform: scale(1); } }
@@ -368,6 +414,13 @@ const VTA5LandingPage = () => {
         50% { transform: scale(1.1); }
         100% { transform: scale(1); }
       }
+      
+      footer {
+        width: 100%;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+      }
     `;
     document.head.appendChild(style);
     return () => document.head.removeChild(style);
@@ -376,7 +429,7 @@ const VTA5LandingPage = () => {
   return (
     <div className="VTA5-container">
       {/* Background Animation */}
-      <div className="background-container">
+      <div className="background-container" style={{ height: '100%', width: '100%' }}>
         <HyperSpeed />
       </div>
 
@@ -394,35 +447,17 @@ const VTA5LandingPage = () => {
         <div className="max-w-screen-xl px-6" style={{ padding: '1rem 1.5rem' }}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div style={{ 
-                width: '40px', 
-                height: '40px', 
-                background: 'linear-gradient(135deg, #ec4899, #8b5cf6)', 
-                borderRadius: '10px', 
-                display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'center', 
-                fontWeight: 'bold', 
-                fontSize: '1.2rem' 
-              }}>
-                VTA5
-              </div>
               <span className="header-logo-text gradient-text" style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
                 Virtual Trading Arena
               </span>
             </div>
-            <nav className="nav-links flex items-center gap-8">
-              <a href="#features" style={{ color: 'var(--color-text-faded)', textDecoration: 'none', transition: 'color 0.3s ease' }}>Features</a>
-              <a href="#how-it-works" style={{ color: 'var(--color-text-faded)', textDecoration: 'none', transition: 'color 0.3s ease' }}>How It Works</a>
-              <a href="#tournaments" style={{ color: 'var(--color-text-faded)', textDecoration: 'none', transition: 'color 0.3s ease' }}>Tournaments</a>
-              <button className="btn-secondary header-signin-btn">Sign In</button>
-            </nav>
+            {/* Removed the right-side nav links and sign-in button */}
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="w-full py-24" style={{ marginTop: '80px', minHeight: '90vh', display: 'flex', alignItems: 'center' }}>
+      <section className="w-full py-24" style={{ marginTop: '80px', minHeight: 'calc(100vh - 80px)', display: 'flex', alignItems: 'center' }}>
         <div className="max-w-screen-xl px-6 text-center">
           <div style={{ animation: 'fadeIn 1s ease-out' }}>
             <h1 className="hero-title gradient-text" style={{ fontSize: '4.5rem', fontWeight: 'bold', marginBottom: '1.5rem', lineHeight: '1.1' }}>
@@ -442,24 +477,16 @@ const VTA5LandingPage = () => {
               </p>
             </div>
 
-            {/* Catchy Taglines */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem', margin: '3rem 0', maxWidth: '1000px', marginLeft: 'auto', marginRight: 'auto' }}>
+            {/* Catchy Taglines aligned in one line with transparent containers */}
+            <div className="catchy-taglines-grid" style={{ gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}>
               {catchyTaglines.map((tagline, index) => (
-                <div key={index} className="card-glass" style={{ padding: '1rem', textAlign: 'center' }}>
+                <div key={index} className="card-glass tagline-container">
                   <p style={{ margin: 0, fontWeight: '600', color: 'var(--color-text-light)' }}>{tagline}</p>
                 </div>
               ))}
             </div>
 
-            <div className="cta-buttons flex gap-4 justify-center" style={{ marginTop: '3rem' }}>
-              <button 
-                className="btn-primary" 
-                style={{ fontSize: '1.2rem', padding: '1rem 2.5rem' }}
-                onClick={() => setShowWaitlistModal(true)}
-              >
-                🔥 Pre-Register Free
-              </button>
-            </div>
+            {/* Removed the "Pre-Register Free" button */}
           </div>
         </div>
       </section>
@@ -655,7 +682,7 @@ const VTA5LandingPage = () => {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem' }}>
             {traderTypes.map((type, index) => (
               <div key={index} className="card-glass" style={{ padding: '2rem', textAlign: 'center' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>{type.icon}</div>
+                <div style={{ marginBottom: '1rem' }}>{type.icon}</div>
                 <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: 'var(--color-text-light)' }}>
                   {type.title}
                 </h3>
@@ -697,13 +724,6 @@ const VTA5LandingPage = () => {
           </div>
 
           <div className="text-center">
-            <button 
-              className="btn-secondary" 
-              style={{ fontSize: '1.1rem', padding: '1rem 2rem' }}
-              onClick={() => setShowWaitlistModal(true)}
-            >
-              👉 Join the Waitlist – It's Free
-            </button>
           </div>
         </div>
       </section>
@@ -772,7 +792,7 @@ const VTA5LandingPage = () => {
             style={{ fontSize: '1.3rem', padding: '1.2rem 3rem' }}
             onClick={() => setShowWaitlistModal(true)}
           >
-            🔥 Pre-Register Now & Be Among the First
+            JOIN THE WAITLIST
           </button>
         </div>
       </section>
@@ -781,25 +801,13 @@ const VTA5LandingPage = () => {
       <footer style={{ 
         background: 'rgba(10, 10, 10, 0.9)', 
         borderTop: '1px solid rgba(139, 92, 246, 0.2)', 
-        padding: '3rem 0 1rem' 
+        padding: '3rem 0 1rem',
+        width: '100%' // Adjusted footer width
       }}>
         <div className="max-w-screen-xl px-6">
           <div className="footer-content flex justify-between items-start" style={{ marginBottom: '2rem' }}>
             <div>
               <div className="flex items-center gap-4" style={{ marginBottom: '1rem' }}>
-                <div style={{ 
-                  width: '40px', 
-                  height: '40px', 
-                  background: 'linear-gradient(135deg, #ec4899, #8b5cf6)', 
-                  borderRadius: '10px', 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center', 
-                  fontWeight: 'bold', 
-                  fontSize: '1.2rem' 
-                }}>
-                  VTA5
-                </div>
                 <span className="gradient-text" style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
                   Virtual Trading Arena
                 </span>
@@ -989,4 +997,4 @@ const VTA5LandingPage = () => {
   );
 };
 
-export default VTA5LandingPage;            
+export default VTA5LandingPage;
