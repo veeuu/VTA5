@@ -2,6 +2,27 @@ import React, { useState, useEffect } from 'react';
 import { Shield, TrendingUp, Trophy, Users, DollarSign, Bot, CheckCircle, X, Mail, User, Phone, Building, Zap, Target, Globe, BarChart3, Calendar, Award, Star, Play, Circle, Sun, Rocket } from 'lucide-react';
 import platformPreviewImage from '../assets/platformPreview.jpg';
 import HyperSpeed from './HyperSpeed';
+import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, addDoc, serverTimestamp } from 'firebase/firestore';
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAp7ULFpcJthwaTqwVxcCoZOn8z4WJO_co",
+  authDomain: "vta5-473411.firebaseapp.com",
+  projectId: "vta5-473411",
+  storageBucket: "vta5-473411.firebasestorage.app",
+  messagingSenderId: "365729582883",
+  appId: "1:365729582883:web:a0e848559b230f2f804696",
+  measurementId: "G-9H06YGJ6F0"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyfATxCSgfFsFNmTHYcbAnyVdXf69TBvw_vuz0WrR14d3ITZuNXaODO4u1Bd6HKHcJo/exec';
+
+
 
 const VTA5LandingPage = () => {
   const [email, setEmail] = useState('');
@@ -11,7 +32,6 @@ const VTA5LandingPage = () => {
     lastName: '',
     email: '',
     phone: '',
-    company: '',
     tradingExperience: '',
     interests: []
   });
@@ -24,46 +44,187 @@ const VTA5LandingPage = () => {
     setEmail('');
   };
 
-  const handleWaitlistSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  // const handleWaitlistSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setIsSubmitting(true);
     
-    setTimeout(() => {
-      console.log('Waitlist form submitted:', formData);
-      const emailContent = {
-        to: 'jigar@ectsasyventures.com',
-        subject: 'New VTA5 Waitlist Registration',
-        body: `
-          New waitlist registration:
-          Name: ${formData.firstName} ${formData.lastName}
-          Email: ${formData.email}
-          Phone: ${formData.phone}
-          Company: ${formData.company}
-          Trading Experience: ${formData.tradingExperience}
-          Interests: ${formData.interests.join(', ')}
-          Registration Time: ${new Date().toLocaleString()}
-        `
-      };
-      console.log('Email would be sent to jigar@ectsasyventures.com:', emailContent);
+  //   setTimeout(() => {
+  //     console.log('Waitlist form submitted:', formData);
+  //     const emailContent = {
+  //       to: 'jigar@ectsasyventures.com',
+  //       subject: 'New VTA5 Waitlist Registration',
+  //       body: `
+  //         New waitlist registration:
+  //         Name: ${formData.firstName} ${formData.lastName}
+  //         Email: ${formData.email}
+  //         Phone: ${formData.phone}
+  //         Company: ${formData.company}
+  //         Trading Experience: ${formData.tradingExperience}
+  //         Interests: ${formData.interests.join(', ')}
+  //         Registration Time: ${new Date().toLocaleString()}
+  //       `
+  //     };
+  //     console.log('Email would be sent to jigar@ectsasyventures.com:', emailContent);
+  //     setIsSubmitting(false);
+  //     setSubmitSuccess(true);
+      
+  //     setTimeout(() => {
+  //       setShowWaitlistModal(false);
+  //       setSubmitSuccess(false);
+  //       setFormData({
+  //         firstName: '',
+  //         lastName: '',
+  //         email: '',
+  //         phone: '',
+  //         company: '',
+  //         tradingExperience: '',
+  //         interests: []
+  //       });
+  //     }, 3000);
+  //   }, 2000);
+  // };
+
+//   const handleWaitlistSubmit = async (e) => {
+//     e.preventDefault();
+//     setIsSubmitting(true);
+
+//     // Clean and validate data
+//     const cleanData = {
+//         firstName: String(formData.firstName || '').trim(),
+//         lastName: String(formData.lastName || '').trim(),
+//         email: String(formData.email || '').trim().toLowerCase(),
+//         phone: String(formData.phone || '').trim(),
+//         tradingExperience: String(formData.tradingExperience || '').trim(),
+//         interests: Array.isArray(formData.interests) ? formData.interests : [],
+//         submissionTimestamp: serverTimestamp()
+//     };
+
+//     // Remove empty optional fields
+//     if (!cleanData.phone) {
+//         delete cleanData.phone;
+//     }
+
+//     console.log("Clean data being sent to Firestore:", cleanData);
+
+//     let firestoreSuccess = false;
+//     let firestoreId = null;
+//     let sheetsSuccess = false;
+
+//     // try {
+//     //     const docRef = await addDoc(collection(db, 'waitlist'), cleanData);
+//     //     firestoreId = docRef.id;
+//     //     firestoreSuccess = true;
+//     //     console.log('Firestore document written with ID: ', docRef.id);
+//     // } catch (firestoreError) {
+//     //     console.error('Firestore error details:', {
+//     //         code: firestoreError.code,
+//     //         message: firestoreError.message,
+//     //         stack: firestoreError.stack
+//     //     });
+//     // }
+    
+//     // Always try Google Sheets (regardless of Firestore result)
+//     try {
+//         const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+//             method: 'POST',
+//             headers: { 'Content-Type': 'application/json' },
+//             body: JSON.stringify({
+//                 ...formData,
+//                 firestoreId: firestoreId || 'FIRESTORE_FAILED'
+//             })
+//         });
+
+//         const result = await response.json();
+//         console.log('Google Sheets:', result.success ? 'Success' : 'Failed');
+//         sheetsSuccess = result.success;
+//     } catch (sheetError) {
+//         console.warn('Google Sheets failed:', sheetError);
+//         sheetsSuccess = false;
+//     }
+
+//     if (firestoreSuccess || sheetsSuccess) {
+//         setIsSubmitting(false);
+//         setSubmitSuccess(true);
+        
+//         setTimeout(() => {
+//             setShowWaitlistModal(false);
+//             setSubmitSuccess(false);
+//             setFormData({
+//                 firstName: '',
+//                 lastName: '',
+//                 email: '',
+//                 phone: '',
+//                 tradingExperience: '',
+//                 interests: []
+//             });
+//         }, 3000);
+
+//     } else {
+//         setIsSubmitting(false);
+//         alert('Sorry, there was an error submitting your information. Please try again.');
+//     }
+// };
+
+
+const handleWaitlistSubmit = async (e) => {
+  e.preventDefault();
+  setIsSubmitting(true);
+
+  let sheetsSuccess = false;
+
+  console.log("Clean data being sent to Google Sheets:", formData);
+
+  try {
+      // Use FormData instead of JSON to avoid CORS preflight
+      const formDataToSend = new FormData();
+      formDataToSend.append('firstName', formData.firstName);
+      formDataToSend.append('lastName', formData.lastName);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('phone', formData.phone);
+      formDataToSend.append('tradingExperience', formData.tradingExperience);
+      formDataToSend.append('interests', formData.interests.join(', '));
+      formDataToSend.append('firestoreId', 'FIRESTORE_DISABLED');
+
+      const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+          method: 'POST',
+          body: formDataToSend
+          // No Content-Type header - let browser set it automatically
+      });
+
+      if (response.ok) {
+          const result = await response.json();
+          console.log('Google Sheets response:', result);
+          sheetsSuccess = result.success;
+      } else {
+          console.error('HTTP error:', response.status);
+          sheetsSuccess = false;
+      }
+  } catch (sheetError) {
+      console.warn('Google Sheets failed:', sheetError);
+      sheetsSuccess = false;
+  }
+
+  if (sheetsSuccess) {
       setIsSubmitting(false);
       setSubmitSuccess(true);
       
       setTimeout(() => {
-        setShowWaitlistModal(false);
-        setSubmitSuccess(false);
-        setFormData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          phone: '',
-          company: '',
-          tradingExperience: '',
-          interests: []
-        });
+          setShowWaitlistModal(false);
+          setSubmitSuccess(false);
+          setFormData({
+              firstName: '',
+              lastName: '',
+              email: '',
+              phone: '',
+              tradingExperience: '',
+              interests: []
+          });
       }, 3000);
-    }, 2000);
-  };
-
+  } else {
+      setIsSubmitting(false);
+      alert('Sorry, there was an error submitting your information. Please try again.');
+  }
+};
   const handleInputChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
