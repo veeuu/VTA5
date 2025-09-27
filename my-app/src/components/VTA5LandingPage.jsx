@@ -451,6 +451,13 @@ const VTA5LandingPage = () => {
                 Virtual Trading Arena
               </span>
             </div>
+            <button
+              className="btn-secondary" // Uses the existing secondary button style for a less distracting header CTA
+              onClick={() => setShowWaitlistModal(true)} // Toggles the waitlist modal
+              style={{ padding: '0.5rem 1.5rem', fontSize: '1rem' }} // Adjusted styling for the header
+            >
+              Join the Waitlist
+            </button>
             {/* Removed the right-side nav links and sign-in button */}
           </div>
         </div>
@@ -926,10 +933,10 @@ const VTA5LandingPage = () => {
                       onChange={(e) => handleInputChange('email', e.target.value)}
                       required
                     />
-                  </div>
+                  </div>  
                   
                   <div className="form-group">
-                    <label className="form-label">Phone Number</label>
+                    <label className="form-label">Phone Number ( Optional ) </label>
                     <input
                       type="tel"
                       className="form-input"
@@ -938,7 +945,7 @@ const VTA5LandingPage = () => {
                     />
                   </div>
                   
-                  <div className="form-group">
+                  {/*<div className="form-group">
                     <label className="form-label">Company (Optional)</label>
                     <input
                       type="text"
@@ -946,7 +953,7 @@ const VTA5LandingPage = () => {
                       value={formData.company}
                       onChange={(e) => handleInputChange('company', e.target.value)}
                     />
-                  </div>
+                  </div>*/}
                   
                   <div className="form-group">
                     <label className="form-label">Trading Experience</label>
