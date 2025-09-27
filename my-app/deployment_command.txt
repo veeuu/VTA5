@@ -1,0 +1,3 @@
+gcloud builds submit --tag gcr.io/vta5-473411/vta5-app .
+
+gcloud run deploy vta5-app   --image gcr.io/vta5-473411/vta5-app   --platform managed   --region us-central1   --allow-unauthenticated

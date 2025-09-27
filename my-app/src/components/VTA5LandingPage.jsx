@@ -2,23 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { Shield, TrendingUp, Trophy, Users, DollarSign, Bot, CheckCircle, X, Mail, User, Phone, Building, Zap, Target, Globe, BarChart3, Calendar, Award, Star, Play, Circle, Sun, Rocket } from 'lucide-react';
 import platformPreviewImage from '../assets/platformPreview.jpg';
 import HyperSpeed from './HyperSpeed';
-import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, serverTimestamp } from 'firebase/firestore';
+// import { initializeApp } from 'firebase/app';
+// import { getFirestore, collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAp7ULFpcJthwaTqwVxcCoZOn8z4WJO_co",
-  authDomain: "vta5-473411.firebaseapp.com",
-  projectId: "vta5-473411",
-  storageBucket: "vta5-473411.firebasestorage.app",
-  messagingSenderId: "365729582883",
-  appId: "1:365729582883:web:a0e848559b230f2f804696",
-  measurementId: "G-9H06YGJ6F0"
-};
+// const firebaseConfig = {
+//   apiKey: "AIzaSyAp7ULFpcJthwaTqwVxcCoZOn8z4WJO_co",
+//   authDomain: "vta5-473411.firebaseapp.com",
+//   projectId: "vta5-473411",
+//   storageBucket: "vta5-473411.firebasestorage.app",
+//   messagingSenderId: "365729582883",
+//   appId: "1:365729582883:web:a0e848559b230f2f804696",
+//   measurementId: "G-9H06YGJ6F0"
+// };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+// const app = initializeApp(firebaseConfig);
+// const db = getFirestore(app);
 
 const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyfATxCSgfFsFNmTHYcbAnyVdXf69TBvw_vuz0WrR14d3ITZuNXaODO4u1Bd6HKHcJo/exec';
 
@@ -1021,7 +1021,7 @@ const handleWaitlistSubmit = async (e) => {
             borderTop: '1px solid rgba(139, 92, 246, 0.2)' 
           }}>
             <p style={{ color: 'var(--color-text-faded)', margin: 0 }}>
-              © 2024 Virtual Trading Arena. All rights reserved.
+              © 2025 Virtual Trading Arena. All rights reserved.
             </p>
             <div className="flex gap-4">
               <a href="#" style={{ color: 'var(--color-text-faded)', textDecoration: 'none' }}>Privacy Policy</a>
