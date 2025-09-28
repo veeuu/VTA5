@@ -321,11 +321,12 @@ const handleWaitlistSubmit = async (e) => {
         margin: 0 auto;
         overflow-x: hidden;
         display: flex;
+        padding-bottom: 20px;
         flex-direction: column;
         align-items: center;
         position: relative;
         z-index: 1;
-        min-height: 100vh;     /* Still ensures full viewport coverage */
+        // min-height: 100vh;     /* Still ensures full viewport coverage */
       }
 
       .background-container {
@@ -635,7 +636,7 @@ const handleWaitlistSubmit = async (e) => {
               Step into the Virtual Trading Arena – the all-in-one platform with dashboard, live leaderboard, and web trader.
             </p>
             <p style={{ fontSize: '1.3rem', color: 'var(--color-text-faded)', marginBottom: '2rem', maxWidth: '900px', margin: '0 auto 2rem' }}>
-              Join daily tournaments starting from $5 and win up to 200% rewards + monthly prizes or practice in free contests.
+              Join daily tournaments starting from $5 and win up to 4000% rewards + monthly prizes or practice in free contests.
             </p>
             
             {/* Key Note */}
@@ -798,7 +799,7 @@ const handleWaitlistSubmit = async (e) => {
                 🏆 Top Traders
               </h3>
               <p style={{ color: 'var(--color-text-faded)', lineHeight: '1.6' }}>
-                Earn up to 200% returns on your entry fee
+                Earn up to 4000% returns on your entry fee
               </p>
             </div>
             
