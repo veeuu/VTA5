@@ -354,7 +354,14 @@ const Hyperspeed = ({
           antialias: false,
           alpha: true
         });
-        this.renderer.setSize(container.offsetWidth, container.offsetHeight, false);
+        // this.renderer.setSize(container.offsetWidth, container.offsetHeight, false);
+        this.renderer.setSize(window.innerWidth, window.innerHeight, false);
+        this.renderer.domElement.style.position = 'fixed';
+        this.renderer.domElement.style.top = '0';
+        this.renderer.domElement.style.left = '0'; 
+        this.renderer.domElement.style.width = '100vw';
+        this.renderer.domElement.style.height = '100vh';
+        this.renderer.domElement.style.pointerEvents = 'none';
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.composer = new EffectComposer(this.renderer);
         container.append(this.renderer.domElement);
@@ -369,6 +376,8 @@ const Hyperspeed = ({
         this.camera.position.y = 8;
         this.camera.position.x = 0;
         this.scene = new THREE.Scene();
+        this.scene.background = new THREE.Color(options.colors.background);
+        // this.scene.background = null;
         this.scene.background = new THREE.Color(options.colors.background);
 
         let fog = new THREE.Fog(options.colors.background, options.length * 0.2, options.length * 500);
@@ -418,8 +427,10 @@ const Hyperspeed = ({
       }
 
       onWindowResize() {
-        const width = this.container.offsetWidth;
-        const height = this.container.offsetHeight;
+        const width = this.container.innerWidth;
+        const height = this.container.innerHeight;
+        // const width = this.container.offsetWidth;
+        // const height = this.container.offsetHeight;
 
         this.renderer.setSize(width, height);
         this.camera.aspect = width / height;

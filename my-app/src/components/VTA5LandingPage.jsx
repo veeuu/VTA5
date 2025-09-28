@@ -301,6 +301,7 @@ const handleWaitlistSubmit = async (e) => {
         width: 100%;
         overflow-x: hidden;
         background-color: rgba(0,0,0,0.15);
+        height: auto;
       }
 
       *, *::before, *::after {
@@ -317,7 +318,6 @@ const handleWaitlistSubmit = async (e) => {
 
       .VTA5-container {
         width: 100%;
-        height: 100%;          /* Match background-container */
         margin: 0 auto;
         overflow-x: hidden;
         display: flex;
@@ -326,7 +326,10 @@ const handleWaitlistSubmit = async (e) => {
         align-items: center;
         position: relative;
         z-index: 1;
+<<<<<<< HEAD
         // min-height: 100vh;     /* Still ensures full viewport coverage */
+=======
+>>>>>>> ff6ca77825a17e6d67dcb395439d53fa9b69c0b5
       }
 
       .background-container {
@@ -626,6 +629,7 @@ const handleWaitlistSubmit = async (e) => {
       </header>
 
       {/* Hero Section */}
+      {/* <section className="w-full py-24" style={{ marginTop: '80px', minHeight: 'calc(100vh - 80px)', display: 'flex', alignItems: 'center' }}> */}
       <section className="w-full py-24" style={{ marginTop: '80px', minHeight: 'calc(100vh - 80px)', display: 'flex', alignItems: 'center' }}>
         <div className="max-w-screen-xl px-6 text-center">
           <div style={{ animation: 'fadeIn 1s ease-out' }}>
