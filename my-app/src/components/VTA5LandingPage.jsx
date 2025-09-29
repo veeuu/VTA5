@@ -309,7 +309,7 @@ const VTA5LandingPage = () => {
                 box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 25px rgba(139, 92, 246, 0.4);
             }
 
-            .max-w-screen-xl { max-width: 2000px; margin: 0 auto; width: 100%; }
+            .max-w-screen-xl { max-width: 1280px; margin: 0 auto; width: 100%; }
             .text-center { text-align: center; }
             .flex { display: flex; }
             .items-center { align-items: center; }
@@ -322,23 +322,17 @@ const VTA5LandingPage = () => {
             .w-full { width: 100%; }
             .grid { display: grid; }
             
-            /* Add this to make the image responsive */
-            .preview-image {
-                max-width: 100%;
-                height: auto;
-            }
-
-            /* New Responsive Styles - Mobile First (Default) */
+            /* Responsive base styles - Mobile First */
             .hero-title {
-              font-size: 2.2rem !important; /* Made this a bit smaller */
-              line-height: 1.1;
+              font-size: 2rem;
+              line-height: 1.2;
             }
             .hero-subtitle {
-              font-size: 1.1rem !important; /* Made this a bit smaller */
+              font-size: 1rem;
             }
 
             .header-container {
-              padding: 0.5rem 1rem;
+              padding: 0.75rem 1rem;
             }
 
             .header-logo-text {
@@ -367,27 +361,103 @@ const VTA5LandingPage = () => {
             .trader-types-grid,
             .early-access-grid {
               grid-template-columns: 1fr;
+              gap: 1.5rem;
             }
             .catchy-taglines-grid {
               grid-template-columns: 1fr;
+              gap: 1rem;
             }
             .preview-grid {
               grid-template-columns: 1fr;
+              gap: 2rem;
+            }
+
+            .section-title {
+              font-size: 2rem;
+              margin-bottom: 1rem;
+            }
+
+            .section-subtitle {
+              font-size: 1rem;
+              max-width: 100%;
+            }
+
+            .feature-card {
+              padding: 1.5rem;
+            }
+
+            .feature-icon {
+              margin-bottom: 0.75rem;
+            }
+
+            .feature-title {
+              font-size: 1.2rem;
+              margin-bottom: 0.75rem;
+            }
+
+            .feature-description {
+              font-size: 0.9rem;
+            }
+
+            .step-number {
+              width: 50px;
+              height: 50px;
+              font-size: 1.2rem;
+              margin-bottom: 1rem;
+            }
+
+            .step-title {
+              font-size: 1.2rem;
+              margin-bottom: 0.75rem;
+            }
+
+            .step-description {
+              font-size: 0.9rem;
+            }
+
+            .modal-content {
+              padding: 1.5rem;
+              width: 95%;
+              max-height: 90vh;
+            }
+
+            .form-group {
+              margin-bottom: 1rem;
+            }
+
+            .form-label {
+              font-size: 0.875rem;
+              margin-bottom: 0.25rem;
+            }
+
+            .form-input,
+            .form-select {
+              padding: 0.75rem;
+              font-size: 0.9rem;
+            }
+
+            .interest-grid {
+              grid-template-columns: 1fr;
+            }
+
+            .btn-primary {
+              padding: 0.75rem 1.5rem;
+              font-size: 1rem;
             }
 
             /* Tablet Styles */
             @media (min-width: 768px) {
               .hero-title {
-                font-size: 3.5rem !important;
+                font-size: 2.5rem;
               }
               .hero-subtitle {
-                font-size: 1.5rem !important;
+                font-size: 1.25rem;
               }
               .header-container {
                 padding: 1rem 1.5rem;
               }
               .header-logo-text {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
               }
               .btn-secondary {
                 padding: 0.75rem 1.5rem;
@@ -418,6 +488,7 @@ const VTA5LandingPage = () => {
               .footer-links {
                 flex-direction: row;
                 margin-top: 0;
+                gap: 2rem;
               }
               .preview-grid {
                 grid-template-columns: 1fr 1fr;
@@ -425,15 +496,70 @@ const VTA5LandingPage = () => {
               .catchy-taglines-grid {
                 grid-template-columns: repeat(2, 1fr);
               }
+              .section-title {
+                font-size: 2.5rem;
+              }
+              .section-subtitle {
+                font-size: 1.1rem;
+              }
+              .feature-card {
+                padding: 1.75rem;
+              }
+              .feature-icon {
+                margin-bottom: 1rem;
+              }
+              .feature-title {
+                font-size: 1.3rem;
+                margin-bottom: 0.875rem;
+              }
+              .feature-description {
+                font-size: 0.95rem;
+              }
+              .step-number {
+                width: 60px;
+                height: 60px;
+                font-size: 1.4rem;
+                margin-bottom: 1.25rem;
+              }
+              .step-title {
+                font-size: 1.3rem;
+                margin-bottom: 0.875rem;
+              }
+              .step-description {
+                font-size: 0.95rem;
+              }
+              .modal-content {
+                padding: 2rem;
+                width: 90%;
+              }
+              .form-group {
+                margin-bottom: 1.25rem;
+              }
+              .form-label {
+                font-size: 0.9rem;
+                margin-bottom: 0.375rem;
+              }
+              .form-input,
+              .form-select {
+                padding: 0.875rem;
+                font-size: 0.95rem;
+              }
+              .interest-grid {
+                grid-template-columns: repeat(2, 1fr);
+              }
+              .btn-primary {
+                padding: 0.875rem 1.75rem;
+                font-size: 1.05rem;
+              }
             }
 
             /* Desktop Styles */
             @media (min-width: 1024px) {
               .hero-title {
-                font-size: 4.5rem !important;
+                font-size: 3.5rem;
               }
               .hero-subtitle {
-                font-size: 2rem !important;
+                font-size: 1.5rem;
               }
               .features-grid {
                 grid-template-columns: repeat(3, 1fr);
@@ -452,6 +578,81 @@ const VTA5LandingPage = () => {
               }
               .catchy-taglines-grid {
                 grid-template-columns: repeat(4, 1fr);
+              }
+              .section-title {
+                font-size: 3rem;
+              }
+              .section-subtitle {
+                font-size: 1.25rem;
+              }
+              .feature-card {
+                padding: 2rem;
+              }
+              .feature-icon {
+                margin-bottom: 1.25rem;
+              }
+              .feature-title {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+              }
+              .feature-description {
+                font-size: 1rem;
+              }
+              .step-number {
+                width: 70px;
+                height: 70px;
+                font-size: 1.6rem;
+                margin-bottom: 1.5rem;
+              }
+              .step-title {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+              }
+              .step-description {
+                font-size: 1rem;
+              }
+              .modal-content {
+                padding: 2.5rem;
+                width: 80%;
+                max-width: 600px;
+              }
+              .form-group {
+                margin-bottom: 1.5rem;
+              }
+              .form-label {
+                font-size: 0.95rem;
+                margin-bottom: 0.5rem;
+              }
+              .form-input,
+              .form-select {
+                padding: 1rem;
+                font-size: 1rem;
+              }
+              .interest-grid {
+                grid-template-columns: repeat(3, 1fr);
+              }
+              .btn-primary {
+                padding: 1rem 2rem;
+                font-size: 1.1rem;
+              }
+            }
+
+            /* Large Desktop Styles */
+            @media (min-width: 1280px) {
+              .hero-title {
+                font-size: 4rem;
+              }
+              .hero-subtitle {
+                font-size: 1.75rem;
+              }
+              .section-title {
+                font-size: 3.5rem;
+              }
+              .section-subtitle {
+                font-size: 1.3rem;
+              }
+              .max-w-screen-xl {
+                max-width: 1400px;
               }
             }
             
@@ -475,9 +676,6 @@ const VTA5LandingPage = () => {
                 background: var(--color-dark-bg-start);
                 border: 1px solid var(--color-card-border);
                 border-radius: 20px;
-                padding: 2rem;
-                max-width: 500px;
-                width: 90%;
                 max-height: 90vh;
                 overflow-y: auto;
                 transform: scale(0.8);
@@ -485,27 +683,102 @@ const VTA5LandingPage = () => {
                 box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
             }
 
-            .form-group { margin-bottom: 1.5rem; }
-            .form-label { display: block; margin-bottom: 0.5rem; color: var(--color-text-light); font-weight: 600; font-size: 0.875rem; }
-            .form-input { width: 100%; padding: 0.75rem 1rem; background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(15px); border: 1px solid var(--color-border-subtle); border-radius: 8px; color: var(--color-text-light); outline: none; transition: border-color 0.3s ease, box-shadow 0.3s ease; font-size: 1rem; }
-            .form-input::placeholder { color: var(--color-text-faded); }
-            .form-input:focus { border-color: var(--color-primary-end); box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3); }
-            .form-select { width: 100%; padding: 0.75rem 1rem; background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(15px); border: 1px solid var(--color-border-subtle); border-radius: 8px; color: var(--color-text-light); outline: none; transition: border-color 0.3s ease, box-shadow 0.3s ease; font-size: 1rem; }
-            .form-select:focus { border-color: var(--color-primary-end); box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3); }
-            .interest-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.75rem; margin-top: 0.5rem; }
-            .interest-checkbox { display: flex; align-items: center; padding: 0.5rem 0.75rem; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--color-border-subtle); border-radius: 8px; cursor: pointer; transition: all 0.3s ease; font-size: 0.875rem; }
-            .interest-checkbox.selected { background: var(--color-primary-end); border-color: var(--color-primary-end); color: white; }
-            .interest-checkbox:hover { background: rgba(139, 92, 246, 0.2); border-color: var(--color-primary-end); }
-            .close-button { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: var(--color-text-faded); cursor: pointer; padding: 0.5rem; border-radius: 50%; transition: all 0.3s ease; }
-            .close-button:hover { background: rgba(255, 255, 255, 0.1); color: var(--color-text-light); }
-            .btn-primary:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
-            .btn-primary:disabled:hover { transform: none; box-shadow: none; }
+            .form-group { 
+              margin-bottom: 1.5rem; 
+            }
+            .form-label { 
+              display: block; 
+              margin-bottom: 0.5rem; 
+              color: var(--color-text-light); 
+              font-weight: 600; 
+            }
+            .form-input { 
+              width: 100%; 
+              padding: 0.75rem 1rem; 
+              background: rgba(255, 255, 255, 0.08); 
+              backdrop-filter: blur(15px); 
+              border: 1px solid var(--color-border-subtle); 
+              border-radius: 8px; 
+              color: var(--color-text-light); 
+              outline: none; 
+              transition: border-color 0.3s ease, box-shadow 0.3s ease; 
+            }
+            .form-input::placeholder { 
+              color: var(--color-text-faded); 
+            }
+            .form-input:focus { 
+              border-color: var(--color-primary-end); 
+              box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3); 
+            }
+            .form-select { 
+              width: 100%; 
+              padding: 0.75rem 1rem; 
+              background: rgba(255, 255, 255, 0.08); 
+              backdrop-filter: blur(15px); 
+              border: 1px solid var(--color-border-subtle); 
+              border-radius: 8px; 
+              color: var(--color-text-light); 
+              outline: none; 
+              transition: border-color 0.3s ease, box-shadow 0.3s ease; 
+            }
+            .form-select:focus { 
+              border-color: var(--color-primary-end); 
+              box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3); 
+            }
+            .interest-grid { 
+              display: grid; 
+              gap: 0.75rem; 
+              margin-top: 0.5rem; 
+            }
+            .interest-checkbox { 
+              display: flex; 
+              align-items: center; 
+              padding: 0.5rem 0.75rem; 
+              background: rgba(255, 255, 255, 0.05); 
+              border: 1px solid var(--color-border-subtle); 
+              border-radius: 8px; 
+              cursor: pointer; 
+              transition: all 0.3s ease; 
+            }
+            .interest-checkbox.selected { 
+              background: var(--color-primary-end); 
+              border-color: var(--color-primary-end); 
+              color: white; 
+            }
+            .interest-checkbox:hover { 
+              background: rgba(139, 92, 246, 0.2); 
+              border-color: var(--color-primary-end); 
+            }
+            .close-button { 
+              position: absolute; 
+              top: 1rem; 
+              right: 1rem; 
+              background: none; 
+              border: none; 
+              color: var(--color-text-faded); 
+              cursor: pointer; 
+              padding: 0.5rem; 
+              border-radius: 50%; 
+              transition: all 0.3s ease; 
+            }
+            .close-button:hover { 
+              background: rgba(255, 255, 255, 0.1); 
+              color: var(--color-text-light); 
+            }
+            .btn-primary:disabled { 
+              opacity: 0.7; 
+              cursor: not-allowed; 
+              transform: none; 
+            }
+            .btn-primary:disabled:hover { 
+              transform: none; 
+              box-shadow: none; 
+            }
             
             .catchy-taglines-grid {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
                 gap: 1rem;
-                margin: 3rem 0;
+                margin: 2rem 0;
                 max-width: 1000px;
                 margin-left: auto;
                 margin-right: auto;
@@ -524,8 +797,21 @@ const VTA5LandingPage = () => {
             @keyframes modalFadeIn { to { opacity: 1; } }
             @keyframes modalScaleIn { to { transform: scale(1); } }
 
-            .success-message { text-align: center; padding: 2rem; }
-            .success-icon { width: 4rem; height: 4rem; background: linear-gradient(to right, #10b981, #22c55e); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; animation: successPulse 0.6s ease-out; }
+            .success-message { 
+              text-align: center; 
+              padding: 2rem; 
+            }
+            .success-icon { 
+              width: 4rem; 
+              height: 4rem; 
+              background: linear-gradient(to right, #10b981, #22c55e); 
+              border-radius: 50%; 
+              display: flex; 
+              align-items: center; 
+              justify-content: center; 
+              margin: 0 auto 1rem; 
+              animation: successPulse 0.6s ease-out; 
+            }
 
             @keyframes successPulse {
                 0% { transform: scale(0); }
@@ -574,16 +860,15 @@ const VTA5LandingPage = () => {
                 backdropFilter: 'blur(20px)',
                 borderBottom: '1px solid rgba(139, 92, 246, 0.2)'
             }}>
-                <div className="max-w-screen-xl px-6 header-container" style={{ padding: '1rem 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div className="max-w-screen-xl px-6 header-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <div className="flex items-center gap-4">
-                        <span className="header-logo-text gradient-text" style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
+                        <span className="header-logo-text gradient-text" style={{ fontWeight: 'bold' }}>
                             Virtual Trading Arena
                         </span>
                     </div>
                     <button
                         className="btn-secondary"
                         onClick={() => setShowWaitlistModal(true)}
-                        style={{ padding: '0.5rem 1.5rem', fontSize: '1rem' }}
                     >
                         Join the Waitlist
                     </button>
@@ -600,13 +885,13 @@ const VTA5LandingPage = () => {
                         <p className="hero-subtitle" style={{ color: 'var(--color-text-light)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
                             Step into the Virtual Trading Arena – the all-in-one platform with dashboard, live leaderboard, and web trader.
                         </p>
-                        <p style={{ fontSize: '1.3rem', color: 'var(--color-text-faded)', marginBottom: '2rem', maxWidth: '900px', margin: '0 auto 2rem' }}>
+                        <p style={{ fontSize: '1.1rem', color: 'var(--color-text-faded)', marginBottom: '2rem', maxWidth: '900px', margin: '0 auto 2rem' }}>
                             Join daily tournaments starting from $5 and win up to 4000% rewards + monthly prizes or practice in free contests.
                         </p>
 
                         {/* Key Note */}
                         <div className="card-glass" style={{ padding: '1.5rem', margin: '2rem auto', maxWidth: '800px', background: 'rgba(236, 72, 153, 0.1)', border: '1px solid rgba(236, 72, 153, 0.3)' }}>
-                            <p style={{ fontSize: '1.1rem', color: 'var(--color-text-light)', margin: 0 }}>
+                            <p style={{ fontSize: '1rem', color: 'var(--color-text-light)', margin: 0 }}>
                                 💡 <strong>Unlike traditional brokerage firms</strong> where you must deposit trading capital, at VTA5 your entry fee gives you full access to the tournament – no extra deposits required.
                             </p>
                         </div>
@@ -626,25 +911,25 @@ const VTA5LandingPage = () => {
             {/* Why VTA5 Section */}
             <section id="features" className="w-full py-24">
                 <div className="max-w-screen-xl px-6">
-                    <div className="text-center" style={{ marginBottom: '4rem' }}>
-                        <h2 className="gradient-text" style={{ fontSize: '3.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+                    <div className="text-center" style={{ marginBottom: '3rem' }}>
+                        <h2 className="section-title gradient-text" style={{ fontWeight: 'bold' }}>
                             Why VTA5?
                         </h2>
-                        <p style={{ fontSize: '1.3rem', color: 'var(--color-text-faded)', maxWidth: '600px', margin: '0 auto' }}>
+                        <p className="section-subtitle" style={{ color: 'var(--color-text-faded)', maxWidth: '600px', margin: '0 auto' }}>
                             Fast-paced highlights that set us apart from traditional trading platforms
                         </p>
                     </div>
 
-                    <div className="features-grid" style={{ display: 'grid', gap: '2rem', marginBottom: '4rem' }}>
+                    <div className="features-grid" style={{ marginBottom: '3rem' }}>
                         {vtaFeatures.map((feature, index) => (
-                            <div key={index} className="card-glass" style={{ padding: '2rem', textAlign: 'center' }}>
-                                <div style={{ color: 'var(--color-primary-end)', marginBottom: '1rem', display: 'flex', justifyContent: 'center' }}>
+                            <div key={index} className="card-glass feature-card" style={{ textAlign: 'center' }}>
+                                <div className="feature-icon" style={{ color: 'var(--color-primary-end)', display: 'flex', justifyContent: 'center' }}>
                                     {feature.icon}
                                 </div>
-                                <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: 'var(--color-text-light)' }}>
+                                <h3 className="feature-title" style={{ fontWeight: 'bold', color: 'var(--color-text-light)' }}>
                                     {feature.title}
                                 </h3>
-                                <p style={{ color: 'var(--color-text-faded)', lineHeight: '1.6' }}>
+                                <p className="feature-description" style={{ color: 'var(--color-text-faded)', lineHeight: '1.6' }}>
                                     {feature.description}
                                 </p>
                             </div>
@@ -656,37 +941,34 @@ const VTA5LandingPage = () => {
             {/* How It Works Section */}
             <section id="how-it-works" className="w-full py-24">
                 <div className="max-w-screen-xl px-6">
-                    <div className="text-center" style={{ marginBottom: '4rem' }}>
-                        <h2 className="gradient-text" style={{ fontSize: '3.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+                    <div className="text-center" style={{ marginBottom: '3rem' }}>
+                        <h2 className="section-title gradient-text" style={{ fontWeight: 'bold' }}>
                             How It Works
                         </h2>
-                        <p style={{ fontSize: '1.3rem', color: 'var(--color-text-faded)', maxWidth: '600px', margin: '0 auto' }}>
+                        <p className="section-subtitle" style={{ color: 'var(--color-text-faded)', maxWidth: '600px', margin: '0 auto' }}>
                             Three simple steps to start competing and winning
                         </p>
                     </div>
 
-                    <div className="how-it-works-grid" style={{ display: 'grid', gap: '2rem' }}>
+                    <div className="how-it-works-grid">
                         {howItWorksSteps.map((step, index) => (
-                            <div key={index} className="card-glass" style={{ padding: '2rem', textAlign: 'center', position: 'relative' }}>
-                                <div style={{
-                                    width: '60px',
-                                    height: '60px',
+                            <div key={index} className="card-glass" style={{ padding: '1.5rem', textAlign: 'center', position: 'relative' }}>
+                                <div className="step-number" style={{
                                     background: 'linear-gradient(135deg, #ec4899, #8b5cf6)',
                                     borderRadius: '50%',
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
-                                    fontSize: '1.5rem',
                                     fontWeight: 'bold',
-                                    margin: '0 auto 1.5rem',
-                                    color: 'white'
+                                    color: 'white',
+                                    margin: '0 auto'
                                 }}>
                                     {step.step}
                                 </div>
-                                <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: 'var(--color-text-light)' }}>
+                                <h3 className="step-title" style={{ fontWeight: 'bold', color: 'var(--color-text-light)' }}>
                                     {step.title}
                                 </h3>
-                                <p style={{ color: 'var(--color-text-faded)', lineHeight: '1.6' }}>
+                                <p className="step-description" style={{ color: 'var(--color-text-faded)', lineHeight: '1.6' }}>
                                     {step.description}
                                 </p>
                             </div>
@@ -698,46 +980,46 @@ const VTA5LandingPage = () => {
             {/* The Arena Advantage Section */}
             <section className="w-full py-24">
                 <div className="max-w-screen-xl px-6">
-                    <div className="text-center" style={{ marginBottom: '4rem' }}>
-                        <h2 className="gradient-text" style={{ fontSize: '3.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+                    <div className="text-center" style={{ marginBottom: '3rem' }}>
+                        <h2 className="section-title gradient-text" style={{ fontWeight: 'bold' }}>
                             The Arena Advantage
                         </h2>
-                        <p style={{ fontSize: '1.3rem', color: 'var(--color-text-faded)', maxWidth: '600px', margin: '0 auto 2rem' }}>
+                        <p className="section-subtitle" style={{ color: 'var(--color-text-faded)', maxWidth: '600px', margin: '0 auto 1.5rem' }}>
                             Unlike traditional brokerage firms
                         </p>
                     </div>
 
-                    <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginBottom: '3rem' }}>
-                        <div className="card-glass" style={{ padding: '2rem', border: '1px solid rgba(239, 68, 68, 0.3)', background: 'rgba(239, 68, 68, 0.05)' }}>
-                            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: '#ef4444' }}>
+                    <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
+                        <div className="card-glass" style={{ padding: '1.5rem', border: '1px solid rgba(239, 68, 68, 0.3)', background: 'rgba(239, 68, 68, 0.05)' }}>
+                            <h3 style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '0.75rem', color: '#ef4444' }}>
                                 ❌ Traditional Brokers
                             </h3>
-                            <p style={{ color: 'var(--color-text-faded)', lineHeight: '1.6' }}>
+                            <p style={{ color: 'var(--color-text-faded)', lineHeight: '1.6', fontSize: '0.9rem' }}>
                                 You deposit trading funds & carry risk. Your money is always at stake with every trade.
                             </p>
                         </div>
-                        <div className="card-glass" style={{ padding: '2rem', border: '1px solid rgba(34, 197, 94, 0.3)', background: 'rgba(34, 197, 94, 0.05)' }}>
-                            <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: '#22c55e' }}>
+                        <div className="card-glass" style={{ padding: '1.5rem', border: '1px solid rgba(34, 197, 94, 0.3)', background: 'rgba(34, 197, 94, 0.05)' }}>
+                            <h3 style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '0.75rem', color: '#22c55e' }}>
                                 ✅ VTA5 Arena
                             </h3>
-                            <p style={{ color: 'var(--color-text-faded)', lineHeight: '1.6' }}>
+                            <p style={{ color: 'var(--color-text-faded)', lineHeight: '1.6', fontSize: '0.9rem' }}>
                                 Pay a small entry fee, access the tournament, and compete risk-free. No additional deposits required.
                             </p>
                         </div>
                     </div>
 
-                    <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', maxWidth: '800px', margin: '0 auto' }}>
-                        <div className="card-glass" style={{ padding: '1.5rem', textAlign: 'center' }}>
-                            <Target size={32} style={{ color: 'var(--color-primary-end)', margin: '0 auto 1rem' }} />
-                            <p style={{ margin: 0, fontWeight: '600', color: 'var(--color-text-light)' }}>🎯 Every move counts.</p>
+                    <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem', maxWidth: '800px', margin: '0 auto' }}>
+                        <div className="card-glass" style={{ padding: '1rem', textAlign: 'center' }}>
+                            <Target size={28} style={{ color: 'var(--color-primary-end)', margin: '0 auto 0.5rem' }} />
+                            <p style={{ margin: 0, fontWeight: '600', color: 'var(--color-text-light)', fontSize: '0.9rem' }}>🎯 Every move counts.</p>
                         </div>
-                        <div className="card-glass" style={{ padding: '1.5rem', textAlign: 'center' }}>
-                            <Trophy size={32} style={{ color: 'var(--color-primary-end)', margin: '0 auto 1rem' }} />
-                            <p style={{ margin: 0, fontWeight: '600', color: 'var(--color-text-light)' }}>🥇 Compete head-to-head in real tournaments.</p>
+                        <div className="card-glass" style={{ padding: '1rem', textAlign: 'center' }}>
+                            <Trophy size={28} style={{ color: 'var(--color-primary-end)', margin: '0 auto 0.5rem' }} />
+                            <p style={{ margin: 0, fontWeight: '600', color: 'var(--color-text-light)', fontSize: '0.9rem' }}>🥇 Compete head-to-head in real tournaments.</p>
                         </div>
-                        <div className="card-glass" style={{ padding: '1.5rem', textAlign: 'center' }}>
-                            <Zap size={32} style={{ color: 'var(--color-primary-end)', margin: '0 auto 1rem' }} />
-                            <p style={{ margin: 0, fontWeight: '600', color: 'var(--color-text-light)' }}>⚡ Instant results, instant excitement.</p>
+                        <div className="card-glass" style={{ padding: '1rem', textAlign: 'center' }}>
+                            <Zap size={28} style={{ color: 'var(--color-primary-end)', margin: '0 auto 0.5rem' }} />
+                            <p style={{ margin: 0, fontWeight: '600', color: 'var(--color-text-light)', fontSize: '0.9rem' }}>⚡ Instant results, instant excitement.</p>
                         </div>
                     </div>
                 </div>
@@ -746,52 +1028,52 @@ const VTA5LandingPage = () => {
             {/* Leaderboard & Rewards Section */}
             <section className="w-full py-24">
                 <div className="max-w-screen-xl px-6">
-                    <div className="text-center" style={{ marginBottom: '4rem' }}>
-                        <h2 className="gradient-text" style={{ fontSize: '3.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+                    <div className="text-center" style={{ marginBottom: '3rem' }}>
+                        <h2 className="section-title gradient-text" style={{ fontWeight: 'bold' }}>
                             Leaderboard & Rewards
                         </h2>
-                        <p style={{ fontSize: '1.3rem', color: 'var(--color-text-faded)', maxWidth: '600px', margin: '0 auto' }}>
+                        <p className="section-subtitle" style={{ color: 'var(--color-text-faded)', maxWidth: '600px', margin: '0 auto' }}>
                             Multiple ways to win and get rewarded for your trading skills
                         </p>
                     </div>
 
-                    <div className="leaderboard-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
-                        <div className="card-glass" style={{ padding: '2rem', textAlign: 'center' }}>
-                            <Trophy size={40} style={{ color: '#ffd700', margin: '0 auto 1rem' }} />
-                            <h3 style={{ fontSize: '1.3rem', fontWeight: 'bold', marginBottom: '1rem', color: 'var(--color-text-light)' }}>
+                    <div className="leaderboard-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem' }}>
+                        <div className="card-glass" style={{ padding: '1.5rem', textAlign: 'center' }}>
+                            <Trophy size={36} style={{ color: '#ffd700', margin: '0 auto 1rem' }} />
+                            <h3 style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '0.75rem', color: 'var(--color-text-light)' }}>
                                 🏆 Top Traders
                             </h3>
-                            <p style={{ color: 'var(--color-text-faded)', lineHeight: '1.6' }}>
+                            <p style={{ color: 'var(--color-text-faded)', lineHeight: '1.6', fontSize: '0.9rem' }}>
                                 Earn up to 4000% returns on your entry fee
                             </p>
                         </div>
 
-                        <div className="card-glass" style={{ padding: '2rem', textAlign: 'center' }}>
-                            <Award size={40} style={{ color: '#ec4899', margin: '0 auto 1rem' }} />
-                            <h3 style={{ fontSize: '1.3rem', fontWeight: 'bold', marginBottom: '1rem', color: 'var(--color-text-light)' }}>
+                        <div className="card-glass" style={{ padding: '1.5rem', textAlign: 'center' }}>
+                            <Award size={36} style={{ color: '#ec4899', margin: '0 auto 1rem' }} />
+                            <h3 style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '0.75rem', color: 'var(--color-text-light)' }}>
                                 🎁 Monthly Champions
                             </h3>
-                            <p style={{ color: 'var(--color-text-faded)', lineHeight: '1.6' }}>
+                            <p style={{ color: 'var(--color-text-faded)', lineHeight: '1.6', fontSize: '0.9rem' }}>
                                 Win exclusive rewards & gifts
                             </p>
                         </div>
 
-                        <div className="card-glass" style={{ padding: '2rem', textAlign: 'center' }}>
-                            <Star size={40} style={{ color: '#8b5cf6', margin: '0 auto 1rem' }} />
-                            <h3 style={{ fontSize: '1.3rem', fontWeight: 'bold', marginBottom: '1rem', color: 'var(--color-text-light)' }}>
+                        <div className="card-glass" style={{ padding: '1.5rem', textAlign: 'center' }}>
+                            <Star size={36} style={{ color: '#8b5cf6', margin: '0 auto 1rem' }} />
+                            <h3 style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '0.75rem', color: 'var(--color-text-light)' }}>
                                 💎 Consistent Performers
                             </h3>
-                            <p style={{ color: 'var(--color-text-faded)', lineHeight: '1.6' }}>
+                            <p style={{ color: 'var(--color-text-faded)', lineHeight: '1.6', fontSize: '0.9rem' }}>
                                 Unlock loyalty perks and special privileges
                             </p>
                         </div>
 
-                        <div className="card-glass" style={{ padding: '2rem', textAlign: 'center' }}>
-                            <Calendar size={40} style={{ color: '#22c55e', margin: '0 auto 1rem' }} />
-                            <h3 style={{ fontSize: '1.3rem', fontWeight: 'bold', marginBottom: '1rem', color: 'var(--color-text-light)' }}>
+                        <div className="card-glass" style={{ padding: '1.5rem', textAlign: 'center' }}>
+                            <Calendar size={36} style={{ color: '#22c55e', margin: '0 auto 1rem' }} />
+                            <h3 style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '0.75rem', color: 'var(--color-text-light)' }}>
                                 📅 Daily Winners
                             </h3>
-                            <p style={{ color: 'var(--color-text-faded)', lineHeight: '1.6' }}>
+                            <p style={{ color: 'var(--color-text-faded)', lineHeight: '1.6', fontSize: '0.9rem' }}>
                                 Every day brings new chances to compete & win
                             </p>
                         </div>
@@ -802,23 +1084,23 @@ const VTA5LandingPage = () => {
             {/* For Every Trader Section */}
             <section id="tournaments" className="w-full py-24">
                 <div className="max-w-screen-xl px-6">
-                    <div className="text-center" style={{ marginBottom: '4rem' }}>
-                        <h2 className="gradient-text" style={{ fontSize: '3.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+                    <div className="text-center" style={{ marginBottom: '3rem' }}>
+                        <h2 className="section-title gradient-text" style={{ fontWeight: 'bold' }}>
                             For Every Trader
                         </h2>
-                        <p style={{ fontSize: '1.3rem', color: 'var(--color-text-faded)', maxWidth: '600px', margin: '0 auto' }}>
+                        <p className="section-subtitle" style={{ color: 'var(--color-text-faded)', maxWidth: '600px', margin: '0 auto' }}>
                             Whether you're just starting or a seasoned pro, we have the perfect arena for you
                         </p>
                     </div>
 
-                    <div className="trader-types-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem' }}>
+                    <div className="trader-types-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
                         {traderTypes.map((type, index) => (
-                            <div key={index} className="card-glass" style={{ padding: '2rem', textAlign: 'center' }}>
+                            <div key={index} className="card-glass" style={{ padding: '1.5rem', textAlign: 'center' }}>
                                 <div style={{ marginBottom: '1rem' }}>{type.icon}</div>
-                                <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: 'var(--color-text-light)' }}>
+                                <h3 style={{ fontSize: '1.3rem', fontWeight: 'bold', marginBottom: '0.75rem', color: 'var(--color-text-light)' }}>
                                     {type.title}
                                 </h3>
-                                <p style={{ color: 'var(--color-text-faded)', lineHeight: '1.6' }}>
+                                <p style={{ color: 'var(--color-text-faded)', lineHeight: '1.6', fontSize: '0.9rem' }}>
                                     {type.description}
                                 </p>
                             </div>
@@ -830,25 +1112,25 @@ const VTA5LandingPage = () => {
             {/* Early Access Benefits Section */}
             <section className="w-full py-24">
                 <div className="max-w-screen-xl px-6">
-                    <div className="text-center" style={{ marginBottom: '4rem' }}>
-                        <h2 className="gradient-text" style={{ fontSize: '3.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+                    <div className="text-center" style={{ marginBottom: '3rem' }}>
+                        <h2 className="section-title gradient-text" style={{ fontWeight: 'bold' }}>
                             Early Access Benefits
                         </h2>
-                        <p style={{ fontSize: '1.3rem', color: 'var(--color-text-faded)', maxWidth: '600px', margin: '0 auto' }}>
+                        <p className="section-subtitle" style={{ color: 'var(--color-text-faded)', maxWidth: '600px', margin: '0 auto' }}>
                             Be among the first to experience the future of competitive trading
                         </p>
                     </div>
 
-                    <div className="early-access-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginBottom: '3rem' }}>
+                    <div className="early-access-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
                         {earlyAccessBenefits.map((benefit, index) => (
-                            <div key={index} className="card-glass" style={{ padding: '2rem', textAlign: 'center' }}>
+                            <div key={index} className="card-glass" style={{ padding: '1.5rem', textAlign: 'center' }}>
                                 <div style={{ color: 'var(--color-primary-end)', marginBottom: '1rem', display: 'flex', justifyContent: 'center' }}>
                                     {benefit.icon}
                                 </div>
-                                <h3 style={{ fontSize: '1.3rem', fontWeight: 'bold', marginBottom: '1rem', color: 'var(--color-text-light)' }}>
+                                <h3 style={{ fontSize: '1.2rem', fontWeight: 'bold', marginBottom: '0.75rem', color: 'var(--color-text-light)' }}>
                                     {benefit.title}
                                 </h3>
-                                <p style={{ color: 'var(--color-text-faded)', lineHeight: '1.6' }}>
+                                <p style={{ color: 'var(--color-text-faded)', lineHeight: '1.6', fontSize: '0.9rem' }}>
                                     {benefit.description}
                                 </p>
                             </div>
@@ -863,41 +1145,43 @@ const VTA5LandingPage = () => {
             {/* Platform Preview Section */}
             <section className="w-full py-24">
                 <div className="max-w-screen-xl px-6">
-                    <div className="preview-grid" style={{ display: 'grid', gap: '4rem', alignItems: 'center' }}>
+                    <div className="preview-grid" style={{ alignItems: 'center' }}>
                         <div>
-                            <h2 className="gradient-text" style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>
+                            <h2 className="section-title gradient-text" style={{ fontWeight: 'bold', marginBottom: '1rem' }}>
                                 Experience Real-Time Trading Like Never Before
                             </h2>
-                            <p style={{ fontSize: '1.2rem', color: 'var(--color-text-faded)', marginBottom: '2rem', lineHeight: '1.6' }}>
+                            <p style={{ fontSize: '1.1rem', color: 'var(--color-text-faded)', marginBottom: '1.5rem', lineHeight: '1.6' }}>
                                 Our integrated platform combines powerful analytics, real-time data, and seamless execution in one comprehensive trading environment.
                             </p>
                             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                                <li style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem', color: 'var(--color-text-light)' }}>
-                                    <CheckCircle size={20} style={{ color: '#22c55e', marginRight: '0.75rem' }} />
+                                <li style={{ display: 'flex', alignItems: 'center', marginBottom: '0.75rem', color: 'var(--color-text-light)', fontSize: '0.95rem' }}>
+                                    <CheckCircle size={18} style={{ color: '#22c55e', marginRight: '0.5rem' }} />
                                     Live market data from major exchanges
                                 </li>
-                                <li style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem', color: 'var(--color-text-light)' }}>
-                                    <CheckCircle size={20} style={{ color: '#22c55e', marginRight: '0.75rem' }} />
+                                <li style={{ display: 'flex', alignItems: 'center', marginBottom: '0.75rem', color: 'var(--color-text-light)', fontSize: '0.95rem' }}>
+                                    <CheckCircle size={18} style={{ color: '#22c55e', marginRight: '0.5rem' }} />
                                     Real-time leaderboard updates
                                 </li>
-                                <li style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem', color: 'var(--color-text-light)' }}>
-                                    <CheckCircle size={20} style={{ color: '#22c55e', marginRight: '0.75rem' }} />
+                                <li style={{ display: 'flex', alignItems: 'center', marginBottom: '0.75rem', color: 'var(--color-text-light)', fontSize: '0.95rem' }}>
+                                    <CheckCircle size={18} style={{ color: '#22c55e', marginRight: '0.5rem' }} />
                                     Advanced charting and analysis tools
                                 </li>
-                                <li style={{ display: 'flex', alignItems: 'center', marginBottom: '1rem', color: 'var(--color-text-light)' }}>
-                                    <CheckCircle size={20} style={{ color: '#22c55e', marginRight: '0.75rem' }} />
+                                <li style={{ display: 'flex', alignItems: 'center', marginBottom: '0.75rem', color: 'var(--color-text-light)', fontSize: '0.95rem' }}>
+                                    <CheckCircle size={18} style={{ color: '#22c55e', marginRight: '0.5rem' }} />
                                     Instant trade execution and results
                                 </li>
                             </ul>
                         </div>
-                        <div className="card-glass" style={{ padding: '2rem', textAlign: 'center' }}>
+                        <div className="card-glass" style={{ padding: '1.5rem', textAlign: 'center' }}>
                             <img
                                 src={platformPreviewImage}
                                 alt="VTA5 Platform Preview"
                                 className="preview-image"
                                 style={{
                                     borderRadius: '12px',
-                                    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)'
+                                    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
+                                    width: '100%',
+                                    height: 'auto'
                                 }}
                             />
                             <p style={{ marginTop: '1rem', color: 'var(--color-text-faded)', fontSize: '0.9rem' }}>
@@ -911,16 +1195,16 @@ const VTA5LandingPage = () => {
             {/* Closing Section */}
             <section className="w-full py-24">
                 <div className="max-w-screen-xl px-6 text-center">
-                    <h2 className="gradient-text" style={{ fontSize: '3.5rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>
+                    <h2 className="section-title gradient-text" style={{ fontWeight: 'bold', marginBottom: '1rem' }}>
                         Your Trading Skills Deserve an Arena.
                     </h2>
-                    <p style={{ fontSize: '1.3rem', color: 'var(--color-text-faded)', maxWidth: '800px', margin: '0 auto 3rem', lineHeight: '1.6' }}>
+                    <p style={{ fontSize: '1.1rem', color: 'var(--color-text-faded)', maxWidth: '800px', margin: '0 auto 2rem', lineHeight: '1.6' }}>
                         With daily tournaments, no deposits required, and an all-in-one trading platform, VTA5 turns trading into a thrilling competition. Whether you're practicing for free or aiming for daily cash rewards, this is where traders become champions.
                     </p>
 
                     <button
                         className="btn-primary"
-                        style={{ fontSize: '1.3rem', padding: '1.2rem 3rem' }}
+                        style={{ fontSize: '1.1rem', padding: '1rem 2.5rem' }}
                         onClick={() => setShowWaitlistModal(true)}
                     >
                         JOIN THE WAITLIST
@@ -936,43 +1220,43 @@ const VTA5LandingPage = () => {
                 width: '100%'
             }}>
                 <div className="max-w-screen-xl px-6">
-                    <div className="footer-content" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem' }}>
+                    <div className="footer-content" style={{ marginBottom: '2rem' }}>
                         <div>
                             <div className="flex items-center gap-4" style={{ marginBottom: '1rem' }}>
-                                <span className="gradient-text" style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
+                                <span className="gradient-text" style={{ fontSize: '1.3rem', fontWeight: 'bold' }}>
                                     Virtual Trading Arena
                                 </span>
                             </div>
-                            <p style={{ color: 'var(--color-text-faded)', maxWidth: '400px' }}>
+                            <p style={{ color: 'var(--color-text-faded)', maxWidth: '400px', fontSize: '0.9rem' }}>
                                 The future of competitive trading. Where skills meet rewards in daily tournaments.
                             </p>
                         </div>
-                        <div className="footer-links flex gap-8">
+                        <div className="footer-links flex">
                             <div>
-                                <h4 style={{ color: 'var(--color-text-light)', marginBottom: '1rem', fontSize: '1.1rem' }}>Platform</h4>
+                                <h4 style={{ color: 'var(--color-text-light)', marginBottom: '1rem', fontSize: '1rem' }}>Platform</h4>
                                 <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                                     <li style={{ marginBottom: '0.5rem' }}>
-                                        <a href="#" style={{ color: 'var(--color-text-faded)', textDecoration: 'none' }}>Tournaments</a>
+                                        <a href="#" style={{ color: 'var(--color-text-faded)', textDecoration: 'none', fontSize: '0.9rem' }}>Tournaments</a>
                                     </li>
                                     <li style={{ marginBottom: '0.5rem' }}>
-                                        <a href="#" style={{ color: 'var(--color-text-faded)', textDecoration: 'none' }}>Leaderboard</a>
+                                        <a href="#" style={{ color: 'var(--color-text-faded)', textDecoration: 'none', fontSize: '0.9rem' }}>Leaderboard</a>
                                     </li>
                                     <li style={{ marginBottom: '0.5rem' }}>
-                                        <a href="#" style={{ color: 'var(--color-text-faded)', textDecoration: 'none' }}>Web Trader</a>
+                                        <a href="#" style={{ color: 'var(--color-text-faded)', textDecoration: 'none', fontSize: '0.9rem' }}>Web Trader</a>
                                     </li>
                                 </ul>
                             </div>
                             <div>
-                                <h4 style={{ color: 'var(--color-text-light)', marginBottom: '1rem', fontSize: '1.1rem' }}>Support</h4>
+                                <h4 style={{ color: 'var(--color-text-light)', marginBottom: '1rem', fontSize: '1rem' }}>Support</h4>
                                 <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                                     <li style={{ marginBottom: '0.5rem' }}>
-                                        <a href="#" style={{ color: 'var(--color-text-faded)', textDecoration: 'none' }}>Help Center</a>
+                                        <a href="#" style={{ color: 'var(--color-text-faded)', textDecoration: 'none', fontSize: '0.9rem' }}>Help Center</a>
                                     </li>
                                     <li style={{ marginBottom: '0.5rem' }}>
-                                        <a href="#" style={{ color: 'var(--color-text-faded)', textDecoration: 'none' }}>Contact Us</a>
+                                        <a href="#" style={{ color: 'var(--color-text-faded)', textDecoration: 'none', fontSize: '0.9rem' }}>Contact Us</a>
                                     </li>
                                     <li style={{ marginBottom: '0.5rem' }}>
-                                        <a href="#" style={{ color: 'var(--color-text-faded)', textDecoration: 'none' }}>FAQ</a>
+                                        <a href="#" style={{ color: 'var(--color-text-faded)', textDecoration: 'none', fontSize: '0.9rem' }}>FAQ</a>
                                     </li>
                                 </ul>
                             </div>
@@ -980,18 +1264,15 @@ const VTA5LandingPage = () => {
                     </div>
 
                     <div className="footer-bottom" style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
                         paddingTop: '2rem',
                         borderTop: '1px solid rgba(139, 92, 246, 0.2)'
                     }}>
-                        <p style={{ color: 'var(--color-text-faded)', margin: 0 }}>
+                        <p style={{ color: 'var(--color-text-faded)', margin: 0, fontSize: '0.9rem' }}>
                             © 2025 Virtual Trading Arena. All rights reserved.
                         </p>
                         <div className="flex gap-4">
-                            <a href="#" style={{ color: 'var(--color-text-faded)', textDecoration: 'none' }}>Privacy Policy</a>
-                            <a href="#" style={{ color: 'var(--color-text-faded)', textDecoration: 'none' }}>Terms of Service</a>
+                            <a href="#" style={{ color: 'var(--color-text-faded)', textDecoration: 'none', fontSize: '0.9rem' }}>Privacy Policy</a>
+                            <a href="#" style={{ color: 'var(--color-text-faded)', textDecoration: 'none', fontSize: '0.9rem' }}>Terms of Service</a>
                         </div>
                     </div>
                 </div>
@@ -1023,7 +1304,7 @@ const VTA5LandingPage = () => {
                                 <h3 style={{ color: 'var(--color-text-light)', marginBottom: '1rem', fontSize: '1.5rem' }}>
                                     Join the VTA5 Waitlist
                                 </h3>
-                                <p style={{ color: 'var(--color-text-faded)', marginBottom: '2rem' }}>
+                                <p style={{ color: 'var(--color-text-faded)', marginBottom: '1.5rem' }}>
                                     Be among the first to experience the future of competitive trading.
                                 </p>
 
