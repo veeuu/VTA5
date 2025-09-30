@@ -18,6 +18,7 @@ const VTA5LandingPage = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
 
   const handleNotifyMe = () => {
     console.log('Email registered:', email);
@@ -25,8 +26,27 @@ const VTA5LandingPage = () => {
     setEmail('');
   };
 
+  const validateForm = () => {
+    const errors = {};
+    if (!formData.firstName.trim()) errors.firstName = 'First name is required';
+    if (!formData.lastName.trim()) errors.lastName = 'Last name is required';
+    if (!formData.email.trim()) {
+      errors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.email = 'Email is invalid';
+    }
+    if (!formData.tradingExperience) errors.tradingExperience = 'Please select your experience level';
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
   const handleWaitlistSubmit = async (e) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+    
     setIsSubmitting(true);
 
     let sheetsSuccess = false;
@@ -76,6 +96,7 @@ const VTA5LandingPage = () => {
           tradingExperience: '',
           interests: []
         });
+        setFormErrors({});
       }, 3000);
     } else {
       setIsSubmitting(false);
@@ -85,6 +106,10 @@ const VTA5LandingPage = () => {
 
   const handleInputChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+    // Clear error when user starts typing
+    if (formErrors[field]) {
+      setFormErrors(prev => ({ ...prev, [field]: '' }));
+    }
   };
 
   const handleInterestToggle = (interest) => {
@@ -130,6 +155,14 @@ const VTA5LandingPage = () => {
     { icon: <Award size={24} />, title: "Founding Trader", description: "Become a Founding Trader with lifetime recognition." }
   ];
 
+  // Spinner component for loading state
+  const Spinner = () => (
+    <svg style={{ animation: 'spin 1s linear infinite', width: '20px', height: '20px', marginLeft: '10px' }} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle style={{ opacity: '0.25' }} cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+      <path style={{ opacity: '0.75' }} fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+    </svg>
+  );
+
   useEffect(() => {
     const style = document.createElement('style');
     style.textContent = `
@@ -148,6 +181,7 @@ const VTA5LandingPage = () => {
         --color-text-light: #e0e7ff;
         --color-text-faded: #a78bfa;
         --color-border-subtle: rgba(100, 116, 139, 0.3);
+        --color-error: #ef4444;
       }
 
       html, body {
@@ -177,7 +211,7 @@ const VTA5LandingPage = () => {
         margin: 0 auto;
         overflow-x: hidden;
         display: flex;
-        padding-bottom: 20px;
+        padding-bottom: 0px;
         flex-direction: column;
         align-items: center;
         position: relative;
@@ -215,6 +249,11 @@ const VTA5LandingPage = () => {
         100% { box-shadow: 0 0 5px var(--color-secondary); }
       }
 
+      @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+
       .gradient-text {
         background: linear-gradient(to right, var(--color-gradient-text-start), var(--color-gradient-text-mid), var(--color-gradient-text-end));
         -webkit-background-clip: text;
@@ -234,6 +273,9 @@ const VTA5LandingPage = () => {
         position: relative;
         overflow: hidden;
         z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .btn-primary::before {
@@ -325,104 +367,164 @@ const VTA5LandingPage = () => {
       .py-24 { padding-top: 6rem; padding-bottom: 6rem; }
       .w-full { width: 100%; }
 
-      @media (max-width: 600px) {
+      /* Default (Mobile First) Styles */
+      .hero-title { 
+        font-size: 2.5rem; 
+        line-height: 1.1; 
+        margin-bottom: 1rem;
+      }
+      .hero-subtitle { 
+        font-size: 1.25rem; 
+        margin-bottom: 1.5rem;
+      }
+      .catchy-taglines-grid { 
+        grid-template-columns: 1fr; 
+        gap: 0.75rem;
+      }
+      .features-grid, 
+      .how-it-works-grid,
+      .trader-types-grid,
+      .rewards-grid,
+      .benefits-grid { 
+        grid-template-columns: 1fr; 
+        gap: 2rem;
+      }
+      .preview-grid { 
+        grid-template-columns: 1fr; 
+        gap: 2rem;
+      }
+      .advantage-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .advantage-pills {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+      }
+      section { 
+        padding: 3rem 0 !important; 
+      }
+      .VTA5-container {
+        padding-bottom: 1rem;
+      }
+      .form-names-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0 !important;
+      }
+      .form-group {
+        margin-bottom: 1rem;
+      }
+      .interest-grid { 
+        grid-template-columns: repeat(2, 1fr) !important; 
+      }
+      footer { 
+        padding: 2rem 0 0.5rem; 
+      }
+      .footer-content { 
+        flex-direction: column; 
+        text-align: center; 
+        gap: 2rem;
+        align-items: center;
+      }
+      .footer-links { 
+        flex-direction: column; 
+        gap: 2rem;
+        text-align: center;
+      }
+      .footer-links div {
+        text-align: center;
+      }
+      .footer-bottom { 
+        flex-direction: column; 
+        gap: 0.75rem; 
+        text-align: center;
+      }
+
+
+      /* Tablet Styles (min-width: 640px) */
+      @media (min-width: 640px) {
         .hero-title { 
-          font-size: 2.5rem !important; 
-          line-height: 1.1; 
-          margin-bottom: 1rem;
+          font-size: 3.5rem; 
         }
         .hero-subtitle { 
-          font-size: 1.5rem !important; 
-          margin-bottom: 1.5rem;
+          font-size: 1.75rem; 
         }
         .catchy-taglines-grid { 
-          grid-template-columns: 1fr !important; 
-          gap: 0.75rem;
-        }
-        .features-grid, 
-        .preview-grid, 
-        .metrics-grid { 
-          grid-template-columns: 1fr !important; 
-        }
-        .card-glass { 
-          padding: 1.5rem !important; 
-        }
-        .btn-primary, 
-        .btn-secondary { 
-          padding: 0.65rem 1.5rem; 
-          font-size: 0.9rem;
-        }
-        .modal-content { 
-          padding: 1.5rem; 
-          width: 95%;
-        }
-        .form-group { 
-          margin-bottom: 1rem; 
-        }
-        .interest-grid { 
-          grid-template-columns: 1fr !important; 
-        }
-        footer { 
-          padding: 2rem 0 0.5rem; 
-        }
-        .footer-content { 
-          flex-direction: column; 
-          text-align: center; 
-          gap: 1.5rem;
-        }
-        .footer-links { 
-          flex-direction: column; 
-          gap: 1.5rem;
-        }
-        .footer-bottom { 
-          flex-direction: column; 
-          gap: 0.75rem; 
-          text-align: center;
-        }
-        .nav-links { 
-          display: none; 
-        }
-        .header-logo-text { 
-          display: none; 
-        }
-        .header-signin-btn { 
-          display: none; 
-        }
-        section { 
-          padding: 3rem 0 !important; 
-        }
-        .max-w-screen-xl { 
-          padding: 0 1rem; 
-        }
-        .cta-buttons { 
-          flex-direction: column; 
+          grid-template-columns: repeat(2, 1fr); 
           gap: 1rem;
         }
-        .VTA5-container {
-          padding-bottom: 1rem;
+        .features-grid,
+        .rewards-grid { 
+          grid-template-columns: repeat(2, 1fr); 
         }
-        .background-container {
-          height: 100vh;
+        .how-it-works-grid,
+        .trader-types-grid,
+        .benefits-grid {
+          grid-template-columns: repeat(2, 1fr);
         }
-        .background-container canvas {
-          height: 100vh;
+        .advantage-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .advantage-pills {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .form-names-grid {
+          grid-template-columns: 1fr 1fr !important;
+        }
+        .footer-content { 
+          flex-direction: row; 
+          text-align: left; 
+          align-items: flex-start;
+        }
+        .footer-links { 
+          flex-direction: row; 
+          text-align: left; 
+        }
+        .footer-links div {
+          text-align: left;
+        }
+        .footer-bottom { 
+          flex-direction: row;
+        }
+        .preview-grid {
+          grid-template-columns: 1fr;
         }
       }
 
-      @media (min-width: 600px) {
-        .email-form { flex-direction: row; }
-        .features-grid { grid-template-columns: repeat(2, 1fr); }
-        .metrics-grid { grid-template-columns: repeat(2, 1fr); }
-        .header-logo-text { display: block; }
-        .header-signin-btn { display: block; }
+      /* Large Tablet / Small Desktop Styles (min-width: 1024px) */
+      @media (min-width: 1024px) {
+        .hero-title { 
+          font-size: 4.5rem; 
+        }
+        .hero-subtitle { 
+          font-size: 2rem; 
+        }
+        .catchy-taglines-grid { 
+          grid-template-columns: repeat(4, 1fr); 
+        }
+        .features-grid { 
+          grid-template-columns: repeat(3, 1fr); 
+        }
+        .how-it-works-grid,
+        .trader-types-grid,
+        .benefits-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .rewards-grid { 
+          grid-template-columns: repeat(4, 1fr); 
+        }
+        .preview-grid { 
+          grid-template-columns: 1fr 1fr; 
+        }
+        .advantage-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .advantage-pills {
+          grid-template-columns: repeat(3, 1fr);
+        }
       }
 
-      @media (min-width: 600px) {
-        .features-grid { grid-template-columns: repeat(3, 1fr); }
-        .preview-grid { grid-template-columns: 1fr 1fr; }
-        .metrics-grid { grid-template-columns: repeat(4, 1fr); }
-      }
-
+      /* General Utility Classes */
       .modal-overlay {
         position: fixed;
         top: 0;
@@ -453,31 +555,129 @@ const VTA5LandingPage = () => {
         box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
       }
 
-      .form-group { margin-bottom: 1.5rem; }
-      .form-label { display: block; margin-bottom: 0.5rem; color: var(--color-text-light); font-weight: 600; font-size: 0.875rem; }
-      .form-input { width: 100%; padding: 0.75rem 1rem; background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(15px); border: 1px solid var(--color-border-subtle); border-radius: 8px; color: var(--color-text-light); outline: none; transition: border-color 0.3s ease, box-shadow 0.3s ease; font-size: 1rem; }
+      .form-group { 
+        margin-bottom: 1.5rem; 
+        position: relative;
+      }
+      .form-label { 
+        display: block; 
+        margin-bottom: 0.5rem; 
+        color: var(--color-text-light); 
+        font-weight: 600; 
+        font-size: 0.875rem; 
+      }
+      .form-input { 
+        width: 100%; 
+        padding: 0.75rem 1rem; 
+        background: rgba(255, 255, 255, 0.08); 
+        backdrop-filter: blur(15px); 
+        border: 1px solid var(--color-border-subtle); 
+        border-radius: 8px; 
+        color: var(--color-text-light); 
+        outline: none; 
+        transition: border-color 0.3s ease, box-shadow 0.3s ease; 
+        font-size: 1rem; 
+      }
       .form-input::placeholder { color: var(--color-text-faded); }
-      .form-input:focus { border-color: var(--color-primary-end); box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3); }
-      .form-select { width: 100%; padding: 0.75rem 1rem; background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(15px); border: 1px solid var(--color-border-subtle); border-radius: 8px; color: var(--color-text-light); outline: none; transition: border-color 0.3s ease, box-shadow 0.3s ease; font-size: 1rem; }
-      .form-select:focus { border-color: var(--color-primary-end); box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3); }
-      .interest-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.75rem; margin-top: 0.5rem; }
-      .interest-checkbox { display: flex; align-items: center; padding: 0.5rem 0.75rem; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--color-border-subtle); border-radius: 8px; cursor: pointer; transition: all 0.3s ease; font-size: 0.875rem; }
-      .interest-checkbox.selected { background: var(--color-primary-end); border-color: var(--color-primary-end); color: white; }
-      .interest-checkbox:hover { background: rgba(139, 92, 246, 0.2); border-color: var(--color-primary-end); }
-      .close-button { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: var(--color-text-faded); cursor: pointer; padding: 0.5rem; border-radius: 50%; transition: all 0.3s ease; }
-      .close-button:hover { background: rgba(255, 255, 255, 0.1); color: var(--color-text-light); }
-      .btn-primary:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
-      .btn-primary:disabled:hover { transform: none; box-shadow: none; }
+      .form-input:focus { 
+        border-color: var(--color-primary-end); 
+        box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3); 
+      }
+      .form-input.error {
+        border-color: var(--color-error);
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3);
+      }
+      .error-message {
+        color: var(--color-error);
+        font-size: 0.75rem;
+        margin-top: 0.25rem;
+        position: absolute;
+        bottom: -1rem;
+        left: 0;
+      }
+      .form-select { 
+        width: 100%; 
+        padding: 0.75rem 1rem; 
+        background: rgba(255, 255, 255, 0.08); 
+        backdrop-filter: blur(15px); 
+        border: 1px solid var(--color-border-subtle); 
+        border-radius: 8px; 
+        color: var(--color-text-light); 
+        outline: none; 
+        transition: border-color 0.3s ease, box-shadow 0.3s ease; 
+        font-size: 1rem; 
+      }
+      .form-select:focus { 
+        border-color: var(--color-primary-end); 
+        box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.3); 
+      }
+      .form-select.error {
+        border-color: var(--color-error);
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3);
+      }
+      .interest-grid { 
+        display: grid; 
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+        gap: 0.75rem; 
+        margin-top: 0.5rem; 
+      }
+      .interest-checkbox { 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        padding: 0.75rem; 
+        background: rgba(255, 255, 255, 0.05); 
+        border: 1px solid var(--color-border-subtle); 
+        border-radius: 8px; 
+        cursor: pointer; 
+        transition: all 0.3s ease; 
+        font-size: 0.875rem; 
+        text-align: center; 
+      }
+      .interest-checkbox.selected { 
+        background: var(--color-primary-end); 
+        border-color: var(--color-primary-end); 
+        color: white; 
+      }
+      .interest-checkbox:hover { 
+        background: rgba(139, 92, 246, 0.2); 
+        border-color: var(--color-primary-end); 
+      }
+      .close-button { 
+        position: absolute; 
+        top: 1rem; 
+        right: 1rem; 
+        background: none; 
+        border: none; 
+        color: var(--color-text-faded); 
+        cursor: pointer; 
+        padding: 0.5rem; 
+        border-radius: 50%; 
+        transition: all 0.3s ease; 
+      }
+      .close-button:hover { 
+        background: rgba(255, 255, 255, 0.1); 
+        color: var(--color-text-light); 
+      }
+      .btn-primary:disabled { 
+        opacity: 0.7; 
+        cursor: not-allowed; 
+        transform: none; 
+        background: linear-gradient(to right, #9ca3af, #6b7280);
+      }
+      .btn-primary:disabled:hover { 
+        transform: none; 
+        box-shadow: none; 
+      }
       
       .catchy-taglines-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 1rem;
         margin: 3rem 0;
         max-width: 1000px;
         margin-left: auto;
         margin-right: auto;
-        justify-items: center;
+        justify-items: stretch;
       }
       
       .tagline-container {
@@ -506,6 +706,23 @@ const VTA5LandingPage = () => {
         max-width: 100%;
         margin-left: auto;
         margin-right: auto;
+      }
+
+      /* Mobile adjustments for modal and form */
+      @media (max-width: 640px) {
+        .modal-content {
+          padding: 1.5rem;
+        }
+        .form-input, .form-select {
+          padding: 1rem;
+        }
+        .btn-primary {
+          padding: 1rem;
+          font-size: 1rem;
+        }
+        .interest-checkbox {
+          padding: 0.75rem;
+        }
       }
     `;
     document.head.appendChild(style);
@@ -538,7 +755,7 @@ const VTA5LandingPage = () => {
               </span>
             </div>
             <button
-              className="btn-secondary" 
+              className="btn-secondary header-signin-btn" 
               onClick={() => setShowWaitlistModal(true)} 
               style={{ padding: '0.5rem 1.5rem', fontSize: '1rem' }} 
             >
@@ -552,25 +769,25 @@ const VTA5LandingPage = () => {
       <section className="w-full py-24" style={{ marginTop: '80px', minHeight: 'calc(100vh - 80px)', display: 'flex', alignItems: 'center' }}>
         <div className="max-w-screen-xl px-6 text-center">
           <div style={{ animation: 'fadeIn 1s ease-out' }}>
-            <h1 className="hero-title gradient-text" style={{ fontSize: '4.5rem', fontWeight: 'bold', marginBottom: '1.5rem', lineHeight: '1.1' }}>
+            <h1 className="hero-title gradient-text" style={{ fontWeight: 'bold' }}>
               ⚡ Trade. Compete. Win Big.
             </h1>
-            <p className="hero-subtitle" style={{ fontSize: '2rem', color: 'var(--color-text-light)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
+            <p className="hero-subtitle" style={{ color: 'var(--color-text-light)', marginBottom: '2rem', maxWidth: '800px', margin: '0 auto 2rem' }}>
               Step into the Virtual Trading Arena – the all-in-one platform with dashboard, live leaderboard, and web trader.
             </p>
-            <p style={{ fontSize: '1.3rem', color: 'var(--color-text-faded)', marginBottom: '2rem', maxWidth: '900px', margin: '0 auto 2rem' }}>
+            <p style={{ fontSize: '1.1rem', color: 'var(--color-text-faded)', marginBottom: '2rem', maxWidth: '900px', margin: '0 auto 2rem' }}>
               Join daily tournaments starting from $5 and win up to 4000% rewards + monthly prizes or practice in free contests.
             </p>
             
             {/* Key Note */}
             <div className="card-glass" style={{ padding: '1.5rem', margin: '2rem auto', maxWidth: '800px', background: 'rgba(236, 72, 153, 0.1)', border: '1px solid rgba(236, 72, 153, 0.3)' }}>
-              <p style={{ fontSize: '1.1rem', color: 'var(--color-text-light)', margin: 0 }}>
+              <p style={{ fontSize: '1rem', color: 'var(--color-text-light)', margin: 0 }}>
                 💡 <strong>Unlike traditional brokerage firms</strong> where you must deposit trading capital, at VTA5 your entry fee gives you full access to the tournament – no extra deposits required.
               </p>
             </div>
 
             {/* Catchy Taglines aligned in one line with transparent containers */}
-            <div className="catchy-taglines-grid" style={{ gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem' }}>
+            <div className="catchy-taglines-grid">
               {catchyTaglines.map((tagline, index) => (
                 <div key={index} className="card-glass tagline-container">
                   <p style={{ margin: 0, fontWeight: '600', color: 'var(--color-text-light)' }}>{tagline}</p>
@@ -585,21 +802,21 @@ const VTA5LandingPage = () => {
       <section id="features" className="w-full py-24">
         <div className="max-w-screen-xl px-6">
           <div className="text-center" style={{ marginBottom: '4rem' }}>
-            <h2 className="gradient-text" style={{ fontSize: '3.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+            <h2 className="gradient-text" style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
               Why VTA5?
             </h2>
-            <p style={{ fontSize: '1.3rem', color: 'var(--color-text-faded)', maxWidth: '600px', margin: '0 auto' }}>
+            <p style={{ fontSize: '1.1rem', color: 'var(--color-text-faded)', maxWidth: '600px', margin: '0 auto' }}>
               Fast-paced highlights that set us apart from traditional trading platforms
             </p>
           </div>
           
-          <div className="features-grid" style={{ display: 'grid', gap: '2rem', marginBottom: '4rem' }}>
+          <div className="features-grid" style={{ display: 'grid', marginBottom: '4rem' }}>
             {vtaFeatures.map((feature, index) => (
               <div key={index} className="card-glass" style={{ padding: '2rem', textAlign: 'center' }}>
                 <div style={{ color: 'var(--color-primary-end)', marginBottom: '1rem', display: 'flex', justifyContent: 'center' }}>
                   {feature.icon}
                 </div>
-                <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: 'var(--color-text-light)' }}>
+                <h3 style={{ fontSize: '1.3rem', fontWeight: 'bold', marginBottom: '1rem', color: 'var(--color-text-light)' }}>
                   {feature.title}
                 </h3>
                 <p style={{ color: 'var(--color-text-faded)', lineHeight: '1.6' }}>
@@ -615,15 +832,15 @@ const VTA5LandingPage = () => {
       <section id="how-it-works" className="w-full py-24">
         <div className="max-w-screen-xl px-6">
           <div className="text-center" style={{ marginBottom: '4rem' }}>
-            <h2 className="gradient-text" style={{ fontSize: '3.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+            <h2 className="gradient-text" style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
               How It Works
             </h2>
-            <p style={{ fontSize: '1.3rem', color: 'var(--color-text-faded)', maxWidth: '600px', margin: '0 auto' }}>
+            <p style={{ fontSize: '1.1rem', color: 'var(--color-text-faded)', maxWidth: '600px', margin: '0 auto' }}>
               Three simple steps to start competing and winning
             </p>
           </div>
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+          <div className="how-it-works-grid" style={{ display: 'grid' }}>
             {howItWorksSteps.map((step, index) => (
               <div key={index} className="card-glass" style={{ padding: '2rem', textAlign: 'center', position: 'relative' }}>
                 <div style={{ 
@@ -641,7 +858,7 @@ const VTA5LandingPage = () => {
                 }}>
                   {step.step}
                 </div>
-                <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: 'var(--color-text-light)' }}>
+                <h3 style={{ fontSize: '1.3rem', fontWeight: 'bold', marginBottom: '1rem', color: 'var(--color-text-light)' }}>
                   {step.title}
                 </h3>
                 <p style={{ color: 'var(--color-text-faded)', lineHeight: '1.6' }}>
@@ -657,17 +874,17 @@ const VTA5LandingPage = () => {
       <section className="w-full py-24">
         <div className="max-w-screen-xl px-6">
           <div className="text-center" style={{ marginBottom: '4rem' }}>
-            <h2 className="gradient-text" style={{ fontSize: '3.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+            <h2 className="gradient-text" style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
               The Arena Advantage
             </h2>
-            <p style={{ fontSize: '1.3rem', color: 'var(--color-text-faded)', maxWidth: '600px', margin: '0 auto 2rem' }}>
+            <p style={{ fontSize: '1.1rem', color: 'var(--color-text-faded)', maxWidth: '600px', margin: '0 auto 2rem' }}>
               Unlike traditional brokerage firms
             </p>
           </div>
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '2rem', marginBottom: '3rem' }}>
+          <div className="advantage-grid" style={{ display: 'grid', marginBottom: '3rem' }}>
             <div className="card-glass" style={{ padding: '2rem', border: '1px solid rgba(239, 68, 68, 0.3)', background: 'rgba(239, 68, 68, 0.05)' }}>
-              <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: '#ef4444' }}>
+              <h3 style={{ fontSize: '1.3rem', fontWeight: 'bold', marginBottom: '1rem', color: '#ef4444' }}>
                 ❌ Traditional Brokers
               </h3>
               <p style={{ color: 'var(--color-text-faded)', lineHeight: '1.6' }}>
@@ -675,7 +892,7 @@ const VTA5LandingPage = () => {
               </p>
             </div>
             <div className="card-glass" style={{ padding: '2rem', border: '1px solid rgba(34, 197, 94, 0.3)', background: 'rgba(34, 197, 94, 0.05)' }}>
-              <h3 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1rem', color: '#22c55e' }}>
+              <h3 style={{ fontSize: '1.3rem', fontWeight: 'bold', marginBottom: '1rem', color: '#22c55e' }}>
                 ✅ VTA5 Arena
               </h3>
               <p style={{ color: 'var(--color-text-faded)', lineHeight: '1.6' }}>
@@ -684,7 +901,7 @@ const VTA5LandingPage = () => {
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', maxWidth: '800px', margin: '0 auto' }}>
+          <div className="advantage-pills" style={{ display: 'grid', maxWidth: '800px', margin: '0 auto' }}>
             <div className="card-glass" style={{ padding: '1.5rem', textAlign: 'center' }}>
               <Target size={32} style={{ color: 'var(--color-primary-end)', margin: '0 auto 1rem' }} />
               <p style={{ margin: 0, fontWeight: '600', color: 'var(--color-text-light)' }}>🎯 Every move counts.</p>
@@ -705,15 +922,15 @@ const VTA5LandingPage = () => {
       <section className="w-full py-24">
         <div className="max-w-screen-xl px-6">
           <div className="text-center" style={{ marginBottom: '4rem' }}>
-            <h2 className="gradient-text" style={{ fontSize: '3.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+            <h2 className="gradient-text" style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
               Leaderboard & Rewards
             </h2>
-            <p style={{ fontSize: '1.3rem', color: 'var(--color-text-faded)', maxWidth: '600px', margin: '0 auto' }}>
+            <p style={{ fontSize: '1.1rem', color: 'var(--color-text-faded)', maxWidth: '600px', margin: '0 auto' }}>
               Multiple ways to win and get rewarded for your trading skills
             </p>
           </div>
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
+          <div className="rewards-grid" style={{ display: 'grid' }}>
             <div className="card-glass" style={{ padding: '2rem', textAlign: 'center' }}>
               <Trophy size={40} style={{ color: '#ffd700', margin: '0 auto 1rem' }} />
               <h3 style={{ fontSize: '1.3rem', fontWeight: 'bold', marginBottom: '1rem', color: 'var(--color-text-light)' }}>
@@ -761,15 +978,15 @@ const VTA5LandingPage = () => {
       <section id="tournaments" className="w-full py-24">
         <div className="max-w-screen-xl px-6">
           <div className="text-center" style={{ marginBottom: '4rem' }}>
-            <h2 className="gradient-text" style={{ fontSize: '3.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+            <h2 className="gradient-text" style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
               For Every Trader
             </h2>
-            <p style={{ fontSize: '1.3rem', color: 'var(--color-text-faded)', maxWidth: '600px', margin: '0 auto' }}>
+            <p style={{ fontSize: '1.1rem', color: 'var(--color-text-faded)', maxWidth: '600px', margin: '0 auto' }}>
               Whether you're just starting or a seasoned pro, we have the perfect arena for you
             </p>
-          </div>
+            </div>
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem' }}>
+          <div className="trader-types-grid" style={{ display: 'grid' }}>
             {traderTypes.map((type, index) => (
               <div key={index} className="card-glass" style={{ padding: '2rem', textAlign: 'center' }}>
                 <div style={{ marginBottom: '1rem' }}>{type.icon}</div>
@@ -789,15 +1006,15 @@ const VTA5LandingPage = () => {
       <section className="w-full py-24">
         <div className="max-w-screen-xl px-6">
           <div className="text-center" style={{ marginBottom: '4rem' }}>
-            <h2 className="gradient-text" style={{ fontSize: '3.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+            <h2 className="gradient-text" style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1rem' }}>
               Early Access Benefits
             </h2>
-            <p style={{ fontSize: '1.3rem', color: 'var(--color-text-faded)', maxWidth: '600px', margin: '0 auto' }}>
+            <p style={{ fontSize: '1.1rem', color: 'var(--color-text-faded)', maxWidth: '600px', margin: '0 auto' }}>
               Be among the first to experience the future of competitive trading
             </p>
           </div>
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginBottom: '3rem' }}>
+          <div className="benefits-grid" style={{ display: 'grid', gap: '2rem', marginBottom: '3rem' }}>
             {earlyAccessBenefits.map((benefit, index) => (
               <div key={index} className="card-glass" style={{ padding: '2rem', textAlign: 'center' }}>
                 <div style={{ color: 'var(--color-primary-end)', marginBottom: '1rem', display: 'flex', justifyContent: 'center' }}>
@@ -823,10 +1040,10 @@ const VTA5LandingPage = () => {
         <div className="max-w-screen-xl px-6">
           <div className="preview-grid" style={{ display: 'grid', gap: '4rem', alignItems: 'center' }}>
             <div>
-              <h2 className="gradient-text" style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>
+              <h2 className="gradient-text" style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>
                 Experience Real-Time Trading Like Never Before
               </h2>
-              <p style={{ fontSize: '1.2rem', color: 'var(--color-text-faded)', marginBottom: '2rem', lineHeight: '1.6' }}>
+              <p style={{ fontSize: '1.1rem', color: 'var(--color-text-faded)', marginBottom: '2rem', lineHeight: '1.6' }}>
                 Our integrated platform combines powerful analytics, real-time data, and seamless execution in one comprehensive trading environment.
               </p>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
@@ -848,7 +1065,7 @@ const VTA5LandingPage = () => {
                 </li>
               </ul>
             </div>
-            <div className="card-glass" style={{ padding: '2rem', textAlign: 'center' }}>
+            <div className="card-glass" style={{ padding: '1.5rem', textAlign: 'center' }}>
               <img 
                 src={platformPreviewImage} 
                 alt="VTA5 Platform Preview" 
@@ -870,16 +1087,16 @@ const VTA5LandingPage = () => {
       {/* Closing Section */}
       <section className="w-full py-24">
         <div className="max-w-screen-xl px-6 text-center">
-          <h2 className="gradient-text" style={{ fontSize: '3.5rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>
+          <h2 className="gradient-text" style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>
             Your Trading Skills Deserve an Arena.
           </h2>
-          <p style={{ fontSize: '1.3rem', color: 'var(--color-text-faded)', maxWidth: '800px', margin: '0 auto 3rem', lineHeight: '1.6' }}>
+          <p style={{ fontSize: '1.1rem', color: 'var(--color-text-faded)', maxWidth: '800px', margin: '0 auto 3rem', lineHeight: '1.6' }}>
             With daily tournaments, no deposits required, and an all-in-one trading platform, VTA5 turns trading into a thrilling competition. Whether you're practicing for free or aiming for daily cash rewards, this is where traders become champions.
           </p>
           
           <button 
             className="btn-primary" 
-            style={{ fontSize: '1.3rem', padding: '1.2rem 3rem' }}
+            style={{ fontSize: '1.1rem', padding: '1rem 2.5rem' }}
             onClick={() => setShowWaitlistModal(true)}
           >
             JOIN THE WAITLIST
@@ -984,26 +1201,28 @@ const VTA5LandingPage = () => {
                 </p>
                 
                 <form onSubmit={handleWaitlistSubmit}>
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
+                  <div className="form-names-grid" style={{ display: 'grid', gap: '1rem', marginBottom: '1.5rem' }}>
                     <div className="form-group">
                       <label className="form-label">First Name</label>
                       <input
                         type="text"
-                        className="form-input"
+                        className={`form-input ${formErrors.firstName ? 'error' : ''}`}
                         value={formData.firstName}
                         onChange={(e) => handleInputChange('firstName', e.target.value)}
                         required
                       />
+                      {formErrors.firstName && <div className="error-message">{formErrors.firstName}</div>}
                     </div>
                     <div className="form-group">
                       <label className="form-label">Last Name</label>
                       <input
                         type="text"
-                        className="form-input"
+                        className={`form-input ${formErrors.lastName ? 'error' : ''}`}
                         value={formData.lastName}
                         onChange={(e) => handleInputChange('lastName', e.target.value)}
                         required
                       />
+                      {formErrors.lastName && <div className="error-message">{formErrors.lastName}</div>}
                     </div>
                   </div>
                   
@@ -1011,15 +1230,19 @@ const VTA5LandingPage = () => {
                     <label className="form-label">Email Address</label>
                     <input
                       type="email"
-                      className="form-input"
+                      className={`form-input ${formErrors.email ? 'error' : ''}`}
                       value={formData.email}
                       onChange={(e) => handleInputChange('email', e.target.value)}
                       required
                     />
-                  </div>  
+                    {formErrors.email && <div className="error-message">{formErrors.email}</div>}
+                  </div>   
                   
                   <div className="form-group">
-                    <label className="form-label">Phone Number ( Optional ) </label>
+                    <label className="form-label">
+                      Phone Number 
+                      <span style={{ fontSize: '0.8rem', color: 'var(--color-text-faded)', marginLeft: '0.5rem' }}>(Optional)</span>
+                    </label>
                     <input
                       type="tel"
                       className="form-input"
@@ -1031,7 +1254,7 @@ const VTA5LandingPage = () => {
                   <div className="form-group">
                     <label className="form-label">Trading Experience</label>
                     <select
-                      className="form-select"
+                      className={`form-select ${formErrors.tradingExperience ? 'error' : ''}`}
                       value={formData.tradingExperience}
                       onChange={(e) => handleInputChange('tradingExperience', e.target.value)}
                       required
@@ -1042,6 +1265,7 @@ const VTA5LandingPage = () => {
                       <option value="advanced">Advanced (3-5 years)</option>
                       <option value="expert">Expert (5+ years)</option>
                     </select>
+                    {formErrors.tradingExperience && <div className="error-message">{formErrors.tradingExperience}</div>}
                   </div>
                   
                   <div className="form-group">
@@ -1065,7 +1289,12 @@ const VTA5LandingPage = () => {
                     disabled={isSubmitting}
                     style={{ width: '100%', marginTop: '1rem' }}
                   >
-                    {isSubmitting ? 'Joining Waitlist...' : 'Join Waitlist'}
+                    {isSubmitting ? (
+                      <>
+                        <span>Joining Waitlist</span>
+                        <Spinner />
+                      </>
+                    ) : 'Join Waitlist'}
                   </button>
                 </form>
               </>
