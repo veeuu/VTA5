@@ -122,7 +122,7 @@ const VTA5LandingPage = () => {
   };
 
   const vtaFeatures = [
-    { icon: <DollarSign size={32} />, title: "Low Entry, High Rewards", description: "Start at just $5, earn up to 200%. No deposits required - just your entry fee." },
+    { icon: <DollarSign size={32} />, title: "Low Entry, High Rewards", description: "Start at just $5, earn up to 4000%. No deposits required - just your entry fee." },
     { icon: <Play size={32} />, title: "Free Practice Tournaments", description: "Sharpen your skills with no risk in our free practice arenas." },
     { icon: <BarChart3 size={32} />, title: "Live Transparency", description: "Real-time leaderboard updates, no hidden scores or manipulation." },
     { icon: <Globe size={32} />, title: "Global Competition", description: "Face traders worldwide with same data and fair play guaranteed." },
@@ -133,7 +133,7 @@ const VTA5LandingPage = () => {
   const howItWorksSteps = [
     { step: "1", title: "Pick Your Arena", description: "Choose between free practice tournaments or paid contests starting from $5 – available daily." },
     { step: "2", title: "Trade in Real Time", description: "Use live market data directly on our integrated web trader – every trade updates instantly." },
-    { step: "3", title: "Climb & Conquer", description: "Rank higher, multiply your entry fee up to 200%, and unlock rewards." }
+    { step: "3", title: "Climb & Conquer", description: "Rank higher, multiply your entry fee up to 4000%, and unlock rewards." }
   ];
 
   const catchyTaglines = [
